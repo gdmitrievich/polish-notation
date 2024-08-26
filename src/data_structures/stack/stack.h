@@ -27,4 +27,6 @@ class Stack {
 };
 } // namespace polish_notation::data_structures::stack
 
+#include "stack.ipp"
+
 #endif // STACK_H
