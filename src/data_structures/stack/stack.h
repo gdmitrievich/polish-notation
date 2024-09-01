@@ -11,19 +11,19 @@ template <typename T>
 class Stack {
    private:
     size_t size_;
-	Node<T>* topPtr_;
+    Node<T>* topPtr_;
 
-	public:
-	Stack();
-	~Stack();
+   public:
+    Stack();
+    ~Stack();
 
-	bool push(const Node<T>& item);
-	T pop();
-	T top() const;
-	void destroy();
+    bool push(const Node<T>& item);
+    T pop();
+    T top() const;
+    void destroy();
 
-	bool isEmpty() const;
-	size_t size() const;
+    bool isEmpty() const;
+    size_t size() const;
 };
 } // namespace polish_notation::data_structures::stack
 

@@ -6,6 +6,6 @@ Stack<T>::Stack() : size_(), topPtr_();
 
 template <typename T>
 Stack<T>::~Stack() {
-	destroy();
+    destroy();
 }
-}
+} // namespace polish_notation::data_structures::stack

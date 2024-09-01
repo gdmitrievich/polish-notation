@@ -4,11 +4,11 @@
 namespace polish_notation::data_structures::node {
 template <typename T>
 struct Node {
-	T data;
-	Node *next;
+    T data;
+    Node* next;
 
-	Node();
-	Node(T data, Node* next = nullptr);
+    Node();
+    Node(T data, Node* next = nullptr);
 };
 } // namespace polish_notation::data_structures::node
 
