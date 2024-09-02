@@ -38,3 +38,34 @@ TEST(CopyCtorTests, CopyNonEmptyObj) {
     EXPECT_EQ(tmp.next->next, nonEmpty.next->next);
     EXPECT_EQ(tmp.next->next, nullptr);
 }
+
+TEST(CopyAssignmentOperatorTests, CopyAssignEmptyObjToEmptyObj) {
+    Node<int> empty = *new Node<int>();
+
+    EXPECT_EQ(empty.data, 0);
+    EXPECT_EQ(empty.next, nullptr);
+}
+
+TEST(CopyAssignmentOperatorTests, CopyAssignEmptyObjToNonEmptyObj) {
+    Node<int> nonEmpty(5, new Node<int>(4));
+    Node<int> empty;
+
+    nonEmpty = empty;
+
+    EXPECT_EQ(nonEmpty.data, empty.data);
+    EXPECT_EQ(nonEmpty.next, empty.next);
+    EXPECT_EQ(nonEmpty.next, nullptr);
+}
+
+TEST(CopyAssignmentOperatorTests, CopyAssignNonEmptyObjToNonEmptyObj) {
+    Node<int> nonEmpty(5, new Node<int>(4));
+    Node<int> tmp(3, new Node<int>(2));
+
+    nonEmpty = tmp;
+
+    EXPECT_EQ(nonEmpty.data, tmp.data);
+    EXPECT_NE(nonEmpty.next, tmp.next);
+    EXPECT_EQ(nonEmpty.next->data, tmp.next->data);
+    EXPECT_EQ(nonEmpty.next->next, tmp.next->next);
+    EXPECT_EQ(nonEmpty.next->next, nullptr);
+}
