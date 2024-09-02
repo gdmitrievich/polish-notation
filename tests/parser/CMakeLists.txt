@@ -6,11 +6,12 @@ target_sources(${TARGET} PRIVATE
 	parser_tests.cpp
 )
 
-target_link_libraries(${TARGET} PUBLIC
-	gtest_main
-	token_test
-)
-
-target_link_libraries(${TARGET} PRIVATE
-	parser
+target_link_libraries(${TARGET}
+	PUBLIC
+		gtest_main
+		token_test
+	PRIVATE
+		parser
+	INTERFACE
+		queue_test
 )
