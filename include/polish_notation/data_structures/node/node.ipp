@@ -15,4 +15,9 @@ Node<T>::Node(T data, Node<T>* next) {
         this->next = nullptr;
     }
 }
+
+template <typename T>
+Node<T>::~Node() {
+    delete next;
+}
 } // namespace polish_notation::data_structures::node

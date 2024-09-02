@@ -9,6 +9,7 @@ struct Node {
 
     Node();
     explicit Node(T data, Node<T>* next = nullptr);
+    ~Node();
 };
 } // namespace polish_notation::data_structures::node
 
