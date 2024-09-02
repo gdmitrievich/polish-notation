@@ -8,7 +8,10 @@ struct Node {
     Node* next;
 
     Node();
-    Node(T data, Node* next = nullptr);
+    Node(const Node<T>& node);
+    explicit Node(const T& data, Node<T>* next = nullptr);
+    Node<T> operator=(const Node<T>& node);
+    ~Node();
 };
 } // namespace polish_notation::data_structures::node
 
