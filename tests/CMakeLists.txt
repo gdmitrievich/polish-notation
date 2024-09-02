@@ -13,4 +13,6 @@ if (BUILD_TESTING)
 
 	include(GoogleTest)
 	gtest_discover_tests(${PROJECT_NAME})
+
+	add_subdirectory(src)
 endif()
