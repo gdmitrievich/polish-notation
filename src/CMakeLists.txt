@@ -1,2 +1,3 @@
 add_subdirectory(token)
 add_subdirectory(parser)
+add_subdirectory(polish_calculation)
