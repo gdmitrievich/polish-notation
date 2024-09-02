@@ -20,7 +20,8 @@ TEST(TwoParamsCtorTests, CopyNonEmptyObj) {
 
     EXPECT_EQ(nonEmpty.data, 5);
     EXPECT_NE(tmp.next, nonEmpty.next);
+    EXPECT_EQ(tmp.data, nonEmpty.data);
     EXPECT_EQ(tmp.next->data, nonEmpty.next->data);
     EXPECT_EQ(tmp.next->next, nonEmpty.next->next);
-    EXPECT_EQ(tmp.next->next->data, nonEmpty.next->next->data);
+    EXPECT_EQ(tmp.next->next, nullptr);
 }
