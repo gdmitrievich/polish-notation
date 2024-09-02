@@ -29,6 +29,22 @@ Node<T>::Node(T data, Node<T>* next) {
 }
 
 template <typename T>
+Node<T> Node<T>::operator=(const Node<T>& node) {
+    if (this != &node) {
+        this->data = node.data;
+
+        delete this->next;
+        if (node.next) {
+            this->next = new Node<T>(node.next->data, node.next->next);
+        } else {
+            this->next = nullptr;
+        }
+    }
+
+    return *this;
+}
+
+template <typename T>
 Node<T>::~Node() {
     delete next;
 }
