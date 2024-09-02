@@ -9,3 +9,8 @@ target_sources(${TARGET} PRIVATE
 target_include_directories(${TARGET} PRIVATE
 	${CMAKE_CURRENT_LIST_DIR}
 )
+
+target_link_libraries(${TARGET} PUBLIC
+	queue
+	token
+)
