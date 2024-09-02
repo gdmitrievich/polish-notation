@@ -17,7 +17,7 @@ Node<T>::Node(const Node<T>& node) {
 }
 
 template <typename T>
-Node<T>::Node(T data, Node<T>* next) {
+Node<T>::Node(const T& data, Node<T>* next) {
     this->data = data;
     if (next) {
         this->next = new Node<T>();
