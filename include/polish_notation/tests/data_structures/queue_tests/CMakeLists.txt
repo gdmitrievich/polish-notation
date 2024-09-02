@@ -3,7 +3,7 @@ set(headers
 	queue_tests.ipp
 )
 
-set(TARGET_LIBRARY queue_tests)
+set(TARGET_LIBRARY queue_tests_lib)
 
 add_library(${TARGET_LIBRARY} INTERFACE
 	${headers}
