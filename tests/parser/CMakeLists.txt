@@ -8,6 +8,7 @@ target_sources(${TARGET} PRIVATE
 
 target_link_libraries(${TARGET} PUBLIC
 	gtest_main
+	token_test
 )
 
 target_link_libraries(${TARGET} PRIVATE
