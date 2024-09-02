@@ -8,6 +8,7 @@ struct Node {
     Node* next;
 
     Node();
+    Node(const Node<T>& node);
     explicit Node(T data, Node<T>* next = nullptr);
     ~Node();
 };
