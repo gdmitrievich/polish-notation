@@ -1,3 +1,4 @@
 add_subdirectory(data_structures)
 add_subdirectory(parser)
 add_subdirectory(token)
+add_subdirectory(polish_calculation)
