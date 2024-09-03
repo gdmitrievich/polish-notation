@@ -6,7 +6,20 @@ Stack<T>::Stack() : size_(), topPtr_() {}
 
 template <typename T>
 Stack<T>::~Stack() {
-    destroy();
+    // destroy();
+}
+
+template <typename T>
+void Stack<T>::push(const T& item) {
+    if (isEmpty()) {
+        topPtr_ = new Node<T>(item);
+    } else {
+        Node<T>* tmp = new Node<T>(item);
+        tmp->next = topPtr_;
+        topPtr_ = tmp;
+    }
+
+    ++size_;
 }
 
 template <typename T>
