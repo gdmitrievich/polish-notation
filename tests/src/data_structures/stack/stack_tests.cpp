@@ -52,4 +52,27 @@ TEST(DestroyTests, DestroyStackWithTwoItems) {
     EXPECT_EQ(nonEmpty.isEmpty(), true);
     EXPECT_EQ(nonEmpty.size(), 0);
 }
+
+TEST(CommonStackTests, PushAndPopItemsWithoutCompleteRemoval) {
+    Stack<int> nonEmpty;
+	nonEmpty.push(1);
+	nonEmpty.push(2);
+	nonEmpty.push(3);
+
+    int poppedValue = nonEmpty.pop();
+	EXPECT_EQ(poppedValue, 3);
+	EXPECT_EQ(nonEmpty.size(), 2);
+
+    poppedValue = nonEmpty.pop();
+	EXPECT_EQ(poppedValue, 2);
+	EXPECT_EQ(nonEmpty.size(), 1);
+	EXPECT_EQ(nonEmpty.isEmpty(), false);
+
+	nonEmpty.push(4);
+	EXPECT_EQ(nonEmpty.top(), 4);
+	EXPECT_EQ(nonEmpty.size(), 2);
+	nonEmpty.push(5);
+	EXPECT_EQ(nonEmpty.top(), 5);
+	EXPECT_EQ(nonEmpty.size(), 3);
+}
 } // namespace polish_notation::data_structures::stack
