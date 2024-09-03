@@ -6,7 +6,7 @@ Stack<T>::Stack() : size_(), topPtr_() {}
 
 template <typename T>
 Stack<T>::~Stack() {
-    // destroy();
+    destroy();
 }
 
 template <typename T>
