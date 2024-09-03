@@ -1,7 +1,10 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include "polish_notation/data_structures/node/node.h"
+
 namespace polish_notation::data_structures::stack {
+using ::polish_notation::data_structures::node::Node;
 using size_t = decltype(sizeof(1));
 
 template <typename T>
@@ -17,7 +20,7 @@ class Stack {
     Stack();
     ~Stack();
 
-    bool push(const Node<T>& item);
+    void push(const T& item);
     T pop();
     T top() const;
     void destroy();

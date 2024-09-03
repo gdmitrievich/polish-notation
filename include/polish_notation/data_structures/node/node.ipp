@@ -43,9 +43,4 @@ Node<T> Node<T>::operator=(const Node<T>& node) {
 
     return *this;
 }
-
-template <typename T>
-Node<T>::~Node() {
-    delete next;
-}
 } // namespace polish_notation::data_structures::node
