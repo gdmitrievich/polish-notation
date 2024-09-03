@@ -23,4 +23,22 @@ TEST(PushTests, PushToStackWithOneItem) {
     EXPECT_EQ(nonEmpty.size(), 2);
     EXPECT_EQ(nonEmpty.top(), 5);
 }
+
+TEST(PopTests, PopStackWithTwoItems) {
+    Stack<int> nonEmpty;
+	nonEmpty.push(1);
+	nonEmpty.push(3);
+
+    int poppedValue = nonEmpty.pop();
+
+    EXPECT_EQ(nonEmpty.isEmpty(), false);
+    EXPECT_EQ(nonEmpty.size(), 1);
+    EXPECT_EQ(poppedValue, 3);
+
+    poppedValue = nonEmpty.pop();
+
+    EXPECT_EQ(nonEmpty.isEmpty(), true);
+    EXPECT_EQ(nonEmpty.size(), 0);
+    EXPECT_EQ(poppedValue, 1);
+}
 } // namespace polish_notation::data_structures::stack
