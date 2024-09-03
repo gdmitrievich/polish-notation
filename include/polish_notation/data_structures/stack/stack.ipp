@@ -10,6 +10,11 @@ Stack<T>::~Stack() {
 }
 
 template <typename T>
+inline T Stack<T>::top() const {
+	return *topPtr_;
+}
+
+template <typename T>
 inline bool Stack<T>::isEmpty() const {
     return topPtr_ == nullptr;
 }
