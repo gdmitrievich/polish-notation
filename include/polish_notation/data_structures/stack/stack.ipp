@@ -23,6 +23,18 @@ void Stack<T>::push(const T& item) {
 }
 
 template <typename T>
+T Stack<T>::pop() {
+    T tmpData = topPtr_->data;
+
+    Node<T>* tmp = topPtr_;
+    topPtr_ = topPtr_->next;
+    delete tmp;
+
+    --size_;
+    return tmpData;
+}
+
+template <typename T>
 inline T Stack<T>::top() const {
     return topPtr_->data;
 }
