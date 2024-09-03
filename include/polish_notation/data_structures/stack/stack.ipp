@@ -40,6 +40,17 @@ inline T Stack<T>::top() const {
 }
 
 template <typename T>
+void Stack<T>::destroy() {
+    while (!isEmpty()) {
+        Node<T>* tmp = topPtr_;
+        topPtr_ = topPtr_->next;
+        delete tmp;
+    }
+
+    size_ = 0;
+}
+
+template <typename T>
 inline bool Stack<T>::isEmpty() const {
     return topPtr_ == nullptr;
 }
