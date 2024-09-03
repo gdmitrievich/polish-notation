@@ -41,4 +41,15 @@ TEST(PopTests, PopStackWithTwoItems) {
     EXPECT_EQ(nonEmpty.size(), 0);
     EXPECT_EQ(poppedValue, 1);
 }
+
+TEST(DestroyTests, DestroyStackWithTwoItems) {
+    Stack<int> nonEmpty;
+	nonEmpty.push(1);
+	nonEmpty.push(3);
+
+	nonEmpty.destroy();
+
+    EXPECT_EQ(nonEmpty.isEmpty(), true);
+    EXPECT_EQ(nonEmpty.size(), 0);
+}
 } // namespace polish_notation::data_structures::stack
