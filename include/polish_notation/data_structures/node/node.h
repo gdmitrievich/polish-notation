@@ -11,7 +11,6 @@ struct Node {
     Node(const Node<T>& node);
     explicit Node(const T& data, Node<T>* next = nullptr);
     Node<T> operator=(const Node<T>& node);
-    ~Node();
 };
 } // namespace polish_notation::data_structures::node
 
