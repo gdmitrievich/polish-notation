@@ -8,9 +8,6 @@ using ::polish_notation::data_structures::node::Node;
 using size_t = decltype(sizeof(1));
 
 template <typename T>
-struct Node;
-
-template <typename T>
 class Stack {
    private:
     size_t size_;
