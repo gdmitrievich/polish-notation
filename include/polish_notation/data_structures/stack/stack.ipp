@@ -11,7 +11,7 @@ Stack<T>::~Stack() {
 
 template <typename T>
 inline T Stack<T>::top() const {
-	return *topPtr_;
+	return topPtr_->data;
 }
 
 template <typename T>
