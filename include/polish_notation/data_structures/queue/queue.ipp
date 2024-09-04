@@ -15,6 +15,11 @@ template <typename T>
 Queue<T>::Queue() : frontPtr_(), backPtr_(), size_() {}
 
 template <typename T>
+Queue<T>::~Queue() {
+    destroy();
+}
+
+template <typename T>
 void Queue<T>::enqueue(const T& item) {
     Node<T>* tmp = new Node<T>(item);
     if (isEmpty()) {

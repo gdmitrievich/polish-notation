@@ -20,6 +20,7 @@ class Queue {
 
    public:
     Queue();
+    ~Queue();
 
     void enqueue(const T& item);
     T dequeue();
