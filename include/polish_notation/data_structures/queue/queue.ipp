@@ -2,6 +2,11 @@
 
 namespace polish_notation::data_structures::queue {
 template <typename T>
+inline const Node<T>* Queue<T>::frontPtr() const {
+	return frontPtr_;
+}
+
+template <typename T>
 Queue<T>::Queue() : frontPtr_(), backPtr_(), size_() {}
 
 template <typename T>

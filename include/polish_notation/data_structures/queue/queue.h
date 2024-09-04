@@ -14,6 +14,9 @@ class Queue {
     Node<T>* backPtr_;
     size_t size_;
 
+   protected:
+    const Node<T>* frontPtr() const;
+
    public:
     Queue();
 
