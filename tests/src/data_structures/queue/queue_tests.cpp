@@ -48,3 +48,24 @@ TEST(DequeueTests, DequeueOneItem) {
 
     EXPECT_EQ(dequeuedValue, 1);
 }
+
+TEST(DequeueTests, DequeueTwoItems) {
+    QueueTests<int> q;
+    q.enqueue(1);
+    q.enqueue(2);
+
+    int dequeuedValue = q.dequeue();
+
+    EXPECT_EQ(q.frontPtr(), q.backPtr());
+    EXPECT_NE(q.frontPtr(), nullptr);
+
+    EXPECT_EQ(q.size(), 1);
+    EXPECT_EQ(dequeuedValue, 1);
+
+    dequeuedValue = q.dequeue();
+    EXPECT_EQ(q.frontPtr(), q.backPtr());
+    EXPECT_EQ(q.frontPtr(), nullptr);
+
+    EXPECT_EQ(q.size(), 0);
+    EXPECT_EQ(dequeuedValue, 2);
+}
