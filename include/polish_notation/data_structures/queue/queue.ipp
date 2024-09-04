@@ -49,7 +49,7 @@ inline T Queue<T>::peek() const {
 
 template <typename T>
 inline bool Queue<T>::isEmpty() const {
-    return frontPtr_ == nullptr;
+    return backPtr_ == nullptr;
 }
 
 template <typename T>
