@@ -5,4 +5,9 @@ template <typename T>
 inline const Node<T>* QueueTests<T>::frontPtr() const {
 	return frontPtr_;
 }
+
+template <typename T>
+inline const Node<T>* QueueTests<T>::backPtr() const {
+	return backPtr_;
+}
 }
