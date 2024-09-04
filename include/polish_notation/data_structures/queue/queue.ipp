@@ -28,6 +28,21 @@ void Queue<T>::enqueue(const T& item) {
 }
 
 template <typename T>
+T Queue<T>::dequeue() {
+    T data = backPtr_->data;
+
+    Node<T>* tmp = backPtr_;
+    backPtr_ = backPtr_->next;
+    delete tmp;
+
+    if (backPtr_ == nullptr)
+        frontPtr_ = nullptr;
+
+    --size_;
+    return data;
+}
+
+template <typename T>
 inline T Queue<T>::peek() const {
     return backPtr_->data;
 }
