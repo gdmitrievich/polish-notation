@@ -14,6 +14,8 @@ class Queue {
     Node<T>* backPtr_;
     size_t size_;
 
+    void deleteNodeAndMoveBackPtrToNextNode();
+
    protected:
     const Node<T>* frontPtr() const;
     const Node<T>* backPtr() const;

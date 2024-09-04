@@ -2,6 +2,13 @@
 
 namespace polish_notation::data_structures::queue {
 template <typename T>
+void Queue<T>::deleteNodeAndMoveBackPtrToNextNode() {
+    Node<T>* tmp = backPtr_;
+    backPtr_ = backPtr_->next;
+    delete tmp;
+}
+
+template <typename T>
 inline const Node<T>* Queue<T>::frontPtr() const {
     return frontPtr_;
 }
@@ -36,9 +43,7 @@ template <typename T>
 T Queue<T>::dequeue() {
     T data = backPtr_->data;
 
-    Node<T>* tmp = backPtr_;
-    backPtr_ = backPtr_->next;
-    delete tmp;
+    deleteNodeAndMoveBackPtrToNextNode();
 
     if (backPtr_ == nullptr)
         frontPtr_ = nullptr;
@@ -54,11 +59,8 @@ inline T Queue<T>::peek() const {
 
 template <typename T>
 void Queue<T>::destroy() {
-    while (!isEmpty()) {
-        Node<T>* tmp = backPtr_;
-        backPtr_ = backPtr_->next;
-        delete tmp;
-    }
+    while (!isEmpty())
+        deleteNodeAndMoveBackPtrToNextNode();
 
     frontPtr_ = backPtr_ = nullptr;
     size_ = 0;
