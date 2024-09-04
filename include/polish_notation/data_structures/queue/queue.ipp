@@ -48,6 +48,18 @@ inline T Queue<T>::peek() const {
 }
 
 template <typename T>
+void Queue<T>::destroy() {
+    while (!isEmpty()) {
+        Node<T>* tmp = backPtr_;
+        backPtr_ = backPtr_->next;
+        delete tmp;
+    }
+
+    frontPtr_ = backPtr_ = nullptr;
+    size_ = 0;
+}
+
+template <typename T>
 inline bool Queue<T>::isEmpty() const {
     return backPtr_ == nullptr;
 }
