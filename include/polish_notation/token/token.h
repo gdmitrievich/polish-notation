@@ -35,6 +35,7 @@ struct Token {
     Data data;
 
     Token() = delete;
+    explicit Token(Id id);
     explicit Token(double num);
     Token(Id binary, Priority p);
 };
