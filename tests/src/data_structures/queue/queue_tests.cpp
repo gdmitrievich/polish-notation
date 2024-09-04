@@ -84,3 +84,32 @@ TEST(DestroyTests, DestroyThreeItemsQueue) {
     EXPECT_EQ(q.frontPtr(), q.backPtr());
     EXPECT_EQ(q.frontPtr(), nullptr);
 }
+
+TEST(QueueTests, RemoveTwoItemsAndAddTwo) {
+    QueueTests<int> q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+
+    int dequeuedValue = q.dequeue();
+    EXPECT_EQ(dequeuedValue, 1);
+    EXPECT_EQ(q.peek(), 2);
+    EXPECT_EQ(q.size(), 2);
+
+    dequeuedValue = q.dequeue();
+    EXPECT_EQ(dequeuedValue, 2);
+    EXPECT_EQ(q.peek(), 3);
+    EXPECT_EQ(q.size(), 1);
+    EXPECT_EQ(q.frontPtr(), q.backPtr());
+
+    q.enqueue(4);
+    EXPECT_EQ(q.peek(), 3);
+    EXPECT_EQ(q.size(), 2);
+    EXPECT_EQ(q.backPtr()->next, q.frontPtr());
+
+    q.enqueue(5);
+    EXPECT_EQ(q.peek(), 3);
+    EXPECT_EQ(q.size(), 3);
+    EXPECT_EQ(q.backPtr()->next->next, q.frontPtr());
+    EXPECT_EQ(q.frontPtr()->data, 5);
+}
