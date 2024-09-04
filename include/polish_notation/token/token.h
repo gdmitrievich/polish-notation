@@ -35,6 +35,7 @@ struct Token {
 
     Token() = delete;
     explicit Token(double num);
+    Token(Id binary, Priority p);
 };
 } // namespace polish_notation::token
 

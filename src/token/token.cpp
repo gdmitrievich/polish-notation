@@ -2,4 +2,6 @@
 
 namespace polish_notation::token {
 Token::Token(double num) : id(Token::Id::num), data(num) {}
+
+Token::Token(Token::Id binary, Token::Priority p) : id(binary), data(p) {}
 }
