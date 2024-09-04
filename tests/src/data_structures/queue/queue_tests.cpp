@@ -69,3 +69,18 @@ TEST(DequeueTests, DequeueTwoItems) {
     EXPECT_EQ(q.size(), 0);
     EXPECT_EQ(dequeuedValue, 2);
 }
+
+TEST(DestroyTests, DestroyThreeItemsQueue) {
+    QueueTests<int> q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+
+    q.destroy();
+
+    EXPECT_EQ(q.size(), 0);
+    EXPECT_EQ(q.isEmpty(), true);
+
+    EXPECT_EQ(q.frontPtr(), q.backPtr());
+    EXPECT_EQ(q.frontPtr(), nullptr);
+}
