@@ -7,6 +7,11 @@ inline const Node<T>* Queue<T>::frontPtr() const {
 }
 
 template <typename T>
+inline const Node<T>* Queue<T>::backPtr() const {
+	return backPtr_;
+}
+
+template <typename T>
 Queue<T>::Queue() : frontPtr_(), backPtr_(), size_() {}
 
 template <typename T>

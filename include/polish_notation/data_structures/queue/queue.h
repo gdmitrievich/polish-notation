@@ -16,6 +16,7 @@ class Queue {
 
    protected:
     const Node<T>* frontPtr() const;
+    const Node<T>* backPtr() const;
 
    public:
     Queue();
