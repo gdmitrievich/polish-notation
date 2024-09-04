@@ -25,12 +25,15 @@ struct Token {
     union Data {
         double num;
         Priority priority;
+
+        Data(double n) : num(n) {}
+        Data(Priority p) : priority(p) {}
     };
 
     Id id;
     Data data;
 
-	Token() = delete;
+    Token() = delete;
 };
 } // namespace polish_notation::token
 
