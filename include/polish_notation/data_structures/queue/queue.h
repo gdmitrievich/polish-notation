@@ -10,20 +10,20 @@ using size_t = decltype(sizeof(1));
 template <typename T>
 class Queue {
    private:
-	Node<T>* frontPtr_;
-	Node<T>* backPtr_;
-	size_t size_;
+    Node<T>* frontPtr_;
+    Node<T>* backPtr_;
+    size_t size_;
 
    public:
-	Queue();
+    Queue();
 
-	void enqueue(const T& item);
-	T dequeue();
-	T peek() const;
-	void destroy();
+    void enqueue(const T& item);
+    T dequeue();
+    T peek() const;
+    void destroy();
 
-	bool isEmpty() const;
-	size_t size() const;
+    bool isEmpty() const;
+    size_t size() const;
 };
 } // namespace polish_notation::data_structures::queue
 
