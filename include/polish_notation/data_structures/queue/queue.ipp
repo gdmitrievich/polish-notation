@@ -3,12 +3,12 @@
 namespace polish_notation::data_structures::queue {
 template <typename T>
 inline const Node<T>* Queue<T>::frontPtr() const {
-	return frontPtr_;
+    return frontPtr_;
 }
 
 template <typename T>
 inline const Node<T>* Queue<T>::backPtr() const {
-	return backPtr_;
+    return backPtr_;
 }
 
 template <typename T>
