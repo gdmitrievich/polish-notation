@@ -26,9 +26,9 @@ struct Token {
         double num;
         Priority priority;
 
-        Data() : num() {}
-        Data(double n) : num(n) {}
-        Data(Priority p) : priority(p) {}
+        Data();
+        Data(double n);
+        Data(Priority p);
     };
 
     Id id;
