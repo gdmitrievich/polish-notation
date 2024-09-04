@@ -29,6 +29,8 @@ struct Token {
 
     Id id;
     Data data;
+
+	Token() = delete;
 };
 } // namespace polish_notation::token
 
