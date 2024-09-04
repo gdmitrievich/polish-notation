@@ -15,6 +15,8 @@ class Queue {
 	size_t size_;
 
    public:
+	Queue();
+
 	void enqueue(const T& item);
 	T dequeue();
 	T peek() const;

@@ -2,6 +2,9 @@
 
 namespace polish_notation::data_structures::queue {
 template <typename T>
+Queue<T>::Queue() : frontPtr_(), backPtr_(), size_() {}
+
+template <typename T>
 inline bool Queue<T>::isEmpty() const {
 	return frontPtr_ == nullptr;
 }
