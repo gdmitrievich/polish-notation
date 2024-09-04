@@ -33,3 +33,18 @@ TEST(EnqueueTests, EnqueueThreeItems) {
     EXPECT_EQ(q.backPtr()->next->next, q.frontPtr());
     EXPECT_NE(q.frontPtr(), q.backPtr());
 }
+
+TEST(DequeueTests, DequeueOneItem) {
+    QueueTests<int> q;
+    q.enqueue(1);
+
+    int dequeuedValue = q.dequeue();
+
+    EXPECT_EQ(q.size(), 0);
+    EXPECT_EQ(q.isEmpty(), true);
+
+    EXPECT_EQ(q.frontPtr(), q.backPtr());
+    EXPECT_EQ(q.frontPtr(), nullptr);
+
+    EXPECT_EQ(dequeuedValue, 1);
+}
