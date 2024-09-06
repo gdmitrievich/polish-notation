@@ -5,6 +5,7 @@
 using namespace polish_notation::parser;
 using std::string;
 
+// getLineWithoutSpaces tests.
 TEST(GetLineWithoutSpacesTests, PassEmptyLine) {
     string src("");
 
@@ -65,4 +66,68 @@ TEST(GetLineWithoutSpacesTests,
     string result = getLineWithoutSpaces(src);
 
     EXPECT_EQ(result, expected);
+}
+
+// convertStrPartToInt tests.
+TEST(ConvertStrPartToIntTests, PassNullptrStr) {
+	const char* src = nullptr;
+	int expected = 0;
+
+	int result = convertStrPartToInt(src);
+
+	EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToIntTests, PassEmptyLine) {
+	const char* src = "";
+	int expected = 0;
+
+	int result = convertStrPartToInt(src);
+
+	EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToIntTests, PassLineWithOnlyDigits) {
+	const char* src = "555";
+	int expected = 555;
+
+	int result = convertStrPartToInt(src);
+
+	EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToIntTests, PassLineWithTheroesAtTheBeginning) {
+	const char* src = "005";
+	int expected = 5;
+
+	int result = convertStrPartToInt(src);
+
+	EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToIntTests, PassLineWithDigitsAndSymbolsAtTheBeginning) {
+	const char* src = "abc555";
+	int expected = 555;
+
+	int result = convertStrPartToInt(src + 3);
+
+	EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToIntTests, PassLineWithDigitsAndSymbolsAtTheEnd) {
+	const char* src = "555cba";
+	int expected = 555;
+
+	int result = convertStrPartToInt(src, 3);
+
+	EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToIntTests, PassLineWithDigitsAndSymbolsAtTheBeginningAndTheEnd) {
+	const char* src = "abc555cba";
+	int expected = 555;
+
+	int result = convertStrPartToInt(src + 3, 3);
+
+	EXPECT_EQ(result, expected);
 }
