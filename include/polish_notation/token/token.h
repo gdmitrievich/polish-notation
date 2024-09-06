@@ -38,6 +38,8 @@ struct Token {
     explicit Token(Id id);
     explicit Token(double num);
     Token(Id binary, Priority p);
+
+    bool operator==(const Token& t) const;
 };
 } // namespace polish_notation::token
 
