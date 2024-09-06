@@ -1,10 +1,10 @@
 #include "parser.h"
 
-#include <cstddef>
-#include <string>
-#include <cstring>
 #include <cctype>
 #include <cmath>
+#include <cstddef>
+#include <cstring>
+#include <string>
 
 namespace polish_notation::parser {
 using std::string;
@@ -124,6 +124,23 @@ double convertStrPartToDouble(const char* str, size_t count) {
              pow(10, fractPartLen);
     }
 
+    return n;
+}
+
+int convertStrPartToInt(const char* str, size_t count) {
+    int n {};
+    if (str) {
+        if (count == (size_t) -1)
+            count = strlen(str);
+
+        int power {};
+        int digit {};
+        while (count > 0) {
+            digit = str[count - 1] - '0';
+            n += digit * pow(10, power++);
+            --count;
+        }
+    }
     return n;
 }
 } // namespace polish_notation::parser
