@@ -101,10 +101,18 @@ int trySetTokenFromStr(Token& token, const char* str) {
     return indent;
 }
 
-// Добавить тест на 5.2552.53 -> 5.2552
 int setNumberFromStr(double& number, const char* str) {
-    const char* DOUBLE_CHARS = "0123456789.";
-    size_t len = strspn(str, DOUBLE_CHARS);
+    if (!str)
+        return 0.;
+
+    size_t intPartLen = getLenOfNumberStr(str);
+    const int DOT_LEN = 1;
+    size_t fractPartOffset = intPartLen + DOT_LEN;
+    size_t fractPartLen {};
+    if (hasFractPart(str, intPartLen))
+        fractPartLen = getLenOfNumberStr(str + fractPartOffset);
+
+    size_t len = intPartLen + (fractPartLen != 0 ? fractPartLen + DOT_LEN : 0);
     number = convertStrPartToDouble(str, len);
 
     return len;
