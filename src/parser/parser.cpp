@@ -4,6 +4,7 @@
 #include <string>
 #include <cstring>
 #include <cctype>
+#include <cmath>
 
 namespace polish_notation::parser {
 using std::string;
@@ -97,5 +98,14 @@ int trySetTokenFromStr(Token& token, const char* str) {
 	}
 
 	return indent;
+}
+
+// Добавить тест на 5.2552.53 -> 5.2552
+int setNumberFromStr(double& number, const char* str) {
+	const char* DOUBLE_CHARS = "0123456789.";
+	size_t len = strspn(str, DOUBLE_CHARS);
+	number = convertStrPartToDouble(str, len);
+
+	return len;
 }
 } // namespace polish_notation::parser

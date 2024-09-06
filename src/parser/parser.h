@@ -14,6 +14,8 @@ bool trySetTokenQueueFromStr(::polish_notation::data_structures::queue::Queue<
                              const ::std::string& str);
 
 int trySetTokenFromStr(::polish_notation::token::Token& token, const char* str);
+
+int setNumberFromStr(double& number, const char* str);
 } // namespace polish_notation::parser
 
 #endif // PARSER_H
