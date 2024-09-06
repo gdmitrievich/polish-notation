@@ -110,6 +110,14 @@ int setNumberFromStr(double& number, const char* str) {
     return len;
 }
 
+size_t getLenOfNumberStr(const char* str) {
+    if (!str)
+        return 0;
+
+    const char* INT_CHARS = "0123456789";
+    return strspn(str, INT_CHARS);
+}
+
 double convertStrPartToDouble(const char* str, size_t count) {
     if (!str)
         return 0.;

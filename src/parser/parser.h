@@ -17,6 +17,8 @@ int trySetTokenFromStr(::polish_notation::token::Token& token, const char* str);
 
 int setNumberFromStr(double& number, const char* str);
 
+size_t getLenOfNumberStr(const char* str);
+
 double convertStrPartToDouble(const char* str, size_t count = -1);
 
 int convertStrPartToInt(const char* str, size_t count = -1);
