@@ -6,6 +6,9 @@
 namespace polish_notation::parser {
 using std::string;
 
+using polish_notation::data_structures::queue::Queue;
+using polish_notation::token::Token;
+
 string getLineWithoutSpaces(const string& line) {
     auto stn = std::string::npos;
 
@@ -22,5 +25,23 @@ string getLineWithoutSpaces(const string& line) {
     }
 
     return newLine;
+}
+
+bool trySetTokenQueueFromStr(Queue<Token>& tokenQueue, const string& str) {
+	bool state = true;
+	const char* cStr = str.c_str();
+	int indent {};
+	Token token(Token::Id::x);
+	while(*cStr && state) {
+		indent = trySetTokenFromStr(token, cStr);
+		if (indent != -1) {
+			cStr += indent;
+			tokenQueue.enqueue(token);
+		} else {
+			state = false;
+		}
+	}
+
+	return state;
 }
 } // namespace polish_notation::parser
