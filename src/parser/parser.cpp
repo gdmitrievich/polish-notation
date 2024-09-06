@@ -129,19 +129,21 @@ double convertStrPartToDouble(const char* str, size_t count) {
 }
 
 int convertStrPartToInt(const char* str, size_t count) {
-    int n {};
-    if (str) {
-        if (count == (size_t) -1)
-            count = strlen(str);
+    if (!str)
+        return 0;
 
-        int power {};
-        int digit {};
-        while (count > 0) {
-            digit = str[count - 1] - '0';
-            n += digit * pow(10, power++);
-            --count;
-        }
+    if (count == (size_t) -1)
+        count = strlen(str);
+
+    int n {};
+    int power {};
+    int digit {};
+    while (count > 0) {
+        digit = str[count - 1] - '0';
+        n += digit * pow(10, power++);
+        --count;
     }
+
     return n;
 }
 } // namespace polish_notation::parser
