@@ -12,6 +12,8 @@ namespace polish_notation::parser {
 bool trySetTokenQueueFromStr(::polish_notation::data_structures::queue::Queue<
                                  ::polish_notation::token::Token>& tokenQueue,
                              const ::std::string& str);
+
+int trySetTokenFromStr(::polish_notation::token::Token& token, const char* str);
 } // namespace polish_notation::parser
 
 #endif // PARSER_H

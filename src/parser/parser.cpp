@@ -2,6 +2,8 @@
 
 #include <cstddef>
 #include <string>
+#include <cstring>
+#include <cctype>
 
 namespace polish_notation::parser {
 using std::string;
@@ -43,5 +45,57 @@ bool trySetTokenQueueFromStr(Queue<Token>& tokenQueue, const string& str) {
 	}
 
 	return state;
+}
+
+int trySetTokenFromStr(Token& token, const char* str) {
+	int indent {};
+	if (isdigit(*str)) {
+		double n {};
+		indent = setNumberFromStr(n, str);
+		token = Token(n);
+	} else if (strncmp(str, "x", 1)) {
+		indent = 1;
+		token.id = Token::Id::x;
+	} else if (strncmp(str, "+", 1)) {
+		indent = 1;
+		token = Token(Token::Id::plus, Token::Priority::plus);
+	} else if (strncmp(str, "-", 1)) {
+		indent = 1;
+		token = Token(Token::Id::minus, Token::Priority::minus);
+	} else if (strncmp(str, "*", 1)) {
+		indent = 1;
+		token = Token(Token::Id::mult, Token::Priority::mult);
+	} else if (strncmp(str, "/", 1)) {
+		indent = 1;
+		token = Token(Token::Id::div, Token::Priority::div);
+	} else if (strncmp(str, "(", 1)) {
+		indent = 1;
+		token = Token(Token::Id::lBrace);
+	} else if (strncmp(str, ")", 1)) {
+		indent = 1;
+		token = Token(Token::Id::rBrace);
+	} else if (strncmp(str, "sin", 3)) {
+		indent = 3;
+		token = Token(Token::Id::sin);
+	} else if (strncmp(str, "cos", 3)) {
+		indent = 3;
+		token = Token(Token::Id::cos);
+	} else if (strncmp(str, "tan", 3)) {
+		indent = 3;
+		token = Token(Token::Id::tan);
+	} else if (strncmp(str, "ctg", 3)) {
+		indent = 3;
+		token = Token(Token::Id::ctg);
+	} else if (strncmp(str, "sqrt", 4)) {
+		indent = 4;
+		token = Token(Token::Id::sqrt);
+	} else if (strncmp(str, "ln", 2)) {
+		indent = 2;
+		token = Token(Token::Id::ln);
+	} else {
+		indent = -1;
+	}
+
+	return indent;
 }
 } // namespace polish_notation::parser
