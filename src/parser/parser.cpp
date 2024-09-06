@@ -111,10 +111,13 @@ int setNumberFromStr(double& number, const char* str) {
 }
 
 double convertStrPartToDouble(const char* str, size_t count) {
-    double n {};
+    if (!str)
+        return 0.;
+
     if (count == (size_t) -1)
         count = strlen(str);
 
+    double n {};
     const char* INT_CHARS = "0123456789";
     size_t intPartLen = strspn(str, INT_CHARS);
     n = convertStrPartToInt(str, intPartLen);
