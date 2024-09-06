@@ -110,6 +110,10 @@ int setNumberFromStr(double& number, const char* str) {
     return len;
 }
 
+bool hasFractPart(const char* str, size_t intPartLen) {
+    return str[intPartLen] == '.' && isdigit(str[intPartLen + 1]);
+}
+
 size_t getLenOfNumberStr(const char* str) {
     if (!str)
         return 0;
