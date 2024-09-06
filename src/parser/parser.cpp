@@ -126,12 +126,11 @@ double convertStrPartToDouble(const char* str, size_t count) {
         count = strlen(str);
 
     double n {};
-    const char* INT_CHARS = "0123456789";
-    size_t intPartLen = strspn(str, INT_CHARS);
+    size_t intPartLen = getLenOfNumberStr(str);
     n = convertStrPartToInt(str, intPartLen);
     if (intPartLen != count) {
         const char* fractPartStr = str + intPartLen + 1;
-        size_t fractPartLen = strspn(fractPartStr, INT_CHARS);
+        size_t fractPartLen = getLenOfNumberStr(fractPartStr);
         n += convertStrPartToInt(fractPartStr, fractPartLen) /
              pow(10, fractPartLen);
     }
