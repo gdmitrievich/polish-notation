@@ -108,4 +108,21 @@ int setNumberFromStr(double& number, const char* str) {
 
 	return len;
 }
+
+double convertStrPartToDouble(const char* str, size_t count) {
+	double n {};
+	if (count == (size_t) -1)
+		count = strlen(str);
+
+	const char* INT_CHARS = "0123456789";
+	size_t intPartLen = strspn(str, INT_CHARS);
+	n = convertStrPartToInt(str, intPartLen);
+	if (intPartLen != count) {
+		const char* fractPartStr = str + intPartLen + 1;
+		size_t fractPartLen = strspn(fractPartStr, INT_CHARS);
+		n += convertStrPartToInt(fractPartStr, fractPartLen) / pow(10, fractPartLen);
+	}
+
+	return n;
+}
 } // namespace polish_notation::parser
