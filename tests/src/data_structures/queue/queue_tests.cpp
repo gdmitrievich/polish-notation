@@ -1,11 +1,11 @@
-#include "polish_notation/tests/data_structures/queue_tests/queue_tests.h"
-
 #include <gtest/gtest.h>
 
-using polish_notation::tests::data_structures::queue_tests::QueueTests;
+#include "queue_test/queue_test.h"
+
+using polish_notation::tests::data_structures::queue_tests::QueueTest;
 
 TEST(EnqueueTests, EnqueueOneItem) {
-    QueueTests<int> q;
+    QueueTest<int> q;
 
     q.enqueue(1);
 
@@ -18,7 +18,7 @@ TEST(EnqueueTests, EnqueueOneItem) {
 }
 
 TEST(EnqueueTests, EnqueueThreeItems) {
-    QueueTests<int> q;
+    QueueTest<int> q;
 
     q.enqueue(1);
     q.enqueue(2);
@@ -35,7 +35,7 @@ TEST(EnqueueTests, EnqueueThreeItems) {
 }
 
 TEST(DequeueTests, DequeueOneItem) {
-    QueueTests<int> q;
+    QueueTest<int> q;
     q.enqueue(1);
 
     int dequeuedValue = q.dequeue();
@@ -50,7 +50,7 @@ TEST(DequeueTests, DequeueOneItem) {
 }
 
 TEST(DequeueTests, DequeueTwoItems) {
-    QueueTests<int> q;
+    QueueTest<int> q;
     q.enqueue(1);
     q.enqueue(2);
 
@@ -71,7 +71,7 @@ TEST(DequeueTests, DequeueTwoItems) {
 }
 
 TEST(DestroyTests, DestroyThreeItemsQueue) {
-    QueueTests<int> q;
+    QueueTest<int> q;
     q.enqueue(1);
     q.enqueue(2);
     q.enqueue(3);
@@ -85,8 +85,8 @@ TEST(DestroyTests, DestroyThreeItemsQueue) {
     EXPECT_EQ(q.frontPtr(), nullptr);
 }
 
-TEST(QueueTests, RemoveTwoItemsAndAddTwo) {
-    QueueTests<int> q;
+TEST(QueueTest, RemoveTwoItemsAndAddTwo) {
+    QueueTest<int> q;
     q.enqueue(1);
     q.enqueue(2);
     q.enqueue(3);

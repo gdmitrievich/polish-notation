@@ -1,3 +1,5 @@
+add_subdirectory(queue_test)
+
 set(TARGET queue_tests)
 
 add_executable(${TARGET})
@@ -15,5 +17,5 @@ target_link_libraries(${TARGET} PUBLIC
 )
 
 target_link_libraries(${TARGET} INTERFACE
-	queue_tests_lib
+	queue_test
 )

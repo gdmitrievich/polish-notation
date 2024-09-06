@@ -1,13 +1,13 @@
-#include "queue_tests.h"
+#include "queue_test.h"
 
 namespace polish_notation::tests::data_structures::queue_tests {
 template <typename T>
-inline const Node<T>* QueueTests<T>::frontPtr() const {
+inline const Node<T>* QueueTest<T>::frontPtr() const {
     return Queue<T>::frontPtr();
 }
 
 template <typename T>
-inline const Node<T>* QueueTests<T>::backPtr() const {
+inline const Node<T>* QueueTest<T>::backPtr() const {
     return Queue<T>::backPtr();
 }
 } // namespace polish_notation::tests::data_structures::queue_tests
