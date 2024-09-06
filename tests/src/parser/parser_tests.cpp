@@ -68,6 +68,115 @@ TEST(GetLineWithoutSpacesTests,
     EXPECT_EQ(result, expected);
 }
 
+// setNumberFromStr tests.
+TEST(SetNumberFromStrTests, PassNullptrStr) {
+    const char* src = nullptr;
+    double expectedNumber = 0.;
+    int expectedIndent = 0;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassEmptyStr) {
+    const char* src = "";
+    double expectedNumber = 0.;
+    int expectedIndent = 0;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassLineWithIntegerDigit) {
+    const char* src = "5";
+    double expectedNumber = 5.;
+    int expectedIndent = 1;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassLineWithIntegerDigits) {
+    const char* src = "555";
+    double expectedNumber = 555.;
+    int expectedIndent = 3;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassLineWithIntegerDigitsInTheBeginning) {
+    const char* src = "555abc";
+    double expectedNumber = 555.;
+    int expectedIndent = 3;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassLineWithDoubleNumber) {
+    const char* src = "5.5";
+    double expectedNumber = 5.5;
+    int expectedIndent = 3;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassLineWithTwoFractionParts) {
+    const char* src = "55.5.55";
+    double expectedNumber = 55.5;
+    int expectedIndent = 4;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassLineWithNonDigitsAtTheEnd) {
+    const char* src = "55.55abc";
+    double expectedNumber = 55.55;
+    int expectedIndent = 5;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
+TEST(SetNumberFromStrTests, PassLineWithNumberWithTheroesAtTheBeginning) {
+    const char* src = "005.005abc";
+    double expectedNumber = 5.005;
+    int expectedIndent = 7;
+    double result {};
+
+    int indent = setNumberFromStr(result, src);
+
+    EXPECT_EQ(result, expectedNumber);
+    EXPECT_EQ(indent, expectedIndent);
+}
+
 // convertStrPartToDouble tests.
 TEST(ConvertStrPartToDoubleTests, PassNullptrStr) {
     const char* src = nullptr;
