@@ -6,7 +6,7 @@ using namespace polish_notation::parser;
 using std::string;
 
 // getLineWithoutSpaces tests.
-TEST(GetLineWithoutSpacesTests, PassEmptyLine) {
+TEST(GetLineWithoutSpacesTest, PassEmptyLine) {
     string src("");
 
     string result = getLineWithoutSpaces(src);
@@ -15,7 +15,7 @@ TEST(GetLineWithoutSpacesTests, PassEmptyLine) {
     EXPECT_EQ(result.size(), 0);
 }
 
-TEST(GetLineWithoutSpacesTests, PassLineWithoutSpaces) {
+TEST(GetLineWithoutSpacesTest, PassLineWithoutSpaces) {
     string src("line_without_spaces");
 
     string result = getLineWithoutSpaces(src);
@@ -23,7 +23,7 @@ TEST(GetLineWithoutSpacesTests, PassLineWithoutSpaces) {
     EXPECT_EQ(result, src);
 }
 
-TEST(GetLineWithoutSpacesTests, PassLineOnlyWithSpaces) {
+TEST(GetLineWithoutSpacesTest, PassLineOnlyWithSpaces) {
     string src("   ");
 
     string result = getLineWithoutSpaces(src);
@@ -31,7 +31,7 @@ TEST(GetLineWithoutSpacesTests, PassLineOnlyWithSpaces) {
     EXPECT_EQ(result.empty(), true);
 }
 
-TEST(GetLineWithoutSpacesTests, PassLineStartsWithSpaces) {
+TEST(GetLineWithoutSpacesTest, PassLineStartsWithSpaces) {
     string src("   line");
     string expected("line");
 
@@ -40,7 +40,7 @@ TEST(GetLineWithoutSpacesTests, PassLineStartsWithSpaces) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(GetLineWithoutSpacesTests, PassLineEndsWithSpaces) {
+TEST(GetLineWithoutSpacesTest, PassLineEndsWithSpaces) {
     string src("line    ");
     string expected("line");
 
@@ -49,7 +49,7 @@ TEST(GetLineWithoutSpacesTests, PassLineEndsWithSpaces) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(GetLineWithoutSpacesTests, PassLineWithSingleSpacesBetweenWords) {
+TEST(GetLineWithoutSpacesTest, PassLineWithSingleSpacesBetweenWords) {
     string src("it's a line with single spaces");
     string expected("it'salinewithsinglespaces");
 
@@ -58,7 +58,7 @@ TEST(GetLineWithoutSpacesTests, PassLineWithSingleSpacesBetweenWords) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(GetLineWithoutSpacesTests,
+TEST(GetLineWithoutSpacesTest,
      PassLineWithSpacesAtTheStartAndEndAndBetweenWords) {
     string src("    it's    a line   with single spaces   ");
     string expected("it'salinewithsinglespaces");
@@ -69,7 +69,7 @@ TEST(GetLineWithoutSpacesTests,
 }
 
 // setNumberFromStr tests.
-TEST(SetNumberFromStrTests, PassNullptrStr) {
+TEST(SetNumberFromStrTest, PassNullptrStr) {
     const char* src = nullptr;
     double expectedNumber = 0.;
     int expectedIndent = 0;
@@ -81,7 +81,7 @@ TEST(SetNumberFromStrTests, PassNullptrStr) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassEmptyStr) {
+TEST(SetNumberFromStrTest, PassEmptyStr) {
     const char* src = "";
     double expectedNumber = 0.;
     int expectedIndent = 0;
@@ -93,7 +93,7 @@ TEST(SetNumberFromStrTests, PassEmptyStr) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassLineWithIntegerDigit) {
+TEST(SetNumberFromStrTest, PassLineWithIntegerDigit) {
     const char* src = "5";
     double expectedNumber = 5.;
     int expectedIndent = 1;
@@ -105,7 +105,7 @@ TEST(SetNumberFromStrTests, PassLineWithIntegerDigit) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassLineWithIntegerDigits) {
+TEST(SetNumberFromStrTest, PassLineWithIntegerDigits) {
     const char* src = "555";
     double expectedNumber = 555.;
     int expectedIndent = 3;
@@ -117,7 +117,7 @@ TEST(SetNumberFromStrTests, PassLineWithIntegerDigits) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassLineWithIntegerDigitsInTheBeginning) {
+TEST(SetNumberFromStrTest, PassLineWithIntegerDigitsInTheBeginning) {
     const char* src = "555abc";
     double expectedNumber = 555.;
     int expectedIndent = 3;
@@ -129,7 +129,7 @@ TEST(SetNumberFromStrTests, PassLineWithIntegerDigitsInTheBeginning) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassLineWithDoubleNumber) {
+TEST(SetNumberFromStrTest, PassLineWithDoubleNumber) {
     const char* src = "5.5";
     double expectedNumber = 5.5;
     int expectedIndent = 3;
@@ -141,7 +141,7 @@ TEST(SetNumberFromStrTests, PassLineWithDoubleNumber) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassLineWithTwoFractionParts) {
+TEST(SetNumberFromStrTest, PassLineWithTwoFractionParts) {
     const char* src = "55.5.55";
     double expectedNumber = 55.5;
     int expectedIndent = 4;
@@ -153,7 +153,7 @@ TEST(SetNumberFromStrTests, PassLineWithTwoFractionParts) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassLineWithNonDigitsAtTheEnd) {
+TEST(SetNumberFromStrTest, PassLineWithNonDigitsAtTheEnd) {
     const char* src = "55.55abc";
     double expectedNumber = 55.55;
     int expectedIndent = 5;
@@ -165,7 +165,7 @@ TEST(SetNumberFromStrTests, PassLineWithNonDigitsAtTheEnd) {
     EXPECT_EQ(indent, expectedIndent);
 }
 
-TEST(SetNumberFromStrTests, PassLineWithNumberWithTheroesAtTheBeginning) {
+TEST(SetNumberFromStrTest, PassLineWithNumberWithTheroesAtTheBeginning) {
     const char* src = "005.005abc";
     double expectedNumber = 5.005;
     int expectedIndent = 7;
@@ -178,7 +178,7 @@ TEST(SetNumberFromStrTests, PassLineWithNumberWithTheroesAtTheBeginning) {
 }
 
 // convertStrPartToDouble tests.
-TEST(ConvertStrPartToDoubleTests, PassNullptrStr) {
+TEST(ConvertStrPartToDoubleTest, PassNullptrStr) {
     const char* src = nullptr;
     double expected = 0.;
 
@@ -187,7 +187,7 @@ TEST(ConvertStrPartToDoubleTests, PassNullptrStr) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassEmptyLine) {
+TEST(ConvertStrPartToDoubleTest, PassEmptyLine) {
     const char* src = "";
     double expected = 0.;
 
@@ -196,7 +196,7 @@ TEST(ConvertStrPartToDoubleTests, PassEmptyLine) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithOnlyIntegerDigits) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithOnlyIntegerDigits) {
     const char* src = "555";
     double expected = 555.;
 
@@ -205,7 +205,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithOnlyIntegerDigits) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithOnlyDoubleDigits) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithOnlyDoubleDigits) {
     const char* src = "555.55";
     double expected = 555.55;
 
@@ -214,7 +214,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithOnlyDoubleDigits) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithOneDigitInIntPart) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithOneDigitInIntPart) {
     const char* src = "0.555";
     double expected = 0.555;
 
@@ -223,7 +223,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithOneDigitInIntPart) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithOneDigitInFractPart) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithOneDigitInFractPart) {
     const char* src = "555.5";
     double expected = 555.5;
 
@@ -232,7 +232,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithOneDigitInFractPart) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithTheroesAtTheFractPart) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithTheroesAtTheFractPart) {
     const char* src = "5.000";
     double expected = 5.;
 
@@ -241,7 +241,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithTheroesAtTheFractPart) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithTheroesInIntAndFractPart) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithTheroesInIntAndFractPart) {
     const char* src = "0.0";
     double expected = 0.;
 
@@ -250,7 +250,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithTheroesInIntAndFractPart) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithDigitsAndSymbolsAtTheBeginning) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithDigitsAndSymbolsAtTheBeginning) {
     const char* src = "abc555.55";
     double expected = 555.55;
 
@@ -259,7 +259,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithDigitsAndSymbolsAtTheBeginning) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests, PassLineWithDigitsAndSymbolsAtTheEnd) {
+TEST(ConvertStrPartToDoubleTest, PassLineWithDigitsAndSymbolsAtTheEnd) {
     const char* src = "555.5cba";
     double expected = 555.5;
 
@@ -268,7 +268,7 @@ TEST(ConvertStrPartToDoubleTests, PassLineWithDigitsAndSymbolsAtTheEnd) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToDoubleTests,
+TEST(ConvertStrPartToDoubleTest,
      PassLineWithDigitsAndSymbolsAtTheBeginningAndTheEnd) {
     const char* src = "abc555.555cba";
     double expected = 555.555;
@@ -279,7 +279,7 @@ TEST(ConvertStrPartToDoubleTests,
 }
 
 // convertStrPartToInt tests.
-TEST(ConvertStrPartToIntTests, PassNullptrStr) {
+TEST(ConvertStrPartToIntTest, PassNullptrStr) {
     const char* src = nullptr;
     int expected = 0;
 
@@ -288,7 +288,7 @@ TEST(ConvertStrPartToIntTests, PassNullptrStr) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToIntTests, PassEmptyLine) {
+TEST(ConvertStrPartToIntTest, PassEmptyLine) {
     const char* src = "";
     int expected = 0;
 
@@ -297,7 +297,7 @@ TEST(ConvertStrPartToIntTests, PassEmptyLine) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToIntTests, PassLineWithOnlyDigits) {
+TEST(ConvertStrPartToIntTest, PassLineWithOnlyDigits) {
     const char* src = "555";
     int expected = 555;
 
@@ -306,7 +306,7 @@ TEST(ConvertStrPartToIntTests, PassLineWithOnlyDigits) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToIntTests, PassLineWithTheroesAtTheBeginning) {
+TEST(ConvertStrPartToIntTest, PassLineWithTheroesAtTheBeginning) {
     const char* src = "005";
     int expected = 5;
 
@@ -315,7 +315,7 @@ TEST(ConvertStrPartToIntTests, PassLineWithTheroesAtTheBeginning) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToIntTests, PassLineWithDigitsAndSymbolsAtTheBeginning) {
+TEST(ConvertStrPartToIntTest, PassLineWithDigitsAndSymbolsAtTheBeginning) {
     const char* src = "abc555";
     int expected = 555;
 
@@ -324,7 +324,7 @@ TEST(ConvertStrPartToIntTests, PassLineWithDigitsAndSymbolsAtTheBeginning) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToIntTests, PassLineWithDigitsAndSymbolsAtTheEnd) {
+TEST(ConvertStrPartToIntTest, PassLineWithDigitsAndSymbolsAtTheEnd) {
     const char* src = "555cba";
     int expected = 555;
 
@@ -333,7 +333,7 @@ TEST(ConvertStrPartToIntTests, PassLineWithDigitsAndSymbolsAtTheEnd) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(ConvertStrPartToIntTests,
+TEST(ConvertStrPartToIntTest,
      PassLineWithDigitsAndSymbolsAtTheBeginningAndTheEnd) {
     const char* src = "abc555cba";
     int expected = 555;
