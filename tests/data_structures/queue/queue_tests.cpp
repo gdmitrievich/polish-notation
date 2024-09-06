@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
-
 #include "queue_test/queue_test.h"
+
+#include <gtest/gtest.h>
 
 using polish_notation::tests::data_structures::queue_tests::QueueTest;
 
