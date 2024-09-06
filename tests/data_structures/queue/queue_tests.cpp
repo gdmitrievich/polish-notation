@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-using polish_notation::tests::data_structures::queue_tests::QueueTest;
+using polish_notation::tests::data_structures::queue_test::QueueTest;
 
 TEST(EnqueueTests, EnqueueOneItem) {
     QueueTest<int> q;
