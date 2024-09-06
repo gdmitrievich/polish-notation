@@ -50,6 +50,9 @@ bool trySetTokenQueueFromStr(Queue<Token>& tokenQueue, const string& str) {
 }
 
 int trySetTokenFromStr(Token& token, const char* str) {
+    if (!str)
+        return -1;
+
     int indent {};
     if (isdigit(*str)) {
         double n {};
