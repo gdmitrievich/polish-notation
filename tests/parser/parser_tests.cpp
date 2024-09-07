@@ -134,6 +134,21 @@ TEST(TrySetTokenFromStrTest, PassLineWithTwoCharTokenSubstr) {
     EXPECT_EQ(indent, 2);
 }
 
+TEST(TrySetTokenFromStrTest, PassLineWithThreeCharTokenSubstr) {
+    vector<const char*> srcs({"sinabc", "cosabc", "tanabc", "ctgabc"});
+    vector<TokenTest> srcTokens(
+        {TokenTest(TokenTest::Id::sin), TokenTest(TokenTest::Id::cos),
+         TokenTest(TokenTest::Id::tan), TokenTest(TokenTest::Id::ctg)});
+
+    TokenTest result;
+    for (int i {}; i < srcs.size(); ++i) {
+        int indent = trySetTokenFromStr(result, srcs[i]);
+
+        EXPECT_EQ(result, srcTokens[i]);
+        EXPECT_EQ(indent, 3);
+    }
+}
+
 // setNumberFromStr tests.
 TEST(SetNumberFromStrTest, PassNullptrStr) {
     const char* src = nullptr;
