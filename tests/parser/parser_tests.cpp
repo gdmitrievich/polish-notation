@@ -2,7 +2,11 @@
 
 #include <gtest/gtest.h>
 
+#include "../token/token_test/token_test.h"
+
 using namespace polish_notation::parser;
+
+using polish_notation::tests::token_test::TokenTest;
 using std::string;
 
 // getLineWithoutSpaces tests.
@@ -66,6 +70,17 @@ TEST(GetLineWithoutSpacesTest,
     string result = getLineWithoutSpaces(src);
 
     EXPECT_EQ(result, expected);
+}
+
+// trySetTokenFromStr tests.
+TEST(TrySetTokenFromStrTest, PassNullptrStr) {
+    const char* src = nullptr;
+    TokenTest result {};
+
+    int indent = trySetTokenFromStr(result, src);
+
+    EXPECT_EQ(result, TokenTest());
+    EXPECT_EQ(indent, -1);
 }
 
 // setNumberFromStr tests.
