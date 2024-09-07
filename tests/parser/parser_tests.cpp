@@ -2,12 +2,15 @@
 
 #include <gtest/gtest.h>
 
+#include <vector>
+
 #include "../token/token_test/token_test.h"
 
 using namespace polish_notation::parser;
 
 using polish_notation::tests::token_test::TokenTest;
 using std::string;
+using std::vector;
 
 // getLineWithoutSpaces tests.
 TEST(GetLineWithoutSpacesTest, PassEmptyLine) {
@@ -101,6 +104,24 @@ TEST(TrySetTokenFromStrTest, PassLineWithIntegerNmbAndDotWithChars) {
 
     EXPECT_EQ(result, TokenTest(555));
     EXPECT_EQ(indent, 3);
+}
+
+TEST(TrySetTokenFromStrTest, PassLineWithOneCharTokenSubstr) {
+    vector<const char*> srcs(
+        {"xabc", "+abc", "-abc", "*abc", "/abc", "(abc", ")abc"});
+    vector<TokenTest> srcTokens(
+        {TokenTest(TokenTest::Id::x), TokenTest(TokenTest::Id::plus),
+         TokenTest(TokenTest::Id::minus), TokenTest(TokenTest::Id::mult),
+         TokenTest(TokenTest::Id::div), TokenTest(TokenTest::Id::lBrace),
+         TokenTest(TokenTest::Id::rBrace)});
+
+    TokenTest result;
+    for (int i {}; i < srcs.size(); ++i) {
+        int indent = trySetTokenFromStr(result, srcs[i]);
+
+        EXPECT_EQ(result, srcTokens[i]);
+        EXPECT_EQ(indent, 1);
+    }
 }
 
 // setNumberFromStr tests.
