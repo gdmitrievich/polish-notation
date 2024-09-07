@@ -124,6 +124,16 @@ TEST(TrySetTokenFromStrTest, PassLineWithOneCharTokenSubstr) {
     }
 }
 
+TEST(TrySetTokenFromStrTest, PassLineWithTwoCharTokenSubstr) {
+    const char* src = "lnabc";
+    TokenTest result {};
+
+    int indent = trySetTokenFromStr(result, src);
+
+    EXPECT_EQ(result, TokenTest(TokenTest::Id::ln));
+    EXPECT_EQ(indent, 2);
+}
+
 // setNumberFromStr tests.
 TEST(SetNumberFromStrTest, PassNullptrStr) {
     const char* src = nullptr;
