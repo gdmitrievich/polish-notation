@@ -15,8 +15,8 @@ struct TokenTest : public Token {
 
     std::string DebugString() const;
 
-	friend std::ostream& operator<<(std::ostream& os, const TokenTest& t);
-	friend void printTo(const TokenTest& t, std::ostream* os);
+    friend std::ostream& operator<<(std::ostream& os, const TokenTest& t);
+    friend void printTo(const TokenTest& t, std::ostream* os);
 };
 } // namespace polish_notation::tests::token_test
 
