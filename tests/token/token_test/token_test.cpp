@@ -15,4 +15,16 @@ bool TokenTest::operator==(const TokenTest& t) const {
 bool TokenTest::operator!=(const TokenTest& t) const {
     return !(*this == t);
 }
+
+std::string TokenTest::DebugString() const {
+    std::string result;
+
+    result += "id: " + std::to_string(int(id));
+    if (id == Token::Id::num)
+        result += ", data.num: " + std::to_string(data.num);
+
+    return result;
+}
 } // namespace polish_notation::tests::token_test
+
+// friend std::ostream& operator<<(std::ostream& os, const TokenTest& t) const;

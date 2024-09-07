@@ -1,6 +1,9 @@
 #ifndef TOKEN_TEST_H
 #define TOKEN_TEST_H
 
+#include <iostream>
+#include <string>
+
 #include "polish_notation/token/token.h"
 
 namespace polish_notation::tests::token_test {
@@ -9,6 +12,8 @@ using ::polish_notation::token::Token;
 struct TokenTest : public Token {
     bool operator==(const TokenTest& t) const;
     bool operator!=(const TokenTest& t) const;
+
+    std::string DebugString() const;
 };
 } // namespace polish_notation::tests::token_test
 
