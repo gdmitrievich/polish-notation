@@ -10,6 +10,6 @@ struct TokenTest : public Token {
     bool operator==(const TokenTest& t) const;
     bool operator!=(const TokenTest& t) const;
 };
-}
+} // namespace polish_notation::tests::token_test
 
 #endif // TOKEN_TEST_H

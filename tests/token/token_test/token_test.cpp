@@ -13,6 +13,6 @@ bool TokenTest::operator==(const TokenTest& t) const {
 }
 
 bool TokenTest::operator!=(const TokenTest& t) const {
-	return !(*this == t);
+    return !(*this == t);
 }
-}
+} // namespace polish_notation::tests::token_test
