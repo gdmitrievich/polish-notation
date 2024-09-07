@@ -14,6 +14,8 @@ struct TokenTest : public Token {
     bool operator!=(const TokenTest& t) const;
 
     std::string DebugString() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const TokenTest& t);
 };
 } // namespace polish_notation::tests::token_test
 

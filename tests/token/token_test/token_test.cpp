@@ -25,6 +25,9 @@ std::string TokenTest::DebugString() const {
 
     return result;
 }
-} // namespace polish_notation::tests::token_test
 
-// friend std::ostream& operator<<(std::ostream& os, const TokenTest& t) const;
+std::ostream& operator<<(std::ostream& os, const TokenTest& t) {
+    return os << t.DebugString();
+}
+
+} // namespace polish_notation::tests::token_test
