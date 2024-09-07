@@ -83,6 +83,16 @@ TEST(TrySetTokenFromStrTest, PassNullptrStr) {
     EXPECT_EQ(indent, -1);
 }
 
+TEST(TrySetTokenFromStrTest, PassEmptyLine) {
+    const char* src = "";
+    TokenTest result {};
+
+    int indent = trySetTokenFromStr(result, src);
+
+    EXPECT_EQ(result, TokenTest());
+    EXPECT_EQ(indent, -1);
+}
+
 // setNumberFromStr tests.
 TEST(SetNumberFromStrTest, PassNullptrStr) {
     const char* src = nullptr;
