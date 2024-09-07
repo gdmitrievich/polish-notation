@@ -159,6 +159,16 @@ TEST(TrySetTokenFromStrTest, PassLineWithFourCharTokenSubstr) {
     EXPECT_EQ(indent, 4);
 }
 
+TEST(TrySetTokenFromStrTest, PassLineWithErrorSubstr) {
+    const char* src = "sQrtabc";
+    TokenTest result {};
+
+    int indent = trySetTokenFromStr(result, src);
+
+    EXPECT_EQ(result, TokenTest());
+    EXPECT_EQ(indent, -1);
+}
+
 // setNumberFromStr tests.
 TEST(SetNumberFromStrTest, PassNullptrStr) {
     const char* src = nullptr;
