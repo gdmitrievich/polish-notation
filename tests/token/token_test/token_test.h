@@ -10,6 +10,11 @@ namespace polish_notation::tests::token_test {
 using ::polish_notation::token::Token;
 
 struct TokenTest : public Token {
+    TokenTest();
+    explicit TokenTest(Id id);
+    explicit TokenTest(double num);
+    TokenTest(Id binary, Priority p);
+
     bool operator==(const TokenTest& t) const;
     bool operator!=(const TokenTest& t) const;
 
