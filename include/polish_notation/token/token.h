@@ -38,6 +38,8 @@ struct Token {
     explicit Token(Id id);
     explicit Token(double num);
     Token(Id binary, Priority p);
+
+    bool isBinaryOperator() const;
 };
 } // namespace polish_notation::token
 
