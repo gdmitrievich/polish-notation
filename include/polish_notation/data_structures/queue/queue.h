@@ -22,6 +22,7 @@ class Queue {
 
    public:
     Queue();
+    Queue(const Queue& q);
     ~Queue();
 
     void enqueue(const T& item);
