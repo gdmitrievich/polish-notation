@@ -3,6 +3,7 @@
 
 namespace polish_notation::token {
 struct Token {
+   public:
     enum class Id {
         num,
         x,
@@ -40,6 +41,9 @@ struct Token {
     Token(Id binary, Priority p);
 
     bool isBinaryOperator() const;
+
+   private:
+    Priority getBinaryOperatorPriority() const;
 };
 } // namespace polish_notation::token
 
