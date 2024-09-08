@@ -4,7 +4,7 @@ namespace polish_notation::token {
 Token::Token() : id(Token::Id::x), data() {}
 Token::Token(Token::Id i) : id(i) {
     if (isBinaryOperator())
-    	data.priority = getBinaryOperatorPriority();
+        data.priority = getBinaryOperatorPriority();
 }
 Token::Token(double num) : id(Token::Id::num), data(num) {}
 

@@ -15,7 +15,7 @@ template <typename T>
 QueueTest<T>::QueueTest() : Queue<T>() {}
 
 template <typename T>
-QueueTest<T>::QueueTest(const std::initializer_list<T>& list) {
+QueueTest<T>::QueueTest(const ::std::initializer_list<T>& list) {
     const T* begin = list.begin();
     while (begin != list.end()) {
         Queue<T>::enqueue(*begin++);

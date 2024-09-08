@@ -16,7 +16,8 @@ class QueueTest : public Queue<T> {
     const Node<T>* backPtr() const;
 
     QueueTest();
-    QueueTest(const std::initializer_list<T>& list);
+    QueueTest(const ::std::initializer_list<T>& list);
+};
 } // namespace polish_notation::tests::data_structures::queue_test
 
 #include "queue_test.ipp"
