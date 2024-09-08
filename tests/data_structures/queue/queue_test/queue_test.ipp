@@ -10,4 +10,8 @@ template <typename T>
 inline const Node<T>* QueueTest<T>::backPtr() const {
     return Queue<T>::backPtr();
 }
+
+template <typename T>
+QueueTest<T>::QueueTest() : Queue<T>() {}
+}
 } // namespace polish_notation::tests::data_structures::queue_test

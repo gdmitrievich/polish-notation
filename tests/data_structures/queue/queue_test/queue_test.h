@@ -12,6 +12,8 @@ class QueueTest : public Queue<T> {
    public:
     const Node<T>* frontPtr() const;
     const Node<T>* backPtr() const;
+
+    QueueTest();
 };
 } // namespace polish_notation::tests::data_structures::queue_test
 
