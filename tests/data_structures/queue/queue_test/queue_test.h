@@ -1,6 +1,8 @@
 #ifndef QUEUE_TEST_H
 #define QUEUE_TEST_H
 
+#include <initializer_list>
+
 #include "polish_notation/data_structures/queue/queue.h"
 
 namespace polish_notation::tests::data_structures::queue_test {
@@ -14,7 +16,7 @@ class QueueTest : public Queue<T> {
     const Node<T>* backPtr() const;
 
     QueueTest();
-};
+    QueueTest(const std::initializer_list<T>& list);
 } // namespace polish_notation::tests::data_structures::queue_test
 
 #include "queue_test.ipp"

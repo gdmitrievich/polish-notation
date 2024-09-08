@@ -13,5 +13,12 @@ inline const Node<T>* QueueTest<T>::backPtr() const {
 
 template <typename T>
 QueueTest<T>::QueueTest() : Queue<T>() {}
+
+template <typename T>
+QueueTest<T>::QueueTest(const std::initializer_list<T>& list) {
+    const T* begin = list.begin();
+    while (begin != list.end()) {
+        Queue<T>::enqueue(*begin++);
+    }
 }
 } // namespace polish_notation::tests::data_structures::queue_test
