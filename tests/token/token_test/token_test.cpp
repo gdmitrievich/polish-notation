@@ -4,7 +4,6 @@ namespace polish_notation::tests::token_test {
 TokenTest::TokenTest() : Token() {}
 TokenTest::TokenTest(Id id) : Token(id) {}
 TokenTest::TokenTest(double num) : Token(num) {}
-TokenTest::TokenTest(Id binary, Priority p) : Token(binary, p) {}
 
 bool TokenTest::operator==(const TokenTest& t) const {
     bool isEqual = true;

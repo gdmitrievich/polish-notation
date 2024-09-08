@@ -38,7 +38,6 @@ struct Token {
     Token();
     explicit Token(Id id);
     explicit Token(double num);
-    Token(Id binary, Priority p);
 
     bool isBinaryOperator() const;
 

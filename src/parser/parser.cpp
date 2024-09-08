@@ -63,16 +63,16 @@ int trySetTokenFromStr(Token& token, const char* str) {
         token.id = Token::Id::x;
     } else if (!strncmp(str, "+", 1)) {
         indent = 1;
-        token = Token(Token::Id::plus, Token::Priority::plus);
+        token = Token(Token::Id::plus);
     } else if (!strncmp(str, "-", 1)) {
         indent = 1;
-        token = Token(Token::Id::minus, Token::Priority::minus);
+        token = Token(Token::Id::minus);
     } else if (!strncmp(str, "*", 1)) {
         indent = 1;
-        token = Token(Token::Id::mult, Token::Priority::mult);
+        token = Token(Token::Id::mult);
     } else if (!strncmp(str, "/", 1)) {
         indent = 1;
-        token = Token(Token::Id::div, Token::Priority::div);
+        token = Token(Token::Id::div);
     } else if (!strncmp(str, "(", 1)) {
         indent = 1;
         token = Token(Token::Id::lBrace);
