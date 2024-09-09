@@ -27,6 +27,9 @@ bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
 
 void setFunctionFromStackTopToQueueIfExists(Stack<Token>& sOperators,
                                             Queue<Token>& qPostfix);
+
+bool tryPlaceStackItemsToQueue(Stack<Token>& sOperators,
+                               Queue<Token>& qPostfix);
 } // namespace polish_notation::shunting_yard_alg
 
 #endif // SHUNTING_YARD_ALG_H

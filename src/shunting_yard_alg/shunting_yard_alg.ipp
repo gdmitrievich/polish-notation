@@ -67,4 +67,20 @@ void setFunctionFromStackTopToQueueIfExists(Stack<Token>& sOperators,
     if (!sOperators.isEmpty() && sOperators.top().isFunction())
         qPostfix.enqueue(sOperators.pop());
 }
+
+bool tryPlaceStackItemsToQueue(Stack<Token>& sOperators,
+                               Queue<Token>& qPostfix) {
+    Token t;
+    bool lBraceFound = false;
+
+    while (!sOperators.isEmpty() && !lBraceFound) {
+        t = sOperators.pop();
+        if (t.id != t_id::lBrace)
+            qPostfix.enqueue(t);
+        else
+            lBraceFound = true;
+    }
+
+    return lBraceFound == false;
+}
 } // namespace polish_notation::shunting_yard_alg
