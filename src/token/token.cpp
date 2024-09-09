@@ -21,6 +21,10 @@ inline bool Token::isFunction() const {
         {t_id::sin, t_id::cos, t_id::tan, t_id::ctg, t_id::sqrt, t_id::ln});
 }
 
+inline bool Token::isNumOrX() const {
+    return isEqualToOneOfTheIdList({t_id::num, t_id::x});
+}
+
 Token::Priority Token::getBinaryOperatorPriority() const {
     Priority pr;
 
