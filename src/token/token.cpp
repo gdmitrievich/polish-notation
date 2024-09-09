@@ -1,5 +1,8 @@
 #include "polish_notation/token/token.h"
 
+#include <algorithm>
+#include <initializer_list>
+
 namespace polish_notation::token {
 Token::Token() : id(Token::Id::x), data() {}
 Token::Token(Token::Id i) : id(i) {
@@ -10,8 +13,8 @@ Token::Token(double num) : id(Token::Id::num), data(num) {}
 
 bool Token::isBinaryOperator() const {
     using id_t = Token::Id;
-    return id == id_t::plus || id == id_t::minus || id == id_t::mult ||
-           id == id_t::div;
+    return isEqualToOneOfTheIdList(
+        {id_t::plus, id_t::minus, id_t::mult, id_t::div});
 }
 
 Token::Priority Token::getBinaryOperatorPriority() const {
@@ -34,5 +37,12 @@ Token::Priority Token::getBinaryOperatorPriority() const {
     }
 
     return pr;
+}
+
+inline bool Token::isEqualToOneOfTheIdList(
+    const ::std::initializer_list<Token::Id>& idList) const {
+    return ::std::any_of(idList.begin(), idList.end(), [this](Token::Id tId) {
+        return id == tId;
+    });
 }
 } // namespace polish_notation::token
