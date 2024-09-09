@@ -24,6 +24,9 @@ void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
 
 bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
                                       Queue<Token>& qPostfix);
+
+void setFunctionFromStackTopToQueueIfExists(Stack<Token>& sOperators,
+                                            Queue<Token>& qPostfix);
 } // namespace polish_notation::shunting_yard_alg
 
 #endif // SHUNTING_YARD_ALG_H

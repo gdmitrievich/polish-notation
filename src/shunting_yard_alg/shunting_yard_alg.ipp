@@ -33,7 +33,7 @@ bool tryMakeOperationWithDequeuedToken(const Token& t, Queue<Token>& qPostfix,
     } else if (t.id == t_id::rBrace) {
         status = tryRetrieveStackItemsUntilLBrace(sOperators, qPostfix);
         if (status)
-            getFunctionFromStackTopIfExists();
+            setFunctionFromStackTopToQueueIfExists(sOperators, qPostfix);
     }
 
     return status;
@@ -60,5 +60,11 @@ bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
     }
 
     return !(sOperators.isEmpty() && !isFound);
+}
+
+void setFunctionFromStackTopToQueueIfExists(Stack<Token>& sOperators,
+                                            Queue<Token>& qPostfix) {
+    if (!sOperators.isEmpty() && sOperators.top().isFunction())
+        qPostfix.enqueue(sOperators.pop());
 }
 } // namespace polish_notation::shunting_yard_alg
