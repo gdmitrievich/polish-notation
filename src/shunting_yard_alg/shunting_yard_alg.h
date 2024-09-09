@@ -18,6 +18,9 @@ using ::polish_notation::token::Token;
 
 bool tryMakeOperationWithDequeuedToken(const Token& t, Queue<Token>& qPostfix,
                                        Stack<Token>& sOperators);
+
+void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
+    const Token& t, Stack<Token>& sOperators, Queue<Token>& qPostfix);
 } // namespace polish_notation::shunting_yard_alg
 
 #endif // SHUNTING_YARD_ALG_H

@@ -38,4 +38,11 @@ bool tryMakeOperationWithDequeuedToken(const Token& t, Queue<Token>& qPostfix,
 
     return status;
 }
+
+void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
+    const Token& t, Stack<Token>& sOperators, Queue<Token>& qPostfix) {
+    if (!sOperators.isEmpty() && sOperators.top().isBinaryOperator() &&
+        t.data.priority <= sOperators.top().data.priority)
+        qPostfix.enqueue(sOperators.pop());
+}
 } // namespace polish_notation::shunting_yard_alg
