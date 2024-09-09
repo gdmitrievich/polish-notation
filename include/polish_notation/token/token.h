@@ -51,6 +51,8 @@ struct Token {
     bool isEqualToOneOfTheIdList(
         const ::std::initializer_list<Token::Id>& idList) const;
 };
+
+using t_id = Token::Id;
 } // namespace polish_notation::token
 
 #endif // TOKEN_H

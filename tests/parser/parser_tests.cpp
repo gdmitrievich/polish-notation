@@ -14,7 +14,7 @@ using namespace polish_notation::parser;
 using polish_notation::tests::data_structures::queue_test::QueueTest;
 using polish_notation::tests::token_test::TokenTest;
 using polish_notation::token::Token;
-using t_id = Token::Id;
+using polish_notation::token::t_id;
 using std::string;
 using std::vector;
 
@@ -99,7 +99,8 @@ INSTANTIATE_TEST_SUITE_P(
             {"NumberWithDotThatHasNoFractPartIsNotPass",
              {"sin+55.",
               QueueTest<TokenTest>({TokenTest(t_id::sin), TokenTest(t_id::plus),
-                                    TokenTest(55)}), false}}),
+                                    TokenTest(55)}),
+              false}}),
         std::pair<const std::string,
                   std::tuple<const std::string, QueueTest<TokenTest>, bool>>(
             {"RandomCase",
@@ -108,13 +109,12 @@ INSTANTIATE_TEST_SUITE_P(
                   {TokenTest(t_id::sqrt), TokenTest(t_id::lBrace),
                    TokenTest(t_id::cos), TokenTest(t_id::x),
                    TokenTest(t_id::plus), TokenTest(5), TokenTest(t_id::rBrace),
-                   TokenTest(t_id::x),
-                   TokenTest(t_id::x),
-                   TokenTest(t_id::rBrace)
-				   }), true}})),
+                   TokenTest(t_id::x), TokenTest(t_id::x),
+                   TokenTest(t_id::rBrace)}),
+              true}})),
     [](const testing::TestParamInfo<StrWithTokensGenerator::ParamType>& info) {
-    return info.param.first;
-});
+        return info.param.first;
+    });
 
 TEST_P(StrWithTokensGenerator, PassNullptrStr) {
     auto in = GetParam();
