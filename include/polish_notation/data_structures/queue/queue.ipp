@@ -22,6 +22,16 @@ template <typename T>
 Queue<T>::Queue() : frontPtr_(), backPtr_(), size_() {}
 
 template <typename T>
+Queue<T>::Queue(const Queue& q) : frontPtr_(), backPtr_(), size_() {
+    const Node<T>* n = q.backPtr_;
+
+    while (n) {
+        enqueue(n->data);
+        n = n->next;
+    }
+}
+
+template <typename T>
 Queue<T>::~Queue() {
     destroy();
 }

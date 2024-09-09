@@ -22,6 +22,8 @@ class Queue {
 
    public:
     Queue();
+    Queue(const Queue& q);
+    Queue<T> operator=(const Queue& q) = delete;
     ~Queue();
 
     void enqueue(const T& item);
