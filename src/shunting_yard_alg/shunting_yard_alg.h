@@ -21,6 +21,9 @@ bool tryMakeOperationWithDequeuedToken(const Token& t, Queue<Token>& qPostfix,
 
 void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
     const Token& t, Stack<Token>& sOperators, Queue<Token>& qPostfix);
+
+bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
+                                      Queue<Token>& qPostfix);
 } // namespace polish_notation::shunting_yard_alg
 
 #endif // SHUNTING_YARD_ALG_H

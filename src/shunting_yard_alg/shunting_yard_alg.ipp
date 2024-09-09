@@ -45,4 +45,20 @@ void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
         t.data.priority <= sOperators.top().data.priority)
         qPostfix.enqueue(sOperators.pop());
 }
+
+bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
+                                      Queue<Token>& qPostfix) {
+    bool isFound = false;
+    Token t;
+
+    while (!sOperators.isEmpty() && !isFound) {
+        t = sOperators.pop();
+        if (t.id != t_id::lBrace)
+            qPostfix.enqueue(t);
+        else
+            isFound = true;
+    }
+
+    return !(sOperators.isEmpty() && !isFound);
+}
 } // namespace polish_notation::shunting_yard_alg
