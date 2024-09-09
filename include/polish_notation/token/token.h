@@ -45,6 +45,7 @@ struct Token {
     explicit Token(double num);
 
     bool isBinaryOperator() const;
+    bool isFunction() const;
 
    private:
     Priority getBinaryOperatorPriority() const;
