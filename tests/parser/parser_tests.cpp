@@ -2,13 +2,19 @@
 
 #include <gtest/gtest.h>
 
+#include <tuple>
 #include <vector>
 
+#include "../data_structures/queue/queue_test/queue_test.h"
 #include "../token/token_test/token_test.h"
+#include "polish_notation/token/token.h"
 
 using namespace polish_notation::parser;
 
+using polish_notation::tests::data_structures::queue_test::QueueTest;
 using polish_notation::tests::token_test::TokenTest;
+using polish_notation::token::Token;
+using t_id = Token::Id;
 using std::string;
 using std::vector;
 
@@ -74,6 +80,56 @@ TEST(GetLineWithoutSpacesTest,
 
     EXPECT_EQ(result, expected);
 }
+
+// trySetTokenQueueFromStr tests.
+namespace try_set_token_queue_from_str {
+class StrWithTokensGenerator
+    : public testing::TestWithParam<std::pair<
+          const std::string,
+          std::tuple<const std::string, QueueTest<TokenTest>, bool>>> {};
+
+INSTANTIATE_TEST_SUITE_P(
+    TrySetTokenQueueFromStrGenerator, StrWithTokensGenerator,
+    testing::Values(
+        std::pair<const std::string,
+                  std::tuple<const std::string, QueueTest<TokenTest>, bool>>(
+            {"EmptyStr", {std::string(), QueueTest<TokenTest>(), true}}),
+        std::pair<const std::string,
+                  std::tuple<const std::string, QueueTest<TokenTest>, bool>>(
+            {"NumberWithDotThatHasNoFractPartIsNotPass",
+             {"sin+55.",
+              QueueTest<TokenTest>({TokenTest(t_id::sin), TokenTest(t_id::plus),
+                                    TokenTest(55)}), false}}),
+        std::pair<const std::string,
+                  std::tuple<const std::string, QueueTest<TokenTest>, bool>>(
+            {"RandomCase",
+             {"sqrt(cosx+5)xx)",
+              QueueTest<TokenTest>(
+                  {TokenTest(t_id::sqrt), TokenTest(t_id::lBrace),
+                   TokenTest(t_id::cos), TokenTest(t_id::x),
+                   TokenTest(t_id::plus), TokenTest(5), TokenTest(t_id::rBrace),
+                   TokenTest(t_id::x),
+                   TokenTest(t_id::x),
+                   TokenTest(t_id::rBrace)
+				   }), true}})),
+    [](const testing::TestParamInfo<StrWithTokensGenerator::ParamType>& info) {
+    return info.param.first;
+});
+
+TEST_P(StrWithTokensGenerator, PassNullptrStr) {
+    auto in = GetParam();
+    std::string src(::std::get<0>(in.second));
+    QueueTest<TokenTest> result;
+    QueueTest<TokenTest> expected(::std::get<1>(in.second));
+
+    bool isCorrect = trySetTokenQueueFromStr((QueueTest<Token>&) result, src);
+
+    ASSERT_EQ(result.size(), expected.size());
+    ASSERT_EQ(isCorrect, ::std::get<2>(in.second));
+    while (!result.isEmpty())
+        EXPECT_EQ(result.dequeue(), expected.dequeue());
+}
+} // namespace try_set_token_queue_from_str
 
 // trySetTokenFromStr tests.
 TEST(TrySetTokenFromStrTest, PassNullptrStr) {
