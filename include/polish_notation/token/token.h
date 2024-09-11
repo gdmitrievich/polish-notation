@@ -1,6 +1,11 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
+namespace std {
+template <typename T>
+class initializer_list;
+} // namespace std
+
 namespace polish_notation::token {
 struct Token {
    public:
@@ -40,10 +45,18 @@ struct Token {
     explicit Token(double num);
 
     bool isBinaryOperator() const;
+    bool isFunction() const;
+    bool isNumOrX() const;
 
    private:
     Priority getBinaryOperatorPriority() const;
+    bool isEqualToOneOfTheIdList(
+        const ::std::initializer_list<Token::Id>& idList) const;
 };
+
+using t_id = Token::Id;
 } // namespace polish_notation::token
+
+#include "token.ipp"
 
 #endif // TOKEN_H

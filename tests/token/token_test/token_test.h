@@ -13,6 +13,7 @@ struct TokenTest : public Token {
     TokenTest();
     explicit TokenTest(Id id);
     explicit TokenTest(double num);
+    TokenTest(const Token& t);
 
     bool operator==(const TokenTest& t) const;
     bool operator!=(const TokenTest& t) const;
