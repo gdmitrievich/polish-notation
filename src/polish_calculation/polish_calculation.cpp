@@ -43,7 +43,7 @@ bool tryCalculateRetrievedToken(const Token& t, Stack<Token>& s) {
         if (s.size() >= 2) {
             double first = s.pop().data.num;
             double second = s.pop().data.num;
-            s.push(calculateBinaryOperator(t.id, first, second));
+            s.push(Token(calculateBinaryOperator(t.id, first, second)));
         } else {
             status = false;
         }
@@ -75,6 +75,28 @@ double calculateFunction(Token::Id funcId, double v) {
         case t_id::ln:
             if (v > 0)
                 res = log(v);
+            break;
+    }
+
+    return res;
+}
+
+double calculateBinaryOperator(Token::Id binId, double first, double second) {
+    double res {};
+
+    switch (binId) {
+        case t_id::plus:
+            res = second + first;
+            break;
+        case t_id::minus:
+            res = second - first;
+            break;
+        case t_id::mult:
+            res = second * first;
+            break;
+        case t_id::div:
+            if (first != 0)
+                res = second / first;
             break;
     }
 

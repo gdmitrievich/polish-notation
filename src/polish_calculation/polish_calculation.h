@@ -23,6 +23,8 @@ void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num);
 bool tryCalculateRetrievedToken(const Token& t, Stack<Token>& s);
 
 double calculateFunction(Token::Id funcId, double v);
+
+double calculateBinaryOperator(Token::Id binId, double first, double second);
 } // namespace polish_notation::polish_calculation
 
 #endif // POLISH_CALCULATION_H
