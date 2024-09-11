@@ -104,3 +104,17 @@ TEST(TryConvertInfixTokenQueueToPostfixTest, ExternalBraces) {
     while (!result.isEmpty())
         EXPECT_EQ((TokenTest) result.dequeue(), (TokenTest) expected.dequeue());
 }
+
+TEST(TryConvertInfixTokenQueueToPostfixTest, LeftBraceUnexistsError) {
+    Queue<Token> src;
+    src.enqueue(Token(t_id::x));
+    src.enqueue(Token(t_id::plus));
+    src.enqueue(Token(t_id::x));
+    src.enqueue(Token(t_id::rBrace));
+
+    std::pair<bool, Queue<Token>> resultPair =
+        tryConvertInfixTokenQueueToPostfix(src);
+
+    ASSERT_FALSE(std::get<0>(resultPair));
+    ASSERT_EQ(std::get<1>(resultPair).size(), 0);
+}
