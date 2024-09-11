@@ -57,4 +57,6 @@ struct Token {
 using t_id = Token::Id;
 } // namespace polish_notation::token
 
+#include "token.ipp"
+
 #endif // TOKEN_H
