@@ -36,7 +36,7 @@ bool tryCalculateRetrievedToken(const Token& t, Stack<Token>& s) {
         s.push(t);
     } else if (t.isFunction()) {
         if (s.size() >= 1)
-            s.push(calculateFunction(t.id, s.pop()));
+            s.push(Token(calculateFunction(t.id, s.pop().data.num)));
         else
             status = false;
     } else if (t.isBinaryOperator()) {
@@ -49,5 +49,35 @@ bool tryCalculateRetrievedToken(const Token& t, Stack<Token>& s) {
         }
     }
     return status;
+}
+
+double calculateFunction(Token::Id funcId, double v) {
+    double res {};
+
+    switch (funcId) {
+        case t_id::sin:
+            res = sin(v);
+            break;
+        case t_id::cos:
+            res = cos(v);
+            break;
+        case t_id::tan:
+            res = tan(v);
+            break;
+        case t_id::ctg:
+            if (tan(v) != 0)
+                res = 1 / tan(v);
+            break;
+        case t_id::sqrt:
+            if (v >= 0)
+                res = sqrt(v);
+            break;
+        case t_id::ln:
+            if (v > 0)
+                res = log(v);
+            break;
+    }
+
+    return res;
 }
 } // namespace polish_notation::polish_calculation
