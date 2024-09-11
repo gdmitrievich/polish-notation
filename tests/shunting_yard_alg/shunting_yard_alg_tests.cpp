@@ -44,3 +44,42 @@ TEST(TryConvertInfixTokenQueueToPostfixTest, SequenceOfFunctions) {
     while (!result.isEmpty())
         EXPECT_EQ((TokenTest) result.dequeue(), (TokenTest) expected.dequeue());
 }
+
+TEST(TryConvertInfixTokenQueueToPostfixTest, RandomCorrectCase) {
+    Queue<Token> src;
+    src.enqueue(Token(t_id::lBrace));
+    src.enqueue(Token(55));
+    src.enqueue(Token(t_id::plus));
+    src.enqueue(Token(33));
+    src.enqueue(Token(t_id::rBrace));
+    src.enqueue(Token(t_id::mult));
+    src.enqueue(Token(t_id::lBrace));
+    src.enqueue(Token(3));
+    src.enqueue(Token(t_id::plus));
+    src.enqueue(Token(t_id::x));
+    src.enqueue(Token(t_id::mult));
+    src.enqueue(Token(t_id::sin));
+    src.enqueue(Token(t_id::x));
+    src.enqueue(Token(t_id::rBrace));
+
+    Queue<Token> expected;
+    expected.enqueue(Token(55));
+    expected.enqueue(Token(33));
+    expected.enqueue(Token(t_id::plus));
+    expected.enqueue(Token(3));
+    expected.enqueue(Token(t_id::x));
+    expected.enqueue(Token(t_id::sin));
+    expected.enqueue(Token(t_id::x));
+    expected.enqueue(Token(t_id::mult));
+    expected.enqueue(Token(t_id::plus));
+    expected.enqueue(Token(t_id::mult));
+
+    std::pair<bool, Queue<Token>> resultPair =
+        tryConvertInfixTokenQueueToPostfix(src);
+
+    Queue<Token> result = std::get<1>(resultPair);
+    ASSERT_TRUE(std::get<0>(resultPair));
+    ASSERT_EQ(result.size(), expected.size());
+    while (!result.isEmpty())
+        EXPECT_EQ((TokenTest) result.dequeue(), (TokenTest) expected.dequeue());
+}
