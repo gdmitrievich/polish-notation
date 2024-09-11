@@ -37,8 +37,8 @@ TEST(TryConvertInfixTokenQueueToPostfixTest, SequenceOfFunctions) {
 
     std::pair<bool, Queue<Token>> resultPair =
         tryConvertInfixTokenQueueToPostfix(src);
-
     Queue<Token> result = std::get<1>(resultPair);
+
     ASSERT_TRUE(std::get<0>(resultPair));
     ASSERT_EQ(result.size(), expected.size());
     while (!result.isEmpty())
@@ -76,8 +76,8 @@ TEST(TryConvertInfixTokenQueueToPostfixTest, RandomCorrectCase) {
 
     std::pair<bool, Queue<Token>> resultPair =
         tryConvertInfixTokenQueueToPostfix(src);
-
     Queue<Token> result = std::get<1>(resultPair);
+
     ASSERT_TRUE(std::get<0>(resultPair));
     ASSERT_EQ(result.size(), expected.size());
     while (!result.isEmpty())
@@ -97,8 +97,8 @@ TEST(TryConvertInfixTokenQueueToPostfixTest, ExternalBraces) {
 
     std::pair<bool, Queue<Token>> resultPair =
         tryConvertInfixTokenQueueToPostfix(src);
-
     Queue<Token> result = std::get<1>(resultPair);
+
     ASSERT_TRUE(std::get<0>(resultPair));
     ASSERT_EQ(result.size(), expected.size());
     while (!result.isEmpty())
