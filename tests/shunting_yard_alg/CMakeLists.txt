@@ -9,6 +9,7 @@ target_sources(${TARGET} PRIVATE
 target_link_libraries(${TARGET}
 	PRIVATE
 		shunting_yard_alg
+		token_test
 	PUBLIC
 		gtest_main
 )
