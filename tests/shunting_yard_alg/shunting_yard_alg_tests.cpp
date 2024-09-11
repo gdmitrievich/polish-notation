@@ -83,3 +83,24 @@ TEST(TryConvertInfixTokenQueueToPostfixTest, RandomCorrectCase) {
     while (!result.isEmpty())
         EXPECT_EQ((TokenTest) result.dequeue(), (TokenTest) expected.dequeue());
 }
+
+TEST(TryConvertInfixTokenQueueToPostfixTest, ExternalBraces) {
+    Queue<Token> src;
+    src.enqueue(Token(t_id::lBrace));
+    src.enqueue(Token(t_id::lBrace));
+    src.enqueue(Token(t_id::x));
+    src.enqueue(Token(t_id::rBrace));
+    src.enqueue(Token(t_id::rBrace));
+
+    Queue<Token> expected;
+    expected.enqueue(Token(t_id::x));
+
+    std::pair<bool, Queue<Token>> resultPair =
+        tryConvertInfixTokenQueueToPostfix(src);
+
+    Queue<Token> result = std::get<1>(resultPair);
+    ASSERT_TRUE(std::get<0>(resultPair));
+    ASSERT_EQ(result.size(), expected.size());
+    while (!result.isEmpty())
+        EXPECT_EQ((TokenTest) result.dequeue(), (TokenTest) expected.dequeue());
+}
