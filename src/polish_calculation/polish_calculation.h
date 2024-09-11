@@ -18,6 +18,8 @@ using pn::token::Token;
 void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num);
 
 ::std::pair<bool, double> tryCalculatePostfixTokenQueue(Queue<Token> qPostfix);
+
+bool tryCalculateRetrievedToken(const Token& t, Stack<Token>& s);
 } // namespace polish_notation::polish_calculation
 
 #endif // POLISH_CALCULATION_H
