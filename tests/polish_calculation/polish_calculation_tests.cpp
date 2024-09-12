@@ -31,3 +31,13 @@ TEST(TryCalculatePostfixTokenQueueTest, SqrtOfThe25) {
     ASSERT_TRUE(resultPair.first);
     EXPECT_DOUBLE_EQ(resultPair.second, 5);
 }
+
+TEST(TryCalculatePostfixTokenQueueTest, FuncWithoutArgError) {
+    Queue<Token> src;
+    src.enqueue(Token(t_id::sin));
+    src.enqueue(Token(t_id::cos));
+
+    ::std::pair<bool, double> resultPair = tryCalculatePostfixTokenQueue(src);
+
+    ASSERT_FALSE(resultPair.first);
+}
