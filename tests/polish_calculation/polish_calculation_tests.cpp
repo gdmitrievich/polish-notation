@@ -53,3 +53,15 @@ TEST(TryCalculatePostfixTokenQueueTest, BinaryOperatorWithoutSecondArgError) {
 
     ASSERT_FALSE(resultPair.first);
 }
+
+TEST(TryCalculatePostfixTokenQueueTest, OperandsAreMoreThanNeededError) {
+    Queue<Token> src;
+    src.enqueue(Token(3));
+    src.enqueue(Token(t_id::plus));
+    src.enqueue(Token(3));
+    src.enqueue(Token(3));
+
+    ::std::pair<bool, double> resultPair = tryCalculatePostfixTokenQueue(src);
+
+    ASSERT_FALSE(resultPair.first);
+}
