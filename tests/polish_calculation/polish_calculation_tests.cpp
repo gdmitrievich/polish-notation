@@ -16,3 +16,18 @@ TEST(TryCalculatePostfixTokenQueueTest, SequenceOfFunctions) {
     ASSERT_TRUE(resultPair.first);
     EXPECT_NEAR(resultPair.second, 0.6812, 0.0001);
 }
+
+TEST(TryCalculatePostfixTokenQueueTest, SqrtOfThe25) {
+    Queue<Token> src;
+    src.enqueue(Token(1));
+    src.enqueue(Token(3));
+    src.enqueue(Token(8));
+    src.enqueue(Token(t_id::mult));
+    src.enqueue(Token(t_id::plus));
+    src.enqueue(Token(t_id::sqrt));
+
+    ::std::pair<bool, double> resultPair = tryCalculatePostfixTokenQueue(src);
+
+    ASSERT_TRUE(resultPair.first);
+    EXPECT_DOUBLE_EQ(resultPair.second, 5);
+}
