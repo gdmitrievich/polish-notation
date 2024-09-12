@@ -15,7 +15,7 @@ using polish_notation::tests::data_structures::queue_test::QueueTest;
 using polish_notation::tests::token_test::TokenTest;
 using polish_notation::token::t_id;
 using polish_notation::token::Token;
-using polish_notation::token::t_id;
+using std::string;
 using std::vector;
 
 // getLineWithoutSpaces tests.
