@@ -13,6 +13,8 @@ namespace polish_notation::renderer {
     const ::polish_notation::data_structures::queue::Queue<
         ::polish_notation::token::Token>& qPostfix,
     FieldInfo fieldInfo);
+
+void fillFieldByDefault(::std::vector<::std::vector<char>>& f, FieldInfo fInfo);
 } // namespace polish_notation::renderer
 
 #endif // FIELD_GENERATOR_H

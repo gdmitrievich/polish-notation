@@ -60,4 +60,27 @@ pair<bool, vector<vector<char>>> tryGetGeneratedField(
 
     return pair<bool, vector<vector<char>>>(isOk, field);
 }
+
+void fillFieldByDefault(vector<vector<char>>& f, FieldInfo fInfo) {
+    const char EMPTY_CELL_CHAR = '.';
+    const char COORD_LINE_CHAR = 'o';
+    const char RIGHT_ARROW_CHAR = '>';
+    const char UP_ARROW_CHAR = '^';
+
+    f = vector<vector<char>>(fInfo.height,
+                             vector<char>(fInfo.width, EMPTY_CELL_CHAR));
+
+    if (fInfo.centerOfCoordinates.second >= 0 &&
+        fInfo.centerOfCoordinates.second < fInfo.height) {
+        f[fInfo.centerOfCoordinates.second] =
+            vector<char>(fInfo.width, COORD_LINE_CHAR);
+        f[fInfo.centerOfCoordinates.second][fInfo.width - 1] = RIGHT_ARROW_CHAR;
+    }
+    if (fInfo.centerOfCoordinates.first >= 0 &&
+        fInfo.centerOfCoordinates.first < fInfo.width) {
+        for (int i {}; i < fInfo.height; ++i)
+            f[i][fInfo.centerOfCoordinates.first] = COORD_LINE_CHAR;
+        f[0][fInfo.centerOfCoordinates.first] = UP_ARROW_CHAR;
+    }
+}
 } // namespace polish_notation::renderer
