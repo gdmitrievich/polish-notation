@@ -11,9 +11,8 @@ target_include_directories(${TARGET} PUBLIC
 )
 
 target_link_libraries(${TARGET}
-	INTERFACE
+	PUBLIC
 		queue
 		stack
-	PUBLIC
 		token
 )

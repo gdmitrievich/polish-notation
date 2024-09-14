@@ -10,10 +10,8 @@ target_include_directories(${TARGET} PUBLIC
 	${CMAKE_SOURCE_DIR}/include
 )
 
-target_link_libraries(${TARGET}
-	INTERFACE
-		queue
-		stack
-	PUBLIC
-		token
+target_link_libraries(${TARGET} PUBLIC
+	queue
+	stack
+	token
 )

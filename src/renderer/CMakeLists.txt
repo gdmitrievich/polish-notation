@@ -11,9 +11,8 @@ target_include_directories(${TARGET} PUBLIC
 )
 
 target_link_libraries(${TARGET}
-	INTERFACE
-		queue
 	PUBLIC
+		queue
 		token
 		polish_calculation
 )
