@@ -1,4 +1,4 @@
-#include "polish_calculation.h"
+#include "polish_notation/polish_calculation/polish_calculation.h"
 
 namespace polish_notation::polish_calculation {
 void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num) {

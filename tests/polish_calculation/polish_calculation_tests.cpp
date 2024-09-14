@@ -1,4 +1,4 @@
-#include "../../src/polish_calculation/polish_calculation.h"
+#include "polish_notation/polish_calculation/polish_calculation.h"
 
 #include <gtest/gtest.h>
 

@@ -1,4 +1,4 @@
-#include "shunting_yard_alg.h"
+#include "polish_notation/shunting_yard_alg/shunting_yard_alg.h"
 
 namespace polish_notation::shunting_yard_alg {
 ::std::pair<bool, Queue<Token>> tryConvertInfixTokenQueueToPostfix(

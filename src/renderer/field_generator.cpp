@@ -1,6 +1,6 @@
-#include "field_generator.h"
+#include "polish_notation/renderer/field_generator.h"
 
-#include "../polish_calculation/polish_calculation.h"
+#include "polish_notation/polish_calculation/polish_calculation.h"
 
 using polish_notation::data_structures::queue::Queue;
 using polish_notation::token::Token;

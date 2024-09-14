@@ -1,4 +1,4 @@
-#include "../../../src/parser/parser.h"
+#include "polish_notation/parser/parser.h"
 
 #include <gtest/gtest.h>
 
