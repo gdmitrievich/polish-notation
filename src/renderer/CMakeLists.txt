@@ -15,7 +15,7 @@ target_link_libraries(${TARGET}
 		queue
 	PUBLIC
 		token
-		polish_calculation_lib
+		polish_calculation
 )
 
 add_subdirectory(console_renderer)

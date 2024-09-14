@@ -8,7 +8,7 @@ target_sources(${TARGET} PRIVATE
 
 target_link_libraries(${TARGET}
 	PRIVATE
-		polish_calculation_lib
+		polish_calculation
 	PUBLIC
 		gtest_main
 )

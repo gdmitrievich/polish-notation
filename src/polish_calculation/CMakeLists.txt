@@ -1,4 +1,4 @@
-set(TARGET polish_calculation_lib)
+set(TARGET polish_calculation)
 
 add_library(${TARGET})
 
