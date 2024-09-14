@@ -1,10 +1,11 @@
-set(headers
-	queue_test.h
-	queue_test.ipp
+set(TARGET queue_test)
+
+add_library(${TARGET} INTERFACE)
+
+target_include_directories(${TARGET} INTERFACE
+	${CMAKE_CURRENT_LIST_DIR}/include
 )
 
-set(TARGET_LIBRARY queue_test)
-
-add_library(${TARGET_LIBRARY} INTERFACE
-	${headers}
+target_link_libraries(${TARGET} INTERFACE
+	queue
 )
