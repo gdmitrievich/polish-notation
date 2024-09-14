@@ -5,7 +5,7 @@
 #include <tuple>
 #include <vector>
 
-#include "../data_structures/queue/queue_test/queue_test.h"
+#include "queue_test.h"
 #include "../token/token_test/token_test.h"
 #include "polish_notation/token/token.h"
 
