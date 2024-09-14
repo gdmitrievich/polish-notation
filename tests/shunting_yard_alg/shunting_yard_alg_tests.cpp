@@ -5,7 +5,7 @@
 #include <string>
 #include <utility>
 
-#include "../../tests/token/token_test/token_test.h"
+#include "token_test.h"
 
 using namespace polish_notation::shunting_yard_alg;
 

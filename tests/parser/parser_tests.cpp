@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "queue_test.h"
-#include "../token/token_test/token_test.h"
+#include "token_test.h"
 #include "polish_notation/token/token.h"
 
 using namespace polish_notation::parser;
