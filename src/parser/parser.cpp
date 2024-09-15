@@ -143,10 +143,13 @@ double convertStrPartToDouble(const char* str, size_t count) {
 
     double n {};
     size_t intPartLen = getLenOfNumberStr(str);
+    intPartLen = intPartLen <= count ? intPartLen : count;
     n = convertStrPartToInt(str, intPartLen);
     if (intPartLen != count) {
         const char* fractPartStr = str + intPartLen + 1;
         size_t fractPartLen = getLenOfNumberStr(fractPartStr);
+		size_t digitsLeft = count - intPartLen - 1;
+		fractPartLen = fractPartLen <= digitsLeft ? fractPartLen : digitsLeft;
         n += convertStrPartToInt(fractPartStr, fractPartLen) /
              pow(10, fractPartLen);
     }
