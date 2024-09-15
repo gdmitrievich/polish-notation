@@ -5,7 +5,7 @@
 
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/token/token.h"
-#include "polish_notation/utility.h"
+#include "polish_notation/utility/utility.h"
 
 namespace polish_notation::parser {
 ::std::string getLineWithoutSpaces(const ::std::string& line);

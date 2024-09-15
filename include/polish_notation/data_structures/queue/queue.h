@@ -1,7 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "polish_notation/utility.h"
+#include "polish_notation/utility/utility.h"
 
 namespace polish_notation::data_structures::node {
 template <typename T>

@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "polish_notation/utility.h"
+#include "polish_notation/utility/utility.h"
 
 namespace polish_notation::polish_calculation {
 namespace pn = polish_notation;
