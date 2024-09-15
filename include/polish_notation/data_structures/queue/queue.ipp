@@ -82,7 +82,7 @@ inline bool Queue<T>::isEmpty() const {
 }
 
 template <typename T>
-inline size_t Queue<T>::size() const {
+inline ::polish_notation::utility::size_t Queue<T>::size() const {
     return size_;
 }
 } // namespace polish_notation::data_structures::queue

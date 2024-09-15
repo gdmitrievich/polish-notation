@@ -56,7 +56,7 @@ inline bool Stack<T>::isEmpty() const {
 }
 
 template <typename T>
-inline size_t Stack<T>::size() const {
+inline ::polish_notation::utility::size_t Stack<T>::size() const {
     return size_;
 }
 } // namespace polish_notation::data_structures::stack

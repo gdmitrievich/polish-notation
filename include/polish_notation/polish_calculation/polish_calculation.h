@@ -11,7 +11,6 @@
 namespace polish_notation::polish_calculation {
 namespace pn = polish_notation;
 using pn::data_structures::queue::Queue;
-using pn::data_structures::queue::size_t;
 using pn::data_structures::stack::Stack;
 using pn::token::t_id;
 using pn::token::Token;

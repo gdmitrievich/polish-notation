@@ -2,15 +2,15 @@
 #define STACK_H
 
 #include "polish_notation/data_structures/node/node.h"
+#include "polish_notation/utility.h"
 
 namespace polish_notation::data_structures::stack {
 using ::polish_notation::data_structures::node::Node;
-using size_t = decltype(sizeof(1));
 
 template <typename T>
 class Stack {
    private:
-    size_t size_;
+    ::polish_notation::utility::size_t size_;
     Node<T>* topPtr_;
 
    public:
@@ -23,7 +23,7 @@ class Stack {
     void destroy();
 
     bool isEmpty() const;
-    size_t size() const;
+    ::polish_notation::utility::size_t size() const;
 };
 } // namespace polish_notation::data_structures::stack
 
