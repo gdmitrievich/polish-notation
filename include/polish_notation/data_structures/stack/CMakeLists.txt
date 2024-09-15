@@ -1,10 +1,7 @@
-set(headers
-	stack.h
-	stack.ipp
-)
+set(TARGET stack)
 
-set(TARGET_LIBRARY stack)
+add_library(${TARGET} INTERFACE)
 
-add_library(${TARGET_LIBRARY} INTERFACE
-	${headers}
+target_include_directories(${TARGET} INTERFACE
+	${CMAKE_SOURCE_DIR}/include
 )

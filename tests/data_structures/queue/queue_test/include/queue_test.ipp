@@ -1,6 +1,11 @@
+#include <initializer_list>
+
 #include "queue_test.h"
 
 namespace polish_notation::tests::data_structures::queue_test {
+using ::polish_notation::data_structures::node::Node;
+using ::polish_notation::data_structures::queue::Queue;
+
 template <typename T>
 inline const Node<T>* QueueTest<T>::frontPtr() const {
     return Queue<T>::frontPtr();

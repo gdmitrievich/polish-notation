@@ -8,14 +8,8 @@ target_sources(${TARGET} PRIVATE
 	queue_tests.cpp
 )
 
-target_include_directories(${TARGET} PRIVATE
-	${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(${TARGET} PUBLIC
-	gtest_main
-)
-
-target_link_libraries(${TARGET} INTERFACE
-	queue_test
+target_link_libraries(${TARGET}
+	PRIVATE
+		gtest_main
+		queue_test
 )

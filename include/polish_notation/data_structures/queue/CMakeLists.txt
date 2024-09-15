@@ -1,10 +1,7 @@
-set(headers
-	queue.h
-	queue.ipp
-)
+set(TARGET queue)
 
-set(TARGET_LIBRARY queue)
+add_library(${TARGET} INTERFACE)
 
-add_library(${TARGET_LIBRARY} INTERFACE
-	${headers}
+target_include_directories(${TARGET} INTERFACE
+	${CMAKE_SOURCE_DIR}/include
 )

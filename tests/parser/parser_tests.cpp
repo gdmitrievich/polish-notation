@@ -1,13 +1,13 @@
-#include "../../../src/parser/parser.h"
+#include "polish_notation/parser/parser.h"
 
 #include <gtest/gtest.h>
 
 #include <tuple>
 #include <vector>
 
-#include "../data_structures/queue/queue_test/queue_test.h"
-#include "../token/token_test/token_test.h"
 #include "polish_notation/token/token.h"
+#include "queue_test.h"
+#include "token_test.h"
 
 using namespace polish_notation::parser;
 
@@ -431,6 +431,42 @@ TEST(ConvertStrPartToDoubleTest,
     double expected = 555.555;
 
     double result = convertStrPartToDouble(src + 3, 7);
+
+    EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToDoubleTest, CountIsLessThanDigitsInIntNum) {
+    const char* src = "555";
+    double expected = 55;
+
+    double result = convertStrPartToDouble(src, 2);
+
+    EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToDoubleTest, CountIsLessThanDigitsInFractNum) {
+    const char* src = "555.555";
+    double expected = 555.5;
+
+    double result = convertStrPartToDouble(src, 5);
+
+    EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToDoubleTest, CountCoversIntDigitsAndDot) {
+    const char* src = "555.555";
+    double expected = 555;
+
+    double result = convertStrPartToDouble(src, 4);
+
+    EXPECT_EQ(result, expected);
+}
+
+TEST(ConvertStrPartToDoubleTest, CountIsBiggerThanDigitsInFractNum) {
+    const char* src = "555.5";
+    double expected = 555.5;
+
+    double result = convertStrPartToDouble(src, 7);
 
     EXPECT_EQ(result, expected);
 }

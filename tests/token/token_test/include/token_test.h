@@ -7,21 +7,19 @@
 #include "polish_notation/token/token.h"
 
 namespace polish_notation::tests::token_test {
-using ::polish_notation::token::Token;
-
-struct TokenTest : public Token {
+struct TokenTest : public ::polish_notation::token::Token {
     TokenTest();
     explicit TokenTest(Id id);
     explicit TokenTest(double num);
-    TokenTest(const Token& t);
+    TokenTest(const ::polish_notation::token::Token& t);
 
     bool operator==(const TokenTest& t) const;
     bool operator!=(const TokenTest& t) const;
 
-    std::string DebugString() const;
+    ::std::string DebugString() const;
 
-    friend std::ostream& operator<<(std::ostream& os, const TokenTest& t);
-    friend void printTo(const TokenTest& t, std::ostream* os);
+    friend ::std::ostream& operator<<(::std::ostream& os, const TokenTest& t);
+    friend void printTo(const TokenTest& t, ::std::ostream* os);
 };
 } // namespace polish_notation::tests::token_test
 

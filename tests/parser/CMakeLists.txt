@@ -7,11 +7,9 @@ target_sources(${TARGET} PRIVATE
 )
 
 target_link_libraries(${TARGET}
-	PUBLIC
+	PRIVATE
 		gtest_main
 		token_test
-	PRIVATE
 		parser
-	INTERFACE
 		queue_test
 )

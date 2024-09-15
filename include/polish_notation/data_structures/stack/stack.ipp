@@ -1,6 +1,9 @@
+#include "polish_notation/data_structures/node/node.h"
 #include "stack.h"
 
 namespace polish_notation::data_structures::stack {
+using ::polish_notation::data_structures::node::Node;
+
 template <typename T>
 Stack<T>::Stack() : size_(), topPtr_() {}
 
@@ -56,7 +59,7 @@ inline bool Stack<T>::isEmpty() const {
 }
 
 template <typename T>
-inline size_t Stack<T>::size() const {
+inline ::polish_notation::utility::size_t Stack<T>::size() const {
     return size_;
 }
 } // namespace polish_notation::data_structures::stack

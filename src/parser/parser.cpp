@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "polish_notation/parser/parser.h"
 
 #include <cctype>
 #include <cmath>
@@ -7,6 +7,7 @@
 #include <string>
 
 namespace polish_notation::parser {
+using ::polish_notation::utility::size_t;
 using std::string;
 
 using polish_notation::data_structures::queue::Queue;
@@ -142,10 +143,13 @@ double convertStrPartToDouble(const char* str, size_t count) {
 
     double n {};
     size_t intPartLen = getLenOfNumberStr(str);
+    intPartLen = intPartLen <= count ? intPartLen : count;
     n = convertStrPartToInt(str, intPartLen);
     if (intPartLen != count) {
         const char* fractPartStr = str + intPartLen + 1;
         size_t fractPartLen = getLenOfNumberStr(fractPartStr);
+		size_t digitsLeft = count - intPartLen - 1;
+		fractPartLen = fractPartLen <= digitsLeft ? fractPartLen : digitsLeft;
         n += convertStrPartToInt(fractPartStr, fractPartLen) /
              pow(10, fractPartLen);
     }

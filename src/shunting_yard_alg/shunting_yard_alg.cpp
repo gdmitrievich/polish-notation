@@ -1,6 +1,11 @@
-#include "shunting_yard_alg.h"
+#include "polish_notation/shunting_yard_alg/shunting_yard_alg.h"
 
 namespace polish_notation::shunting_yard_alg {
+using ::polish_notation::data_structures::queue::Queue;
+using ::polish_notation::data_structures::stack::Stack;
+using ::polish_notation::token::t_id;
+using ::polish_notation::token::Token;
+
 ::std::pair<bool, Queue<Token>> tryConvertInfixTokenQueueToPostfix(
     Queue<Token>& qInfix) {
     Queue<Token> qPostfix;

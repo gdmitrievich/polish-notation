@@ -1,11 +1,11 @@
-#include "console_renderer.h"
+#include "polish_notation/renderer/console_renderer/console_renderer.h"
 
 #include <iostream>
 
+namespace polish_notation::renderer::console {
 using std::cout, std::endl;
 using std::vector;
 
-namespace polish_notation::renderer::console {
 void renderField(const vector<vector<char>>& field) {
     const int HEIGHT = field.size();
     const int WIDTH = field[0].size();

@@ -3,19 +3,18 @@ set(TARGET field_generator)
 add_library(${TARGET})
 
 target_sources(${TARGET} PRIVATE
-	${CMAKE_CURRENT_LIST_DIR}/field_generator.cpp
+	field_generator.cpp
 )
 
 target_include_directories(${TARGET} PUBLIC
-	${CMAKE_CURRENT_LIST_DIR}
+	${CMAKE_SOURCE_DIR}/include
 )
 
 target_link_libraries(${TARGET}
-	INTERFACE
-		queue
 	PUBLIC
+		queue
 		token
-		polish_calculation_lib
+		polish_calculation
 )
 
 add_subdirectory(console_renderer)

@@ -6,14 +6,13 @@ target_sources(${TARGET} PRIVATE
 	${CMAKE_CURRENT_LIST_DIR}/shunting_yard_alg.cpp
 )
 
-target_include_directories(${TARGET} PRIVATE
-	${CMAKE_CURRENT_LIST_DIR}
+target_include_directories(${TARGET} PUBLIC
+	${CMAKE_SOURCE_DIR}/include
 )
 
 target_link_libraries(${TARGET}
-	INTERFACE
+	PUBLIC
 		queue
 		stack
-	PUBLIC
 		token
 )

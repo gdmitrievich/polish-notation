@@ -1,10 +1,7 @@
-set(headers
-	node.h
-	node.ipp
-)
+set(TARGET node)
 
-set(TARGET_LIBRARY node)
+add_library(${TARGET} INTERFACE)
 
-add_library(${TARGET_LIBRARY} INTERFACE
-	${headers}
+target_include_directories(${TARGET} INTERFACE
+	${CMAKE_SOURCE_DIR}/include
 )

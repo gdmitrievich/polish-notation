@@ -1,8 +1,17 @@
-#include "../../src/polish_calculation/polish_calculation.h"
+#include "polish_notation/polish_calculation/polish_calculation.h"
 
 #include <gtest/gtest.h>
 
+#include <cmath>
+
 using namespace polish_notation::polish_calculation;
+namespace pn = polish_notation;
+using pn::data_structures::queue::Queue;
+using pn::data_structures::stack::Stack;
+using pn::token::t_id;
+using pn::token::Token;
+
+using pn::utility::size_t;
 
 TEST(TryCalculatePostfixTokenQueueTest, SequenceOfFunctions) {
     Queue<Token> src;
