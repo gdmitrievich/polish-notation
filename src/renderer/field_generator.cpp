@@ -1,7 +1,11 @@
 #include "polish_notation/renderer/field_generator.h"
 
+#include <cmath>
+#include <iostream>
+
 #include "polish_notation/polish_calculation/polish_calculation.h"
 
+namespace polish_notation::renderer {
 using polish_notation::data_structures::queue::Queue;
 using polish_notation::token::Token;
 using std::pair;
@@ -10,10 +14,8 @@ using std::vector;
 using polish_notation::polish_calculation::replaceAllXWithNumInTokenQueue;
 using polish_notation::polish_calculation::tryCalculatePostfixTokenQueue;
 
-#include <iostream>
 using std::cout, std::endl;
 
-namespace polish_notation::renderer {
 pair<bool, vector<vector<char>>> tryGetGeneratedField(
     const Queue<Token>& qPostfix, FieldInfo fieldInfo) {
     if (fieldInfo.width <= 0 || fieldInfo.height <= 0)

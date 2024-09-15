@@ -1,3 +1,5 @@
+#include <initializer_list>
+
 #include "queue_test.h"
 
 namespace polish_notation::tests::data_structures::queue_test {

@@ -1,8 +1,16 @@
 #include "polish_notation/polish_calculation/polish_calculation.h"
 
+#include <cmath>
+
 #include "polish_notation/utility.h"
 
 namespace polish_notation::polish_calculation {
+namespace pn = polish_notation;
+using pn::data_structures::queue::Queue;
+using pn::data_structures::stack::Stack;
+using pn::token::t_id;
+using pn::token::Token;
+
 using pn::utility::size_t;
 
 void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num) {

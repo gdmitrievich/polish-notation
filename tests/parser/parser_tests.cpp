@@ -5,9 +5,9 @@
 #include <tuple>
 #include <vector>
 
+#include "polish_notation/token/token.h"
 #include "queue_test.h"
 #include "token_test.h"
-#include "polish_notation/token/token.h"
 
 using namespace polish_notation::parser;
 

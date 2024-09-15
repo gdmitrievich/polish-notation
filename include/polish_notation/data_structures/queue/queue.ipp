@@ -1,6 +1,9 @@
+#include "polish_notation/data_structures/node/node.h"
 #include "polish_notation/data_structures/queue/queue.h"
 
 namespace polish_notation::data_structures::queue {
+using ::polish_notation::data_structures::node::Node;
+
 template <typename T>
 void Queue<T>::deleteNodeAndMoveBackPtrToNextNode() {
     Node<T>* tmp = backPtr_;

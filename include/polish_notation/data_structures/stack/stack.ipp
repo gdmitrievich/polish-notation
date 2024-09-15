@@ -1,6 +1,9 @@
+#include "polish_notation/data_structures/node/node.h"
 #include "stack.h"
 
 namespace polish_notation::data_structures::stack {
+using ::polish_notation::data_structures::node::Node;
+
 template <typename T>
 Stack<T>::Stack() : size_(), topPtr_() {}
 

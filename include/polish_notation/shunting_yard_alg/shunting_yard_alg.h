@@ -8,28 +8,42 @@
 #include "polish_notation/token/token.h"
 
 namespace polish_notation::shunting_yard_alg {
-using ::polish_notation::data_structures::queue::Queue;
-using ::polish_notation::data_structures::stack::Stack;
-using ::polish_notation::token::t_id;
-using ::polish_notation::token::Token;
+::std::pair<bool, ::polish_notation::data_structures::queue::Queue<
+                      ::polish_notation::token::Token>>
+tryConvertInfixTokenQueueToPostfix(
+    ::polish_notation::data_structures::queue::Queue<
+        ::polish_notation::token::Token>& qInfix);
 
-::std::pair<bool, Queue<Token>> tryConvertInfixTokenQueueToPostfix(
-    Queue<Token>& qInfix);
-
-bool tryMakeOperationWithDequeuedToken(const Token& t, Queue<Token>& qPostfix,
-                                       Stack<Token>& sOperators);
+bool tryMakeOperationWithDequeuedToken(
+    const ::polish_notation::token::Token& t,
+    ::polish_notation::data_structures::queue::Queue<
+        ::polish_notation::token::Token>& qPostfix,
+    ::polish_notation::data_structures::stack::Stack<
+        ::polish_notation::token::Token>& sOperators);
 
 void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
-    const Token& t, Stack<Token>& sOperators, Queue<Token>& qPostfix);
+    const ::polish_notation::token::Token& t,
+    ::polish_notation::data_structures::stack::Stack<
+        ::polish_notation::token::Token>& sOperators,
+    ::polish_notation::data_structures::queue::Queue<
+        ::polish_notation::token::Token>& qPostfix);
 
-bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
-                                      Queue<Token>& qPostfix);
+bool tryRetrieveStackItemsUntilLBrace(
+    ::polish_notation::data_structures::stack::Stack<
+        ::polish_notation::token::Token>& sOperators,
+    ::polish_notation::data_structures::queue::Queue<
+        ::polish_notation::token::Token>& qPostfix);
 
-void setFunctionFromStackTopToQueueIfExists(Stack<Token>& sOperators,
-                                            Queue<Token>& qPostfix);
+void setFunctionFromStackTopToQueueIfExists(
+    ::polish_notation::data_structures::stack::Stack<
+        ::polish_notation::token::Token>& sOperators,
+    ::polish_notation::data_structures::queue::Queue<
+        ::polish_notation::token::Token>& qPostfix);
 
-bool tryPlaceStackItemsToQueue(Stack<Token>& sOperators,
-                               Queue<Token>& qPostfix);
+bool tryPlaceStackItemsToQueue(::polish_notation::data_structures::stack::Stack<
+                                   ::polish_notation::token::Token>& sOperators,
+                               ::polish_notation::data_structures::queue::Queue<
+                                   ::polish_notation::token::Token>& qPostfix);
 } // namespace polish_notation::shunting_yard_alg
 
 #endif // SHUNTING_YARD_ALG_H

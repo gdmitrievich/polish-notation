@@ -1,6 +1,8 @@
 #include "token_test.h"
 
 namespace polish_notation::tests::token_test {
+using ::polish_notation::token::Token;
+
 TokenTest::TokenTest() : Token() {}
 TokenTest::TokenTest(Id id) : Token(id) {}
 TokenTest::TokenTest(double num) : Token(num) {}
@@ -34,5 +36,4 @@ std::string TokenTest::DebugString() const {
 std::ostream& operator<<(std::ostream& os, const TokenTest& t) {
     return os << t.DebugString();
 }
-
 } // namespace polish_notation::tests::token_test

@@ -7,8 +7,8 @@
 #include <string>
 
 namespace polish_notation::parser {
-using std::string;
 using ::polish_notation::utility::size_t;
+using std::string;
 
 using polish_notation::data_structures::queue::Queue;
 using polish_notation::token::Token;
