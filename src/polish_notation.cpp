@@ -1,49 +1,49 @@
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <utility>
 #include <vector>
-#include <cmath>
 
-#include "polish_notation/parser/parser.h"
 #include "polish_notation/data_structures/queue/queue.h"
-#include "polish_notation/token/token.h"
+#include "polish_notation/exceptions/invalid_field_info_exception/invalid_field_info_exception.h"
+#include "polish_notation/exceptions/invalid_function/invalid_function.h"
+#include "polish_notation/parser/parser.h"
 #include "polish_notation/renderer/console_renderer/console_renderer.h"
 #include "polish_notation/renderer/field_generator.h"
 #include "polish_notation/renderer/field_info.h"
 #include "polish_notation/shunting_yard_alg/shunting_yard_alg.h"
+#include "polish_notation/token/token.h"
+#include "user_err_mess_printer.h"
+#include "user_input.h"
 
 namespace pn = polish_notation;
 namespace pn_ds = polish_notation::data_structures;
 
 int main(void) {
-    std::cout << "Write function: ";
-    std::string funcLine;
-    getline(std::cin, funcLine);
+    std::string funcStr;
+    pn_ui::setFunctionStr(funcStr);
 
     std::string funcLineWithoutSpaces =
-        pn::parser::getLineWithoutSpaces(funcLine);
-    pn_ds::queue::Queue<pn::token::Token> qTokens;
-    bool status =
-        pn::parser::trySetTokenQueueFromStr(qTokens, funcLineWithoutSpaces);
+        pn::parser::getLineWithoutSpaces(funcStr);
 
-    std::pair<bool, pn_ds::queue::Queue<pn::token::Token>>
-        postfixTokenQueuePair =
-            pn::shunting_yard_alg::tryConvertInfixTokenQueueToPostfix(qTokens);
-    status = postfixTokenQueuePair.first;
-    if (status) {
-        pn_ds::queue::Queue<pn::token::Token> postfixTokenQueue(
-            postfixTokenQueuePair.second);
-        std::pair<bool, std::vector<std::vector<char>>> generatedFieldPair =
-            pn::renderer::tryGetGeneratedField(postfixTokenQueue, pn::renderer::FieldInfo({
-				150,
-				30,
-				{-2 * M_PI, 2 * M_PI},
-				{-1, 1},
-				{74, 15}
-			}));
-        status = generatedFieldPair.first;
-        if (status)
-            pn::renderer::console::renderField(generatedFieldPair.second);
+    try {
+        pn_ds::queue::Queue<pn::token::Token> qTokens;
+        if (!pn::parser::trySetTokenQueueFromStr(qTokens,
+                                                 funcLineWithoutSpaces))
+            throw ::pn_e::InvalidFunction(
+                ::pn_e::InvalidFunction::ErrType::InvalidToken,
+                "invalid_function: Invalid token.");
+
+        pn_ds::queue::Queue<pn::token::Token> postfixTokenQueue =
+            pn::shunting_yard_alg::convertInfixTokenQueueToPostfix(qTokens);
+
+        pn::renderer::FieldInfo fInfo;
+        pn_ui::setFieldInfo(fInfo);
+        pn::renderer::console::renderField(
+            pn::renderer::getGeneratedField(postfixTokenQueue, fInfo));
+    } catch (const ::std::exception& e) {
+        pn_uemp::printErrMess(e);
+        exit(EXIT_FAILURE);
     }
 
     return 0;
