@@ -27,20 +27,18 @@ void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num) {
     }
 }
 
-::std::pair<bool, double> tryCalculatePostfixTokenQueue(Queue<Token> qPostfix) {
+double calculatePostfixTokenQueue(Queue<Token> qPostfix) {
     Stack<Token> s;
-    bool isOk = true;
-    ::std::pair<bool, double> result(true, 0);
 
-    while (!qPostfix.isEmpty() && isOk)
-     	calculateRetrievedToken(qPostfix.dequeue(), s);
+    while (!qPostfix.isEmpty())
+        calculateRetrievedToken(qPostfix.dequeue(), s);
 
-    if (isOk && s.size() == 1)
-        result.second = s.pop().data.num;
+    if (s.size() == 1)
+        return s.pop().data.num;
     else
-        result.first = false;
-
-    return result;
+        throw ::pn_e::InvalidFunction(
+            ::pn_e::InvalidFunction::ErrType::OperatorsAreLessThenOperands,
+            "invalid_function: Operators are less then operands error.");
 }
 
 void calculateRetrievedToken(const Token& t, Stack<Token>& s) {

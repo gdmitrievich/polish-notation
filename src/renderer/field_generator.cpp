@@ -11,8 +11,8 @@ using polish_notation::token::Token;
 using std::pair;
 using std::vector;
 
+using polish_notation::polish_calculation::calculatePostfixTokenQueue;
 using polish_notation::polish_calculation::replaceAllXWithNumInTokenQueue;
-using polish_notation::polish_calculation::tryCalculatePostfixTokenQueue;
 
 using std::cout, std::endl;
 
@@ -42,21 +42,15 @@ pair<bool, vector<vector<char>>> tryGetGeneratedField(
 
         Queue<Token> qPostfixWithoutX(qPostfix);
         replaceAllXWithNumInTokenQueue(qPostfixWithoutX, i);
-        ::std::pair valuePair = tryCalculatePostfixTokenQueue(qPostfixWithoutX);
-        if (valuePair.first) {
-            double v = valuePair.second;
-            if (v >= fieldInfo.codomain.first &&
-                v <= fieldInfo.codomain.second) {
-                int yInitInSrcCoords = round(v / HEIGHT_SEGMENT_SIZE);
-                int yInSrcCoords =
-                    fieldInfo.centerOfCoordinates.second - yInitInSrcCoords;
-                if (yInSrcCoords >= 0 && yInSrcCoords < fieldInfo.height) {
-                    const char FUNC_VALUE_CHAR = '*';
-                    field[yInSrcCoords][xInSrcCoords] = FUNC_VALUE_CHAR;
-                }
+        double v = calculatePostfixTokenQueue(qPostfixWithoutX);
+        if (v >= fieldInfo.codomain.first && v <= fieldInfo.codomain.second) {
+            int yInitInSrcCoords = round(v / HEIGHT_SEGMENT_SIZE);
+            int yInSrcCoords =
+                fieldInfo.centerOfCoordinates.second - yInitInSrcCoords;
+            if (yInSrcCoords >= 0 && yInSrcCoords < fieldInfo.height) {
+                const char FUNC_VALUE_CHAR = '*';
+                field[yInSrcCoords][xInSrcCoords] = FUNC_VALUE_CHAR;
             }
-        } else {
-            isOk = false;
         }
     }
 

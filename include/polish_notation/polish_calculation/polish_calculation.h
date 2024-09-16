@@ -13,7 +13,7 @@ void replaceAllXWithNumInTokenQueue(
         ::polish_notation::token::Token>& q,
     double num);
 
-::std::pair<bool, double> tryCalculatePostfixTokenQueue(
+double calculatePostfixTokenQueue(
     ::polish_notation::data_structures::queue::Queue<
         ::polish_notation::token::Token>
         qPostfix);
