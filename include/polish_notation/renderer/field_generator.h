@@ -9,10 +9,12 @@
 #include "polish_notation/token/token.h"
 
 namespace polish_notation::renderer {
-::std::pair<bool, ::std::vector<::std::vector<char>>> tryGetGeneratedField(
+::std::vector<::std::vector<char>> getGeneratedField(
     const ::polish_notation::data_structures::queue::Queue<
         ::polish_notation::token::Token>& qPostfix,
     FieldInfo fieldInfo);
+
+void checkInputDataAndThrowExceptionIfNeeded(const FieldInfo& f);
 
 void fillFieldByDefault(::std::vector<::std::vector<char>>& f, FieldInfo fInfo);
 } // namespace polish_notation::renderer
