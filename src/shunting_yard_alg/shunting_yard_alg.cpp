@@ -1,47 +1,47 @@
 #include "polish_notation/shunting_yard_alg/shunting_yard_alg.h"
 
+#include "polish_notation/exceptions/invalid_function/invalid_function.h"
+
 namespace polish_notation::shunting_yard_alg {
 using ::polish_notation::data_structures::queue::Queue;
 using ::polish_notation::data_structures::stack::Stack;
 using ::polish_notation::token::t_id;
 using ::polish_notation::token::Token;
 
-::std::pair<bool, Queue<Token>> tryConvertInfixTokenQueueToPostfix(
-    Queue<Token>& qInfix) {
+Queue<Token> convertInfixTokenQueueToPostfix(Queue<Token>& qInfix) {
     Queue<Token> qPostfix;
     Stack<Token> sOperators;
-    bool isOk = true;
 
-    while (!qInfix.isEmpty() && isOk)
-        isOk = tryMakeOperationWithDequeuedToken(qInfix.dequeue(), qPostfix,
-                                                 sOperators);
-    if (isOk)
-        isOk = tryPlaceStackItemsToQueue(sOperators, qPostfix);
-    if (!isOk)
-        qPostfix.destroy();
+    while (!qInfix.isEmpty())
+        operateNextTokenFromInfixQueue(qInfix, qPostfix, sOperators);
+    placeStackItemsToQueue(sOperators, qPostfix);
 
-    return ::std::pair(isOk, qPostfix);
+    return qPostfix;
 }
 
-bool tryMakeOperationWithDequeuedToken(const Token& t, Queue<Token>& qPostfix,
-                                       Stack<Token>& sOperators) {
-    bool status = true;
-
+void operateNextTokenFromInfixQueue(Queue<Token>& qInfix,
+                                    Queue<Token>& qPostfix,
+                                    Stack<Token>& sOperators) {
+    Token t = qInfix.dequeue();
     if (t.isNumOrX()) {
         qPostfix.enqueue(t);
     } else if (t.isBinaryOperator()) {
         moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
             t, sOperators, qPostfix);
         sOperators.push(t);
-    } else if (t.isFunction() || t.id == t_id::lBrace) {
+    } else if (t.isFunction()) {
+        if (!hasFunctionArg(qInfix))
+            throw ::pn_e::InvalidFunction(
+                ::pn_e::InvalidFunction::ErrType::FunctionWithoutArg,
+                "invalid_function: Function without argument error.");
+
+        sOperators.push(t);
+    } else if (t.id == t_id::lBrace) {
         sOperators.push(t);
     } else if (t.id == t_id::rBrace) {
-        status = tryRetrieveStackItemsUntilLBrace(sOperators, qPostfix);
-        if (status)
-            setFunctionFromStackTopToQueueIfExists(sOperators, qPostfix);
+        retrieveStackItemsUntilLBrace(sOperators, qPostfix);
+        setFunctionFromStackTopToQueueIfExists(sOperators, qPostfix);
     }
-
-    return status;
 }
 
 void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
@@ -51,8 +51,16 @@ void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
         qPostfix.enqueue(sOperators.pop());
 }
 
-bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
-                                      Queue<Token>& qPostfix) {
+bool hasFunctionArg(const Queue<Token>& qInfix) {
+    if (qInfix.isEmpty())
+        return false;
+
+    Token t = qInfix.peek();
+    return t.isNumOrX() || t.isFunction() || t.id == t_id::lBrace;
+}
+
+void retrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
+                                   Queue<Token>& qPostfix) {
     bool isFound = false;
     Token t;
 
@@ -64,7 +72,10 @@ bool tryRetrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
             isFound = true;
     }
 
-    return !(sOperators.isEmpty() && !isFound);
+    if (sOperators.isEmpty() && !isFound)
+        throw ::pn_e::InvalidFunction(
+            ::pn_e::InvalidFunction::ErrType::LBraceNotFound,
+            "invalid_function: Left brace not found.");
 }
 
 void setFunctionFromStackTopToQueueIfExists(Stack<Token>& sOperators,
@@ -73,19 +84,17 @@ void setFunctionFromStackTopToQueueIfExists(Stack<Token>& sOperators,
         qPostfix.enqueue(sOperators.pop());
 }
 
-bool tryPlaceStackItemsToQueue(Stack<Token>& sOperators,
-                               Queue<Token>& qPostfix) {
+void placeStackItemsToQueue(Stack<Token>& sOperators, Queue<Token>& qPostfix) {
     Token t;
-    bool lBraceFound = false;
 
-    while (!sOperators.isEmpty() && !lBraceFound) {
+    while (!sOperators.isEmpty()) {
         t = sOperators.pop();
         if (t.id != t_id::lBrace)
             qPostfix.enqueue(t);
         else
-            lBraceFound = true;
+            throw ::pn_e::InvalidFunction(
+                ::pn_e::InvalidFunction::ErrType::RBraceNotFound,
+                "invalid_function: Right brace not found.");
     }
-
-    return lBraceFound == false;
 }
 } // namespace polish_notation::shunting_yard_alg

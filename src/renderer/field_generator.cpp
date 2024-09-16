@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 
+#include "polish_notation/exceptions/invalid_field_info_exception/invalid_field_info_exception.h"
 #include "polish_notation/polish_calculation/polish_calculation.h"
 
 namespace polish_notation::renderer {
@@ -11,15 +12,14 @@ using polish_notation::token::Token;
 using std::pair;
 using std::vector;
 
+using polish_notation::polish_calculation::calculatePostfixTokenQueue;
 using polish_notation::polish_calculation::replaceAllXWithNumInTokenQueue;
-using polish_notation::polish_calculation::tryCalculatePostfixTokenQueue;
 
 using std::cout, std::endl;
 
-pair<bool, vector<vector<char>>> tryGetGeneratedField(
-    const Queue<Token>& qPostfix, FieldInfo fieldInfo) {
-    if (fieldInfo.width <= 0 || fieldInfo.height <= 0)
-        return pair(false, ::std::vector<vector<char>>());
+vector<vector<char>> getGeneratedField(const Queue<Token>& qPostfix,
+                                       FieldInfo fieldInfo) {
+    checkInputDataAndThrowExceptionIfNeeded(fieldInfo);
 
     vector<vector<char>> field;
     fillFieldByDefault(field, fieldInfo);
@@ -42,25 +42,43 @@ pair<bool, vector<vector<char>>> tryGetGeneratedField(
 
         Queue<Token> qPostfixWithoutX(qPostfix);
         replaceAllXWithNumInTokenQueue(qPostfixWithoutX, i);
-        ::std::pair valuePair = tryCalculatePostfixTokenQueue(qPostfixWithoutX);
-        if (valuePair.first) {
-            double v = valuePair.second;
-            if (v >= fieldInfo.codomain.first &&
-                v <= fieldInfo.codomain.second) {
-                int yInitInSrcCoords = round(v / HEIGHT_SEGMENT_SIZE);
-                int yInSrcCoords =
-                    fieldInfo.centerOfCoordinates.second - yInitInSrcCoords;
-                if (yInSrcCoords >= 0 && yInSrcCoords < fieldInfo.height) {
-                    const char FUNC_VALUE_CHAR = '*';
-                    field[yInSrcCoords][xInSrcCoords] = FUNC_VALUE_CHAR;
-                }
+        double v {};
+        try {
+            v = calculatePostfixTokenQueue(qPostfixWithoutX);
+        } catch (::std::domain_error& e) {
+            continue;
+        }
+        if (v >= fieldInfo.codomain.first && v <= fieldInfo.codomain.second) {
+            int yInitInSrcCoords = round(v / HEIGHT_SEGMENT_SIZE);
+            int yInSrcCoords =
+                fieldInfo.centerOfCoordinates.second - yInitInSrcCoords;
+            if (yInSrcCoords >= 0 && yInSrcCoords < fieldInfo.height) {
+                const char FUNC_VALUE_CHAR = '*';
+                field[yInSrcCoords][xInSrcCoords] = FUNC_VALUE_CHAR;
             }
-        } else {
-            isOk = false;
         }
     }
 
-    return pair<bool, vector<vector<char>>>(isOk, field);
+    return field;
+}
+
+void checkInputDataAndThrowExceptionIfNeeded(const FieldInfo& f) {
+    if (f.width <= 0)
+        throw ::pn_e::InvalidFieldInfoException(
+            f, ::pn_e::InvalidFieldInfoException::ErrType::NegativeOrZeroWidth,
+            "invalid_field_info: Negative or zero width error.");
+    if (f.height <= 0)
+        throw ::pn_e::InvalidFieldInfoException(
+            f, ::pn_e::InvalidFieldInfoException::ErrType::NegativeOrZeroHeigth,
+            "invalid_field_info: Negative or zero height error.");
+    if (f.domain.first > f.domain.second)
+        throw ::pn_e::InvalidFieldInfoException(
+            f, ::pn_e::InvalidFieldInfoException::ErrType::InvalidDomain,
+            "invalid_field_info: Invalid domain error.");
+    if (f.codomain.first > f.codomain.second)
+        throw ::pn_e::InvalidFieldInfoException(
+            f, ::pn_e::InvalidFieldInfoException::ErrType::InvalidCodomain,
+            "invalid_field_info: Invalid codomain error.");
 }
 
 void fillFieldByDefault(vector<vector<char>>& f, FieldInfo fInfo) {

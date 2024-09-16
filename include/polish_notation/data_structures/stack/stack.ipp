@@ -1,14 +1,17 @@
+#include <stdexcept>
+
 #include "polish_notation/data_structures/node/node.h"
+#include "polish_notation/utility/utility.h"
 #include "stack.h"
 
 namespace polish_notation::data_structures::stack {
 using ::polish_notation::data_structures::node::Node;
 
 template <typename T>
-Stack<T>::Stack() : size_(), topPtr_() {}
+Stack<T>::Stack() noexcept : size_(), topPtr_() {}
 
 template <typename T>
-Stack<T>::~Stack() {
+Stack<T>::~Stack() noexcept {
     destroy();
 }
 
@@ -27,6 +30,10 @@ void Stack<T>::push(const T& item) {
 
 template <typename T>
 T Stack<T>::pop() {
+    if (isEmpty())
+        throw ::std::runtime_error(
+            pn_u::debugTrace("runtime_error: Popping from an empty stack."));
+
     T tmpData = topPtr_->data;
 
     Node<T>* tmp = topPtr_;
@@ -39,11 +46,15 @@ T Stack<T>::pop() {
 
 template <typename T>
 inline T Stack<T>::top() const {
+    if (isEmpty())
+        throw ::std::runtime_error(
+            pn_u::debugTrace("runtime_error: Extraction from an empty stack."));
+
     return topPtr_->data;
 }
 
 template <typename T>
-void Stack<T>::destroy() {
+void Stack<T>::destroy() noexcept {
     while (!isEmpty()) {
         Node<T>* tmp = topPtr_;
         topPtr_ = topPtr_->next;
@@ -54,12 +65,12 @@ void Stack<T>::destroy() {
 }
 
 template <typename T>
-inline bool Stack<T>::isEmpty() const {
+inline bool Stack<T>::isEmpty() const noexcept {
     return topPtr_ == nullptr;
 }
 
 template <typename T>
-inline ::polish_notation::utility::size_t Stack<T>::size() const {
+inline ::polish_notation::utility::size_t Stack<T>::size() const noexcept {
     return size_;
 }
 } // namespace polish_notation::data_structures::stack

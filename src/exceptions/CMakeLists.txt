@@ -1,0 +1,2 @@
+add_subdirectory(invalid_function)
+add_subdirectory(invalid_field_info_exception)

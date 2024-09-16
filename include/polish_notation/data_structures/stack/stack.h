@@ -1,7 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "polish_notation/utility.h"
+#include "polish_notation/utility/utility.h"
 
 namespace polish_notation::data_structures::node {
 template <typename T>
@@ -16,16 +16,16 @@ class Stack {
     ::polish_notation::data_structures::node::Node<T>* topPtr_;
 
    public:
-    Stack();
-    ~Stack();
+    Stack() noexcept;
+    ~Stack() noexcept;
 
     void push(const T& item);
     T pop();
     T top() const;
-    void destroy();
+    void destroy() noexcept;
 
-    bool isEmpty() const;
-    ::polish_notation::utility::size_t size() const;
+    bool isEmpty() const noexcept;
+    ::polish_notation::utility::size_t size() const noexcept;
 };
 } // namespace polish_notation::data_structures::stack
 

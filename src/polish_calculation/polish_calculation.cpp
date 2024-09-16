@@ -1,8 +1,10 @@
 #include "polish_notation/polish_calculation/polish_calculation.h"
 
 #include <cmath>
+#include <stdexcept>
 
-#include "polish_notation/utility.h"
+#include "polish_notation/exceptions/invalid_function/invalid_function.h"
+#include "polish_notation/utility/utility.h"
 
 namespace polish_notation::polish_calculation {
 namespace pn = polish_notation;
@@ -26,41 +28,42 @@ void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num) {
     }
 }
 
-::std::pair<bool, double> tryCalculatePostfixTokenQueue(Queue<Token> qPostfix) {
+double calculatePostfixTokenQueue(Queue<Token> qPostfix) {
     Stack<Token> s;
-    bool isOk = true;
-    ::std::pair<bool, double> result(true, 0);
 
-    while (!qPostfix.isEmpty() && isOk)
-        isOk = tryCalculateRetrievedToken(qPostfix.dequeue(), s);
+    while (!qPostfix.isEmpty())
+        calculateRetrievedToken(qPostfix.dequeue(), s);
 
-    if (isOk && s.size() == 1)
-        result.second = s.pop().data.num;
+    if (s.size() == 1)
+        return s.pop().data.num;
     else
-        result.first = false;
-
-    return result;
+        throw ::pn_e::InvalidFunction(
+            ::pn_e::InvalidFunction::ErrType::OperatorsAreLessThenOperands,
+            "invalid_function: Operators are less then operands error.");
 }
 
-bool tryCalculateRetrievedToken(const Token& t, Stack<Token>& s) {
-    bool status = true;
+void calculateRetrievedToken(const Token& t, Stack<Token>& s) {
     if (t.id == t_id::num) {
         s.push(t);
     } else if (t.isFunction()) {
         if (s.size() >= 1)
             s.push(Token(calculateFunction(t.id, s.pop().data.num)));
         else
-            status = false;
+            throw ::pn_e::InvalidFunction(
+                ::pn_e::InvalidFunction::ErrType::FunctionWithoutArg,
+                "invalid_function: Function without argument error.");
     } else if (t.isBinaryOperator()) {
         if (s.size() >= 2) {
             double first = s.pop().data.num;
             double second = s.pop().data.num;
             s.push(Token(calculateBinaryOperator(t.id, first, second)));
         } else {
-            status = false;
+            throw ::pn_e::InvalidFunction(::pn_e::InvalidFunction::ErrType::
+                                              BinaryOperatorWithoutTwoOperands,
+                                          "invalid_function: Binary operator "
+                                          "without two operands error.");
         }
     }
-    return status;
 }
 
 double calculateFunction(Token::Id funcId, double v) {
@@ -74,19 +77,32 @@ double calculateFunction(Token::Id funcId, double v) {
             res = cos(v);
             break;
         case t_id::tan:
+            if (::std::fmod(v, M_PI) == M_PI / 2)
+                throw ::std::domain_error("domain_error: The tangent is not "
+                                          "defined for x = pi/2 + pi*k");
+
             res = tan(v);
             break;
         case t_id::ctg:
-            if (tan(v) != 0)
-                res = 1 / tan(v);
+            if (::std::fmod(v, M_PI) == 0)
+                throw ::std::domain_error(
+                    "domain_error: The cotangent is not defined for x = pi*k");
+
+            res = 1 / tan(v);
             break;
         case t_id::sqrt:
-            if (v >= 0)
-                res = sqrt(v);
+            if (v < 0)
+                throw ::std::domain_error(
+                    "domain_error: The sqrt is not defined for x < 0");
+
+            res = sqrt(v);
             break;
         case t_id::ln:
-            if (v > 0)
-                res = log(v);
+            if (v <= 0)
+                throw ::std::domain_error(
+                    "domain_error: The ln is not defined for x <= 0");
+
+            res = log(v);
             break;
     }
 
@@ -107,8 +123,10 @@ double calculateBinaryOperator(Token::Id binId, double first, double second) {
             res = second * first;
             break;
         case t_id::div:
-            if (first != 0)
-                res = second / first;
+            if (first == 0)
+                throw ::std::domain_error("domain_error: Division by zero.");
+
+            res = second / first;
             break;
     }
 
