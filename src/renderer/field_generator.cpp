@@ -42,7 +42,12 @@ vector<vector<char>> getGeneratedField(const Queue<Token>& qPostfix,
 
         Queue<Token> qPostfixWithoutX(qPostfix);
         replaceAllXWithNumInTokenQueue(qPostfixWithoutX, i);
-        double v = calculatePostfixTokenQueue(qPostfixWithoutX);
+		double v {};
+		try {
+        	v = calculatePostfixTokenQueue(qPostfixWithoutX);
+		} catch (::std::domain_error& e) {
+			continue;
+		}
         if (v >= fieldInfo.codomain.first && v <= fieldInfo.codomain.second) {
             int yInitInSrcCoords = round(v / HEIGHT_SEGMENT_SIZE);
             int yInSrcCoords =

@@ -1,6 +1,7 @@
 #include "polish_notation/polish_calculation/polish_calculation.h"
 
 #include <cmath>
+#include <stdexcept>
 
 #include "polish_notation/exceptions/invalid_function/invalid_function.h"
 #include "polish_notation/utility/utility.h"
@@ -76,19 +77,32 @@ double calculateFunction(Token::Id funcId, double v) {
             res = cos(v);
             break;
         case t_id::tan:
+            if (::std::fmod(v, M_PI) == M_PI / 2)
+                throw ::std::domain_error("domain_error: The tangent is not "
+                                          "defined for x = pi/2 + pi*k");
+
             res = tan(v);
             break;
         case t_id::ctg:
-            if (tan(v) != 0)
-                res = 1 / tan(v);
+            if (::std::fmod(v, M_PI) == 0)
+                throw ::std::domain_error(
+                    "domain_error: The cotangent is not defined for x = pi*k");
+
+            res = 1 / tan(v);
             break;
         case t_id::sqrt:
-            if (v >= 0)
-                res = sqrt(v);
+            if (v < 0)
+                throw ::std::domain_error(
+                    "domain_error: The sqrt is not defined for x < 0");
+
+            res = sqrt(v);
             break;
         case t_id::ln:
-            if (v > 0)
-                res = log(v);
+            if (v <= 0)
+                throw ::std::domain_error(
+                    "domain_error: The ln is not defined for x <= 0");
+
+            res = log(v);
             break;
     }
 
@@ -109,8 +123,10 @@ double calculateBinaryOperator(Token::Id binId, double first, double second) {
             res = second * first;
             break;
         case t_id::div:
-            if (first != 0)
-                res = second / first;
+            if (first == 0)
+                throw ::std::domain_error("domain_error: Division by zero.");
+
+            res = second / first;
             break;
     }
 
