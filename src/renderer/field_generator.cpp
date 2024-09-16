@@ -19,7 +19,7 @@ using std::cout, std::endl;
 
 vector<vector<char>> getGeneratedField(const Queue<Token>& qPostfix,
                                        FieldInfo fieldInfo) {
-	checkInputDataAndThrowExceptionIfNeeded(fieldInfo);
+    checkInputDataAndThrowExceptionIfNeeded(fieldInfo);
 
     vector<vector<char>> field;
     fillFieldByDefault(field, fieldInfo);
@@ -42,12 +42,12 @@ vector<vector<char>> getGeneratedField(const Queue<Token>& qPostfix,
 
         Queue<Token> qPostfixWithoutX(qPostfix);
         replaceAllXWithNumInTokenQueue(qPostfixWithoutX, i);
-		double v {};
-		try {
-        	v = calculatePostfixTokenQueue(qPostfixWithoutX);
-		} catch (::std::domain_error& e) {
-			continue;
-		}
+        double v {};
+        try {
+            v = calculatePostfixTokenQueue(qPostfixWithoutX);
+        } catch (::std::domain_error& e) {
+            continue;
+        }
         if (v >= fieldInfo.codomain.first && v <= fieldInfo.codomain.second) {
             int yInitInSrcCoords = round(v / HEIGHT_SEGMENT_SIZE);
             int yInSrcCoords =
@@ -65,19 +65,19 @@ vector<vector<char>> getGeneratedField(const Queue<Token>& qPostfix,
 void checkInputDataAndThrowExceptionIfNeeded(const FieldInfo& f) {
     if (f.width <= 0)
         throw ::pn_e::InvalidFieldInfoException(
-            ::pn_e::InvalidFieldInfoException::ErrType::NegativeOrZeroWidth,
+            f, ::pn_e::InvalidFieldInfoException::ErrType::NegativeOrZeroWidth,
             "invalid_field_info: Negative or zero width error.");
     if (f.height <= 0)
         throw ::pn_e::InvalidFieldInfoException(
-            ::pn_e::InvalidFieldInfoException::ErrType::NegativeOrZeroHeigth,
+            f, ::pn_e::InvalidFieldInfoException::ErrType::NegativeOrZeroHeigth,
             "invalid_field_info: Negative or zero height error.");
-	if (f.domain.first > f.domain.second)
+    if (f.domain.first > f.domain.second)
         throw ::pn_e::InvalidFieldInfoException(
-            ::pn_e::InvalidFieldInfoException::ErrType::InvalidDomain,
+            f, ::pn_e::InvalidFieldInfoException::ErrType::InvalidDomain,
             "invalid_field_info: Invalid domain error.");
-	if (f.codomain.first > f.codomain.second)
+    if (f.codomain.first > f.codomain.second)
         throw ::pn_e::InvalidFieldInfoException(
-            ::pn_e::InvalidFieldInfoException::ErrType::InvalidCodomain,
+            f, ::pn_e::InvalidFieldInfoException::ErrType::InvalidCodomain,
             "invalid_field_info: Invalid codomain error.");
 }
 

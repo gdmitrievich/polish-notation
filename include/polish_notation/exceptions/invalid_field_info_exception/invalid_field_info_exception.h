@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include <string>
 
+#include "polish_notation/renderer/field_info.h"
+
 namespace polish_notation::exceptions {
 class InvalidFieldInfoException : public ::std::runtime_error {
    public:
@@ -14,13 +16,16 @@ class InvalidFieldInfoException : public ::std::runtime_error {
         InvalidCodomain
     };
 
-    InvalidFieldInfoException(ErrType errType,
+    InvalidFieldInfoException(::polish_notation::renderer::FieldInfo fInfo,
+                              ErrType errType,
                               const ::std::string& message) noexcept;
 
     ErrType getErrType() const noexcept;
+    ::polish_notation::renderer::FieldInfo getFieldInfo() const;
 
    private:
     ErrType errType_;
+    ::polish_notation::renderer::FieldInfo fInfo_;
 };
 } // namespace polish_notation::exceptions
 
