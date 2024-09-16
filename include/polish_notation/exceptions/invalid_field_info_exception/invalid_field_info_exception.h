@@ -24,4 +24,6 @@ class InvalidFieldInfoException : public ::std::runtime_error {
 };
 } // namespace polish_notation::exceptions
 
+namespace pn_e = polish_notation::exceptions;
+
 #endif // INVALID_FIELD_INFO_H
