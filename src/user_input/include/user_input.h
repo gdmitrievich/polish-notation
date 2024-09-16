@@ -8,6 +8,11 @@
 
 namespace polish_notation::user_input {
 void setFunctionStr(::std::string& fStr);
+
+void setFieldInfo(::polish_notation::renderer::FieldInfo& fInfo);
+
+template <typename T>
+void printActionAndSetAnswer(const char* action, T& data);
 } // namespace polish_notation::user_input
 
 namespace pn_ui = polish_notation::user_input;
