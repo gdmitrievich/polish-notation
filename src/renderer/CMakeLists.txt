@@ -15,6 +15,7 @@ target_link_libraries(${TARGET}
 		queue
 		token
 		polish_calculation
+		invalid_field_info_exception
 )
 
 add_subdirectory(console_renderer)
