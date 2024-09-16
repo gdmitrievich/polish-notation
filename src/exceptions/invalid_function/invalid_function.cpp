@@ -8,8 +8,7 @@ InvalidFunction::InvalidFunction(ErrType errType,
     errType_(errType),
     runtime_error(message) {}
 
-
 InvalidFunction::ErrType InvalidFunction::getErrType() const noexcept {
-	return errType_;
+    return errType_;
 }
 } // namespace polish_notation::exceptions

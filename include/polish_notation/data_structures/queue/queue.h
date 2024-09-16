@@ -19,8 +19,10 @@ class Queue {
     void deleteNodeAndMoveBackPtrToNextNode() noexcept;
 
    protected:
-    const ::polish_notation::data_structures::node::Node<T>* frontPtr() const noexcept;
-    const ::polish_notation::data_structures::node::Node<T>* backPtr() const noexcept;
+    const ::polish_notation::data_structures::node::Node<T>* frontPtr()
+        const noexcept;
+    const ::polish_notation::data_structures::node::Node<T>* backPtr()
+        const noexcept;
 
    public:
     Queue() noexcept;

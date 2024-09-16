@@ -1,7 +1,7 @@
+#include <stdexcept>
+
 #include "polish_notation/data_structures/node/node.h"
 #include "polish_notation/data_structures/queue/queue.h"
-
-#include <stdexcept>
 #include "polish_notation/utility/utility.h"
 
 namespace polish_notation::data_structures::queue {
@@ -57,8 +57,9 @@ void Queue<T>::enqueue(const T& item) {
 
 template <typename T>
 T Queue<T>::dequeue() {
-	if (isEmpty())
-		throw ::std::runtime_error(::pn_u::debugTrace("runtime_error: Dequeuing from an empty queue."));
+    if (isEmpty())
+        throw ::std::runtime_error(::pn_u::debugTrace(
+            "runtime_error: Dequeuing from an empty queue."));
 
     T data = backPtr_->data;
 
@@ -73,8 +74,9 @@ T Queue<T>::dequeue() {
 
 template <typename T>
 inline T Queue<T>::peek() const {
-	if (isEmpty())
-		throw ::std::runtime_error(::pn_u::debugTrace("runtime_error: Peeking from an empty queue."));
+    if (isEmpty())
+        throw ::std::runtime_error(
+            ::pn_u::debugTrace("runtime_error: Peeking from an empty queue."));
 
     return backPtr_->data;
 }

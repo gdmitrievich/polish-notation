@@ -148,8 +148,8 @@ double convertStrPartToDouble(const char* str, size_t count) {
     if (intPartLen != count) {
         const char* fractPartStr = str + intPartLen + 1;
         size_t fractPartLen = getLenOfNumberStr(fractPartStr);
-		size_t digitsLeft = count - intPartLen - 1;
-		fractPartLen = fractPartLen <= digitsLeft ? fractPartLen : digitsLeft;
+        size_t digitsLeft = count - intPartLen - 1;
+        fractPartLen = fractPartLen <= digitsLeft ? fractPartLen : digitsLeft;
         n += convertStrPartToInt(fractPartStr, fractPartLen) /
              pow(10, fractPartLen);
     }

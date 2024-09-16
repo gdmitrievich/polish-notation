@@ -7,22 +7,22 @@
 namespace polish_notation::exceptions {
 class InvalidFunction : public ::std::runtime_error {
    public:
-	enum class ErrType : char {
-		LBraceNotFound,
-		RBraceNotFound,
-		OperatorsAreLessThenOperands,
-		FunctionWithoutArg,
-		BinaryOperatorWithoutTwoOperands
-	};
+    enum class ErrType : char {
+        LBraceNotFound,
+        RBraceNotFound,
+        OperatorsAreLessThenOperands,
+        FunctionWithoutArg,
+        BinaryOperatorWithoutTwoOperands
+    };
 
-	InvalidFunction(ErrType errType, const ::std::string& message) noexcept;
+    InvalidFunction(ErrType errType, const ::std::string& message) noexcept;
 
-	ErrType getErrType() const noexcept;
+    ErrType getErrType() const noexcept;
 
    private:
-	ErrType errType_;
+    ErrType errType_;
 };
-}
+} // namespace polish_notation::exceptions
 
 namespace pn_e = polish_notation::exceptions;
 
