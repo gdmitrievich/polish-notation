@@ -2,6 +2,7 @@
 
 #include <cmath>
 
+#include "polish_notation/exceptions/invalid_function/invalid_function.h"
 #include "polish_notation/utility/utility.h"
 
 namespace polish_notation::polish_calculation {
@@ -32,7 +33,7 @@ void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num) {
     ::std::pair<bool, double> result(true, 0);
 
     while (!qPostfix.isEmpty() && isOk)
-        isOk = tryCalculateRetrievedToken(qPostfix.dequeue(), s);
+     	calculateRetrievedToken(qPostfix.dequeue(), s);
 
     if (isOk && s.size() == 1)
         result.second = s.pop().data.num;
@@ -42,25 +43,28 @@ void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num) {
     return result;
 }
 
-bool tryCalculateRetrievedToken(const Token& t, Stack<Token>& s) {
-    bool status = true;
+void calculateRetrievedToken(const Token& t, Stack<Token>& s) {
     if (t.id == t_id::num) {
         s.push(t);
     } else if (t.isFunction()) {
         if (s.size() >= 1)
             s.push(Token(calculateFunction(t.id, s.pop().data.num)));
         else
-            status = false;
+            throw ::pn_e::InvalidFunction(
+                ::pn_e::InvalidFunction::ErrType::FunctionWithoutArg,
+                "invalid_function: Function without argument error.");
     } else if (t.isBinaryOperator()) {
         if (s.size() >= 2) {
             double first = s.pop().data.num;
             double second = s.pop().data.num;
             s.push(Token(calculateBinaryOperator(t.id, first, second)));
         } else {
-            status = false;
+            throw ::pn_e::InvalidFunction(::pn_e::InvalidFunction::ErrType::
+                                              BinaryOperatorWithoutTwoOperands,
+                                          "invalid_function: Binary operator "
+                                          "without two operands error.");
         }
     }
-    return status;
 }
 
 double calculateFunction(Token::Id funcId, double v) {

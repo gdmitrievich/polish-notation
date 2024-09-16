@@ -18,9 +18,9 @@ void replaceAllXWithNumInTokenQueue(
         ::polish_notation::token::Token>
         qPostfix);
 
-bool tryCalculateRetrievedToken(const ::polish_notation::token::Token& t,
-                                ::polish_notation::data_structures::stack::
-                                    Stack<::polish_notation::token::Token>& s);
+void calculateRetrievedToken(const ::polish_notation::token::Token& t,
+                             ::polish_notation::data_structures::stack::Stack<
+                                 ::polish_notation::token::Token>& s);
 
 double calculateFunction(::polish_notation::token::Token::Id funcId, double v);
 
