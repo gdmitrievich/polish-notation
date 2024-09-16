@@ -12,7 +12,8 @@ class InvalidFunction : public ::std::runtime_error {
         RBraceNotFound,
         OperatorsAreLessThenOperands,
         FunctionWithoutArg,
-        BinaryOperatorWithoutTwoOperands
+        BinaryOperatorWithoutTwoOperands,
+        InvalidToken
     };
 
     InvalidFunction(ErrType errType, const ::std::string& message) noexcept;
