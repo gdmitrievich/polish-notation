@@ -39,6 +39,7 @@ int main(void) {
 
         pn::renderer::FieldInfo fInfo;
         pn_ui::setFieldInfo(fInfo);
+        pn::renderer::checkInputDataAndThrowExceptionIfNeeded(fInfo);
         pn::renderer::console::renderField(
             pn::renderer::getGeneratedField(postfixTokenQueue, fInfo));
     } catch (const ::std::exception& e) {
