@@ -14,8 +14,9 @@ convertInfixTokenQueueToPostfix(
     ::polish_notation::data_structures::queue::Queue<
         ::polish_notation::token::Token>& qInfix);
 
-void makeOperationWithDequeuedToken(
-    const ::polish_notation::token::Token& t,
+void operateNextTokenFromInfixQueue(
+    ::polish_notation::data_structures::queue::Queue<
+        ::polish_notation::token::Token>& qInfix,
     ::polish_notation::data_structures::queue::Queue<
         ::polish_notation::token::Token>& qPostfix,
     ::polish_notation::data_structures::stack::Stack<
@@ -27,6 +28,9 @@ void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
         ::polish_notation::token::Token>& sOperators,
     ::polish_notation::data_structures::queue::Queue<
         ::polish_notation::token::Token>& qPostfix);
+
+bool hasFunctionArg(const ::polish_notation::data_structures::queue::Queue<
+                    ::polish_notation::token::Token>& qInfix);
 
 void retrieveStackItemsUntilLBrace(
     ::polish_notation::data_structures::stack::Stack<

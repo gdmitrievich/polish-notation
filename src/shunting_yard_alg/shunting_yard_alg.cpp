@@ -13,21 +13,30 @@ Queue<Token> convertInfixTokenQueueToPostfix(Queue<Token>& qInfix) {
     Stack<Token> sOperators;
 
     while (!qInfix.isEmpty())
-        makeOperationWithDequeuedToken(qInfix.dequeue(), qPostfix, sOperators);
+        operateNextTokenFromInfixQueue(qInfix, qPostfix, sOperators);
     placeStackItemsToQueue(sOperators, qPostfix);
 
     return qPostfix;
 }
 
-void makeOperationWithDequeuedToken(const Token& t, Queue<Token>& qPostfix,
+void operateNextTokenFromInfixQueue(Queue<Token>& qInfix,
+                                    Queue<Token>& qPostfix,
                                     Stack<Token>& sOperators) {
+    Token t = qInfix.dequeue();
     if (t.isNumOrX()) {
         qPostfix.enqueue(t);
     } else if (t.isBinaryOperator()) {
         moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
             t, sOperators, qPostfix);
         sOperators.push(t);
-    } else if (t.isFunction() || t.id == t_id::lBrace) {
+    } else if (t.isFunction()) {
+        if (!hasFunctionArg(qInfix))
+            throw ::pn_e::InvalidFunction(
+                ::pn_e::InvalidFunction::ErrType::FunctionWithoutArg,
+                "invalid_function: Function without argument error.");
+
+        sOperators.push(t);
+    } else if (t.id == t_id::lBrace) {
         sOperators.push(t);
     } else if (t.id == t_id::rBrace) {
         retrieveStackItemsUntilLBrace(sOperators, qPostfix);
@@ -40,6 +49,14 @@ void moveGreaterOrEqualBinaryOperatorFromStackTopToQueueIfExists(
     if (!sOperators.isEmpty() && sOperators.top().isBinaryOperator() &&
         t.data.priority <= sOperators.top().data.priority)
         qPostfix.enqueue(sOperators.pop());
+}
+
+bool hasFunctionArg(const Queue<Token>& qInfix) {
+    if (qInfix.isEmpty())
+        return false;
+
+    Token t = qInfix.peek();
+    return t.isNumOrX() || t.isFunction() || t.id == t_id::lBrace;
 }
 
 void retrieveStackItemsUntilLBrace(Stack<Token>& sOperators,
