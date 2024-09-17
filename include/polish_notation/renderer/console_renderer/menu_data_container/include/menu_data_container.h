@@ -31,6 +31,8 @@ class MenuDataContainer {
     void printMenu() const;
     bool update(char pressedKey);
 };
+
+namespace pn = polish_notation;
 } // namespace polish_notation::renderer::console::menu_data_container
 
 namespace pn_r_c_mdc = polish_notation::renderer::console::menu_data_container;
