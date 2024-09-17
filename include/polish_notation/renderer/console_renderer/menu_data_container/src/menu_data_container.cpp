@@ -40,4 +40,13 @@ void MenuDataContainer::regenerateFunction() {
 		exit(EXIT_FAILURE);
 	}
 }
+
+void MenuDataContainer::regenerateField() {
+	try {
+		field_ = pn::renderer::getGeneratedField(funcPostfixTokenQueue_, fInfo_);
+	} catch (const ::std::exception& e) {
+		pn_uemp::printErrMess(e);
+		exit(EXIT_FAILURE);
+	}
+}
 }
