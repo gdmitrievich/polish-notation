@@ -2,6 +2,7 @@
 #define MENU_DATA_CONTAINER_H
 
 #include <string>
+#include <vector>
 
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/renderer/field_info.h"
@@ -17,6 +18,7 @@ class MenuDataContainer {
         ::polish_notation::token::Token>
         funcPostfixTokenQueue_;
     ::polish_notation::renderer::FieldInfo fInfo_;
+	::std::vector<::std::vector<char>> field_;
 
     ActionType actionType_;
     int arrowPos_;
@@ -25,7 +27,7 @@ class MenuDataContainer {
     void regenerateFunction();
 
    public:
-	MenuDataContainer();
+    MenuDataContainer();
 
     void printField() const;
     void printMenu() const;
