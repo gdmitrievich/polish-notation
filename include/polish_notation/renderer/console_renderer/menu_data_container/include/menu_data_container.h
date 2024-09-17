@@ -33,6 +33,7 @@ class MenuDataContainer {
 };
 
 namespace pn = polish_notation;
+namespace pn_ds = polish_notation::data_structures;
 } // namespace polish_notation::renderer::console::menu_data_container
 
 namespace pn_r_c_mdc = polish_notation::renderer::console::menu_data_container;
