@@ -29,7 +29,7 @@ class MenuDataContainer {
    public:
     MenuDataContainer();
 
-    void printField() const;
+    void renderField() const;
     void printMenu() const;
     bool update(char pressedKey);
 };

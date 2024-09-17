@@ -3,6 +3,7 @@
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/parser/parser.h"
 #include "polish_notation/renderer/field_generator.h"
+#include "polish_notation/renderer/console_renderer/console_renderer.h"
 #include "polish_notation/shunting_yard_alg/shunting_yard_alg.h"
 #include "polish_notation/token/token.h"
 #include "user_err_mess_printer.h"
@@ -48,5 +49,9 @@ void MenuDataContainer::regenerateField() {
 		pn_uemp::printErrMess(e);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void MenuDataContainer::renderField() const {
+	pn::renderer::console::renderField(field_);
 }
 }
