@@ -18,7 +18,7 @@ class MenuDataContainer {
         ::polish_notation::token::Token>
         funcPostfixTokenQueue_;
     ::polish_notation::renderer::FieldInfo fInfo_;
-	::std::vector<::std::vector<char>> field_;
+    ::std::vector<::std::vector<char>> field_;
 
     ActionType actionType_;
     int arrowPos_;
@@ -26,11 +26,13 @@ class MenuDataContainer {
     void regenerateField();
     void regenerateFunction();
 
+    ::std::string actionTypeToStr(ActionType a) const;
+
    public:
     MenuDataContainer();
 
     void renderField() const;
-    void printMenu() const;
+    void renderMenu() const;
     bool update(char pressedKey);
 };
 
