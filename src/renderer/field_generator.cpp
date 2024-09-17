@@ -19,6 +19,8 @@ using std::cout, std::endl;
 
 vector<vector<char>> getGeneratedField(const Queue<Token>& qPostfix,
                                        FieldInfo fieldInfo) {
+	checkInputDataAndThrowExceptionIfNeeded(fieldInfo);
+
     vector<vector<char>> field;
     fillFieldByDefault(field, fieldInfo);
 
