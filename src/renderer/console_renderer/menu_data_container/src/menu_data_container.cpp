@@ -1,6 +1,7 @@
 #include "menu_data_container.h"
 
 #include <iostream>
+#include <cstdlib>
 
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/parser/parser.h"
@@ -18,6 +19,7 @@ MenuDataContainer::MenuDataContainer() :
     fInfo_(),
     field_(),
     actionType_(ActionType::Select),
+	editableOptions(),
     arrowPos_() {
     try {
         pn_ui::setFunctionStr(funcStr_);
@@ -29,6 +31,9 @@ MenuDataContainer::MenuDataContainer() :
         pn_uemp::printErrMess(e);
         exit(EXIT_FAILURE);
     }
+
+	initEditableOptions();
+	regenerateEditableOptions();
 }
 
 void MenuDataContainer::regenerateFunction() {
@@ -63,5 +68,78 @@ void MenuDataContainer::regenerateField() {
 
 void MenuDataContainer::renderField() const {
     pn::renderer::console::renderField(field_);
+}
+
+void MenuDataContainer::renderMenu() const {
+    using std::cout, std::endl;
+
+	system("cls");
+    cout << "Type: " << actionTypeToStr(actionType_) << endl;
+	renderEditableOptions();
+    cout << "q - quit; ";
+    cout << "m - change mode;" << endl;
+    cout << "w, d (k, l) - move up (SELECT), increase value (EDIT);" << endl;
+    cout << "s, a (j, h) - move down (SELECT), decrease value (EDIT);" << endl;
+    cout << "In case of domain, codomain and center:" << endl;
+    cout << "d, a (l, h) - to change the first value;" << endl;
+    cout << "w, s (k, j) - to change the second value;" << endl;
+}
+
+void MenuDataContainer::initEditableOptions() {
+	editableOptions[0].first = "Function: ";
+	editableOptions[1].first = "Width: ";
+	editableOptions[2].first = "Height: ";
+	editableOptions[3].first = "Domain: ";
+	editableOptions[4].first = "Codomain: ";
+	editableOptions[5].first = "Center: ";
+}
+
+void MenuDataContainer::regenerateEditableOption(int idx) {
+	switch (idx) {
+		case 0:
+			editableOptions[idx].second = funcStr_;
+			break;
+		case 1:
+			editableOptions[idx].second = std::to_string(fInfo_.width);
+			break;
+		case 2:
+			editableOptions[idx].second = std::to_string(fInfo_.height);
+			break;
+		case 3:
+			editableOptions[idx].second = "[" + std::to_string(fInfo_.domain.first) + ", " + std::to_string(fInfo_.domain.second) + "]";
+			break;
+		case 4:
+			editableOptions[idx].second = "[" + std::to_string(fInfo_.codomain.first) + ", " + std::to_string(fInfo_.codomain.second) + "]";
+			break;
+		case 5:
+			editableOptions[idx].second = "(" + std::to_string(fInfo_.centerOfCoordinates.first) + ", " + std::to_string(fInfo_.centerOfCoordinates.second) + ")";
+			break;
+	}
+}
+
+void MenuDataContainer::regenerateEditableOptions() {
+	for (int i {}; i < n_ED_OPT; ++i)
+		regenerateEditableOption(i);
+}
+
+void MenuDataContainer::renderEditableOptions() const {
+    using std::cout, std::endl;
+	for (int i {}; i < n_ED_OPT; ++i) {
+		if (i == arrowPos_)
+			cout << ">>> ";
+		cout << editableOptions[i].first + editableOptions[i].second << endl;
+	}
+}
+
+std::string MenuDataContainer::actionTypeToStr(
+    MenuDataContainer::ActionType a) const {
+    switch (actionType_) {
+        case ActionType::Select:
+            return "SELECT";
+        case ActionType::Edit:
+            return "EDIT";
+        default:
+            return std::string();
+    }
 }
 } // namespace polish_notation::renderer::console::menu_data_container
