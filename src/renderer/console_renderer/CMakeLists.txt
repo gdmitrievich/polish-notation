@@ -9,3 +9,5 @@ target_sources(${TARGET} PRIVATE
 target_include_directories(${TARGET} PUBLIC
 	${CMAKE_SOURCE_DIR}/include
 )
+
+add_subdirectory(menu_data_container)
