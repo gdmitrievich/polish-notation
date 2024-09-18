@@ -12,6 +12,7 @@
 #include "polish_notation/token/token.h"
 #include "user_err_mess_printer.h"
 #include "user_input.h"
+#include "polish_notation/utility/utility.h"
 
 namespace polish_notation::renderer::console::menu_data_container {
 MenuDataContainer::MenuDataContainer() :
@@ -35,6 +36,12 @@ MenuDataContainer::MenuDataContainer() :
 
 	initEditableOptions();
 	regenerateEditableOptions();
+
+	pn_u_c_rm::setRawMode();
+}
+
+MenuDataContainer::~MenuDataContainer() {
+	pn_u_c_rm::resetMode(pn_u_c_rm::original);
 }
 
 void MenuDataContainer::regenerateFunction() {
@@ -176,10 +183,12 @@ bool MenuDataContainer::isArrowPointsToFunctionOptionInSelectMode() const {
 
 void MenuDataContainer::updateFunction() {
 	try {
+		pn_u_c_rm::resetMode(pn_u_c_rm::original);
 		pn_ui::setFunctionStr(funcStr_);
 		regenerateFunction();
 		regenerateField();
 		regenerateEditableOption(arrowPos_);
+		pn_u_c_rm::setRawMode();
 	} catch (const ::std::exception& e) {
 		pn_uemp::printErrMess(e);
 		exit(EXIT_FAILURE);

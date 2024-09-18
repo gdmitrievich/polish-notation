@@ -44,6 +44,7 @@ class MenuDataContainer {
 	void updateFunction();
    public:
     MenuDataContainer();
+    ~MenuDataContainer();
 
     void renderField() const;
     void renderMenu() const;
