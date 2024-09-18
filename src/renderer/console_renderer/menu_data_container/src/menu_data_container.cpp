@@ -10,7 +10,7 @@
 #include "polish_notation/renderer/field_generator.h"
 #include "polish_notation/shunting_yard_alg/shunting_yard_alg.h"
 #include "polish_notation/token/token.h"
-#include "user_err_mess_printer.h"
+#include "polish_notation/exceptions/invalid_function/invalid_function.h"
 #include "user_input.h"
 #include "polish_notation/utility/utility.h"
 
@@ -23,16 +23,11 @@ MenuDataContainer::MenuDataContainer() :
     actionType_(ActionType::Select),
 	editableOptions(),
     arrowPos_() {
-    try {
-        pn_ui::setFunctionStr(funcStr_);
-        regenerateFunction();
+	pn_ui::setFunctionStr(funcStr_);
+	regenerateFunction();
 
-        pn_ui::setFieldInfo(fInfo_);
-        field_ = getGeneratedField(funcPostfixTokenQueue_, fInfo_);
-    } catch (const ::std::exception& e) {
-        pn_uemp::printErrMess(e);
-        exit(EXIT_FAILURE);
-    }
+	pn_ui::setFieldInfo(fInfo_);
+	field_ = getGeneratedField(funcPostfixTokenQueue_, fInfo_);
 
 	initEditableOptions();
 	regenerateEditableOptions();
@@ -48,30 +43,20 @@ void MenuDataContainer::regenerateFunction() {
     std::string funcLineWithoutSpaces =
         pn::parser::getLineWithoutSpaces(funcStr_);
 
-    try {
-        pn_ds::queue::Queue<pn::token::Token> qTokens;
-        if (!pn::parser::trySetTokenQueueFromStr(qTokens,
-                                                 funcLineWithoutSpaces))
-            throw ::pn_e::InvalidFunction(
-                ::pn_e::InvalidFunction::ErrType::InvalidToken,
-                "invalid_function: Invalid token.");
+	pn_ds::queue::Queue<pn::token::Token> qTokens;
+	if (!pn::parser::trySetTokenQueueFromStr(qTokens,
+												funcLineWithoutSpaces))
+		throw ::pn_e::InvalidFunction(
+			::pn_e::InvalidFunction::ErrType::InvalidToken,
+			"invalid_function: Invalid token.");
 
-        funcPostfixTokenQueue_ =
-            pn::shunting_yard_alg::convertInfixTokenQueueToPostfix(qTokens);
-    } catch (const ::std::exception& e) {
-        pn_uemp::printErrMess(e);
-        exit(EXIT_FAILURE);
-    }
+	funcPostfixTokenQueue_ =
+		pn::shunting_yard_alg::convertInfixTokenQueueToPostfix(qTokens);
 }
 
 void MenuDataContainer::regenerateField() {
-    try {
-        field_ =
-            pn::renderer::getGeneratedField(funcPostfixTokenQueue_, fInfo_);
-    } catch (const ::std::exception& e) {
-        pn_uemp::printErrMess(e);
-        exit(EXIT_FAILURE);
-    }
+	field_ =
+		pn::renderer::getGeneratedField(funcPostfixTokenQueue_, fInfo_);
 }
 
 void MenuDataContainer::renderField() const {
@@ -182,17 +167,12 @@ bool MenuDataContainer::isArrowPointsToFunctionOptionInSelectMode() const {
 }
 
 void MenuDataContainer::updateFunction() {
-	try {
-		pn_u_c_rm::resetMode(pn_u_c_rm::original);
-		pn_ui::setFunctionStr(funcStr_);
-		regenerateFunction();
-		regenerateField();
-		regenerateEditableOption(arrowPos_);
-		pn_u_c_rm::setRawMode();
-	} catch (const ::std::exception& e) {
-		pn_uemp::printErrMess(e);
-		exit(EXIT_FAILURE);
-	}
+	pn_u_c_rm::resetMode(pn_u_c_rm::original);
+	pn_ui::setFunctionStr(funcStr_);
+	regenerateFunction();
+	regenerateField();
+	regenerateEditableOption(arrowPos_);
+	pn_u_c_rm::setRawMode();
 }
 
 void MenuDataContainer::processPressedKeyInSelectMode(char pressedKey) {

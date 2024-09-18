@@ -20,7 +20,5 @@ target_link_libraries(${TARGET}
 		field_generator
 		shunting_yard_alg
 		invalid_function
-		invalid_field_info_exception
-		user_err_mess_printer
 		user_input
 )

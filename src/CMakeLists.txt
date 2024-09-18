@@ -18,4 +18,5 @@ target_sources(${TARGET} PRIVATE
 target_link_libraries(${TARGET}
 	PRIVATE
 		menu_data_container
+		user_err_mess_printer
 )
