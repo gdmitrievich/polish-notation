@@ -37,6 +37,7 @@ class MenuDataContainer {
 	void renderEditableOptions() const;
 
 	void processPressedKeyInSelectMode(char pressedKey);
+	bool processPressedKeyInEditMode(char pressedKey);
 	int returnValueIfOneOfTheKeyPressed(int value, char pressedKey, const std::initializer_list<char>& keys);
 
 	bool isArrowPointsToFunctionOptionInSelectMode() const;

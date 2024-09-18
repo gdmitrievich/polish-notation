@@ -200,6 +200,46 @@ void MenuDataContainer::processPressedKeyInSelectMode(char pressedKey) {
 		arrowPos_ += v;
 }
 
+bool MenuDataContainer::processPressedKeyInEditMode(char pressedKey) {
+	int v {-2};
+	if (arrowPos_ == 1 || arrowPos_ == 2) {
+		v = returnValueIfOneOfTheKeyPressed(1, pressedKey, {'w', 'd', 'k', 'l'});
+		if (v == 0) v = returnValueIfOneOfTheKeyPressed(-1, pressedKey, {'s', 'a', 'j', 'h'});
+		if (v == 0)
+			return false;
+
+		if (arrowPos_ == 1)
+			fInfo_.width += v;
+		else
+			fInfo_.height += v;
+	} else if (arrowPos_ >= 3 && arrowPos_ <= 5) {
+		v = returnValueIfOneOfTheKeyPressed(1, pressedKey, {'d', 'l'});
+		if (v == 0) v = returnValueIfOneOfTheKeyPressed(-1, pressedKey, {'a', 'h'});
+
+		if (arrowPos_ == 3)
+			fInfo_.domain.first += v;
+		else if (arrowPos_ == 4)
+			fInfo_.codomain.first += v;
+		else if (arrowPos_ == 5)
+			fInfo_.centerOfCoordinates.first += v;
+		if (v != 0) return true;
+
+		v = returnValueIfOneOfTheKeyPressed(1, pressedKey, {'w', 'k'});
+		if (v == 0) v = returnValueIfOneOfTheKeyPressed(-1, pressedKey, {'s', 'j'});
+		if (v == 0)
+			return false;
+
+		if (arrowPos_ == 3)
+			fInfo_.domain.second += v;
+		else if (arrowPos_ == 4)
+			fInfo_.codomain.second += v;
+		else if (arrowPos_ == 5)
+			fInfo_.centerOfCoordinates.second += v;
+	}
+
+	return true;
+}
+
 int MenuDataContainer::returnValueIfOneOfTheKeyPressed(int value, char pressedKey, const std::initializer_list<char>& keys) {
 	return ::std::any_of(keys.begin(), keys.end(), [pressedKey](int key) {return key == pressedKey;}) ? value : 0;
 }
