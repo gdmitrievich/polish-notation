@@ -173,4 +173,16 @@ bool MenuDataContainer::update(char pressedKey) {
 bool MenuDataContainer::isArrowPointsToFunctionOptionInSelectMode() const {
 	return arrowPos_ == 0 && actionType_ == ActionType::Select;
 }
+
+void MenuDataContainer::updateFunction() {
+	try {
+		pn_ui::setFunctionStr(funcStr_);
+		regenerateFunction();
+		regenerateField();
+		regenerateEditableOption(arrowPos_);
+	} catch (const ::std::exception& e) {
+		pn_uemp::printErrMess(e);
+		exit(EXIT_FAILURE);
+	}
+}
 }

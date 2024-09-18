@@ -36,6 +36,7 @@ class MenuDataContainer {
 	void renderEditableOptions() const;
 
 	bool isArrowPointsToFunctionOptionInSelectMode() const;
+	void updateFunction();
    public:
     MenuDataContainer();
 
