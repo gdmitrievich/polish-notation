@@ -1,6 +1,9 @@
 #include "user_input.h"
 
-#include <exception>
+#include <string>
+
+#include "polish_notation/exceptions/type_conversion_error/type_conversion_error.h"
+#include "polish_notation/parser/parser.h"
 
 namespace polish_notation::user_input {
 using polish_notation::renderer::FieldInfo;
@@ -35,9 +38,8 @@ void setFieldInfo(FieldInfo& fInfo) {
 template <typename T>
 void printActionAndSetAnswer(const char* action, T& data) {
     cout << action;
-    if (!cin >> data)
-        throw ::std::invalid_argument(
-            "invalid_argument: Can't read data from stdin.");
-    cin.get();
+    std::string str;
+    cin >> str;
+    data = polish_notation::parser::convertStrPartToDouble(str.c_str());
 }
 } // namespace polish_notation::user_input

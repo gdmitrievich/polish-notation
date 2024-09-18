@@ -10,8 +10,9 @@ void printErrMess(const ::std::exception& e) {
     } else if (dynamic_cast<const ::pn_e::InvalidFieldInfoException*>(&e)) {
         printInvalidFieldInfoErrMess(
             dynamic_cast<const ::pn_e::InvalidFieldInfoException&>(e));
-    } else if (dynamic_cast<const ::std::invalid_argument*>(&e)) {
-        std::cout << "Invalid data: "
+    } else if (dynamic_cast<const ::pn_e::TypeConversionError*>(&e)) {
+        printTypeConversionErrorErrMess(
+            dynamic_cast<const ::pn_e::TypeConversionError&>(e));
     }
 }
 
@@ -71,5 +72,11 @@ void printInvalidFieldInfoErrMess(const ::pn_e::InvalidFieldInfoException& e) {
 
     std::cout << std::endl;
     std::cout << "Please, correct it." << std::endl;
+}
+
+void printTypeConversionErrorErrMess(const ::pn_e::TypeConversionError& e) {
+    std::cout << "Type conversion error: Incompatible object '" + e.getValue() +
+                     "'. Please, use object with valid type."
+              << std::endl;
 }
 } // namespace polish_notation::user_err_mess_printer
