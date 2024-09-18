@@ -169,4 +169,8 @@ bool MenuDataContainer::update(char pressedKey) {
 
 	return true;
 }
+
+bool MenuDataContainer::isArrowPointsToFunctionOptionInSelectMode() const {
+	return arrowPos_ == 0 && actionType_ == ActionType::Select;
+}
 }
