@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <initializer_list>
 
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/renderer/field_info.h"
@@ -36,6 +37,7 @@ class MenuDataContainer {
 	void renderEditableOptions() const;
 
 	void processPressedKeyInSelectMode(char pressedKey);
+	int returnValueIfOneOfTheKeyPressed(int value, char pressedKey, const std::initializer_list<char>& keys);
 
 	bool isArrowPointsToFunctionOptionInSelectMode() const;
 	void updateFunction();

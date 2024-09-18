@@ -199,4 +199,8 @@ void MenuDataContainer::processPressedKeyInSelectMode(char pressedKey) {
 	else
 		arrowPos_ += v;
 }
+
+int MenuDataContainer::returnValueIfOneOfTheKeyPressed(int value, char pressedKey, const std::initializer_list<char>& keys) {
+	return ::std::any_of(keys.begin(), keys.end(), [pressedKey](int key) {return key == pressedKey;}) ? value : 0;
+}
 }
