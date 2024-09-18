@@ -81,7 +81,7 @@ void MenuDataContainer::renderField() const {
 void MenuDataContainer::renderMenu() const {
     using std::cout, std::endl;
 
-	system("cls");
+	system("clear");
     cout << "Type: " << actionTypeToStr(actionType_) << endl;
 	renderEditableOptions();
     cout << "q - quit; ";
