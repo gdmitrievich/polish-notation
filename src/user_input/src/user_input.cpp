@@ -39,7 +39,7 @@ template <typename T>
 void printActionAndSetAnswer(const char* action, T& data) {
     cout << action;
     std::string str;
-    cin >> str;
+    (cin >> str).get();
     data = polish_notation::parser::convertStrPartToDouble(str.c_str());
 }
 } // namespace polish_notation::user_input

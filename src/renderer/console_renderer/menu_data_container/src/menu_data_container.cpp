@@ -23,6 +23,7 @@ MenuDataContainer::MenuDataContainer() :
     actionType_(ActionType::Select),
     editableOptions(),
     arrowPos_() {
+	system("clear");
     pn_ui::setFunctionStr(funcStr_);
     regenerateFunction();
 
