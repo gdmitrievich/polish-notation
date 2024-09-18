@@ -6,6 +6,8 @@
 #include <cstring>
 #include <string>
 
+#include "polish_notation/exceptions/type_conversion_error/type_conversion_error.h"
+
 namespace polish_notation::parser {
 using ::polish_notation::utility::size_t;
 using std::string;
@@ -146,6 +148,11 @@ double convertStrPartToDouble(const char* str, size_t count) {
     intPartLen = intPartLen <= count ? intPartLen : count;
     n = convertStrPartToInt(str, intPartLen);
     if (intPartLen != count) {
+        if (str[intPartLen] != '.')
+            throw ::pn_e::TypeConversionError(
+                ::std::string(str),
+                "logic_type_conversion_error: Can't convert symbol to digit.");
+
         const char* fractPartStr = str + intPartLen + 1;
         size_t fractPartLen = getLenOfNumberStr(fractPartStr);
         size_t digitsLeft = count - intPartLen - 1;

@@ -17,6 +17,7 @@ class Queue {
     ::polish_notation::utility::size_t size_;
 
     void deleteNodeAndMoveBackPtrToNextNode() noexcept;
+    void copyNodesFrom(const Queue<T>& q);
 
    protected:
     const ::polish_notation::data_structures::node::Node<T>* frontPtr()
@@ -27,7 +28,7 @@ class Queue {
    public:
     Queue() noexcept;
     Queue(const Queue& q);
-    Queue<T> operator=(const Queue& q) = delete;
+    Queue<T> operator=(const Queue& q);
     ~Queue() noexcept;
 
     void enqueue(const T& item);

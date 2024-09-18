@@ -15,6 +15,16 @@ void Queue<T>::deleteNodeAndMoveBackPtrToNextNode() noexcept {
 }
 
 template <typename T>
+void Queue<T>::copyNodesFrom(const Queue<T>& q) {
+    const Node<T>* n = q.backPtr_;
+
+    while (n) {
+        enqueue(n->data);
+        n = n->next;
+    }
+}
+
+template <typename T>
 inline const Node<T>* Queue<T>::frontPtr() const noexcept {
     return frontPtr_;
 }
@@ -29,12 +39,18 @@ Queue<T>::Queue() noexcept : frontPtr_(), backPtr_(), size_() {}
 
 template <typename T>
 Queue<T>::Queue(const Queue& q) : frontPtr_(), backPtr_(), size_() {
-    const Node<T>* n = q.backPtr_;
+    copyNodesFrom(q);
+}
 
-    while (n) {
-        enqueue(n->data);
-        n = n->next;
-    }
+template <typename T>
+Queue<T> Queue<T>::operator=(const Queue& q) {
+    if (this == &q)
+        return *this;
+
+    destroy();
+    copyNodesFrom(q);
+
+    return *this;
 }
 
 template <typename T>

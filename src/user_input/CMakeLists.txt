@@ -1,13 +1,13 @@
-set(TARGET console_renderer)
+set(TARGET user_input)
 
 add_library(${TARGET})
 
 target_sources(${TARGET} PRIVATE
-	${CMAKE_CURRENT_LIST_DIR}/console_renderer.cpp
+	src/user_input.cpp
 )
 
 target_include_directories(${TARGET} PUBLIC
+	${CMAKE_CURRENT_LIST_DIR}/include
 	${CMAKE_SOURCE_DIR}/include
+	${CMAKE_CURRENT_LIST_DIR}/src
 )
-
-add_subdirectory(menu_data_container)
