@@ -40,11 +40,9 @@ vector<vector<char>> getGeneratedField(const Queue<Token>& qPostfix,
         if (xInSrcCoords < 0 || xInSrcCoords >= fieldInfo.width)
             continue;
 
-        Queue<Token> qPostfixWithoutX(qPostfix);
-        replaceAllXWithNumInTokenQueue(qPostfixWithoutX, i);
         double v {};
         try {
-            v = calculatePostfixTokenQueue(qPostfixWithoutX);
+            v = calculatePostfixTokenQueue(qPostfix, i);
         } catch (::std::domain_error& e) {
             continue;
         }

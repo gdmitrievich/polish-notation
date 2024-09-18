@@ -28,9 +28,10 @@ void replaceAllXWithNumInTokenQueue(Queue<Token>& q, double num) {
     }
 }
 
-double calculatePostfixTokenQueue(Queue<Token> qPostfix) {
+double calculatePostfixTokenQueue(Queue<Token> qPostfix, double xReplacement) {
     Stack<Token> s;
 
+    replaceAllXWithNumInTokenQueue(qPostfix, xReplacement);
     while (!qPostfix.isEmpty())
         calculateRetrievedToken(qPostfix.dequeue(), s);
 

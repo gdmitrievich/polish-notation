@@ -13,10 +13,10 @@ void replaceAllXWithNumInTokenQueue(
         ::polish_notation::token::Token>& q,
     double num);
 
-double calculatePostfixTokenQueue(
-    ::polish_notation::data_structures::queue::Queue<
-        ::polish_notation::token::Token>
-        qPostfix);
+double calculatePostfixTokenQueue(::polish_notation::data_structures::queue::
+                                      Queue< ::polish_notation::token::Token>
+                                          qPostfix,
+                                  double xReplacement);
 
 void calculateRetrievedToken(const ::polish_notation::token::Token& t,
                              ::polish_notation::data_structures::stack::Stack<
