@@ -185,4 +185,18 @@ void MenuDataContainer::updateFunction() {
 		exit(EXIT_FAILURE);
 	}
 }
+
+void MenuDataContainer::processPressedKeyInSelectMode(char pressedKey) {
+	int v = returnValueIfOneOfTheKeyPressed(-1, pressedKey, {'w', 'd', 'k', 'l'});
+	if (v == 0) v = returnValueIfOneOfTheKeyPressed(1, pressedKey, {'s', 'a', 'j', 'h'});
+	if (v == 0)
+		return;
+
+	if (v + arrowPos_ == -1)
+		arrowPos_ = n_ED_OPT - 1;
+	else if (v + arrowPos_ == n_ED_OPT)
+		arrowPos_ = 0;
+	else
+		arrowPos_ += v;
+}
 }

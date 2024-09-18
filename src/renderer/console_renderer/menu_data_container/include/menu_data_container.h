@@ -35,6 +35,8 @@ class MenuDataContainer {
 	void regenerateEditableOptions();
 	void renderEditableOptions() const;
 
+	void processPressedKeyInSelectMode(char pressedKey);
+
 	bool isArrowPointsToFunctionOptionInSelectMode() const;
 	void updateFunction();
    public:
