@@ -143,6 +143,11 @@ double convertStrPartToDouble(const char* str, size_t count) {
     if (count == (size_t) -1)
         count = strlen(str);
 
+	bool isNegative = str[0] == '-';
+	if (isNegative) {
+		--count;
+		str = str + 1;
+	}
     double n {};
     size_t intPartLen = getLenOfNumberStr(str);
     intPartLen = intPartLen <= count ? intPartLen : count;
@@ -161,7 +166,7 @@ double convertStrPartToDouble(const char* str, size_t count) {
              pow(10, fractPartLen);
     }
 
-    return n;
+    return (isNegative ? -1 : 1) * n;
 }
 
 int convertStrPartToInt(const char* str, size_t count) {
