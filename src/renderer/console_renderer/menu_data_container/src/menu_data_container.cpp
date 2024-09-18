@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <cctype>
 
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/parser/parser.h"
@@ -142,4 +143,30 @@ std::string MenuDataContainer::actionTypeToStr(
             return std::string();
     }
 }
-} // namespace polish_notation::renderer::console::menu_data_container
+
+bool MenuDataContainer::update(char pressedKey) {
+	char lowerKey = tolower(pressedKey);
+	switch (lowerKey)
+	{
+	case 'm':
+		if (isArrowPointsToFunctionOptionInSelectMode())
+			updateFunction();
+
+		actionType_ = (ActionType) !((bool) actionType_);
+		return true;
+	case 'q':
+		return false;
+	}
+
+	if (actionType_ == ActionType::Select) {
+		processPressedKeyInSelectMode(lowerKey);
+	} else if (actionType_ == ActionType::Edit) {
+		if(processPressedKeyInEditMode(lowerKey)) {
+			regenerateEditableOption(arrowPos_);
+			regenerateField();
+		}
+	}
+
+	return true;
+}
+}
