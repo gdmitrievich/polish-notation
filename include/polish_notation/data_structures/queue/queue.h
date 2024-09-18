@@ -17,7 +17,7 @@ class Queue {
     ::polish_notation::utility::size_t size_;
 
     void deleteNodeAndMoveBackPtrToNextNode() noexcept;
-	void copyNodesFrom(const Queue<T>& q);
+    void copyNodesFrom(const Queue<T>& q);
 
    protected:
     const ::polish_notation::data_structures::node::Node<T>* frontPtr()

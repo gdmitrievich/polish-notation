@@ -1,10 +1,11 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
-#include <experimental/source_location>
-#include <string>
 #include <termios.h>
 #include <unistd.h>
+
+#include <experimental/source_location>
+#include <string>
 
 namespace polish_notation::utility {
 using size_t = decltype(sizeof(1));
@@ -28,10 +29,10 @@ inline void setRawMode() {
     tcsetattr(STDIN_FILENO, TCSANOW, &raw);
 }
 
-inline void resetMode(struct termios &original) {
+inline void resetMode(struct termios& original) {
     tcsetattr(STDIN_FILENO, TCSANOW, &original);
 }
-}
+} // namespace console::raw_mode
 } // namespace polish_notation::utility
 
 namespace pn_u = polish_notation::utility;

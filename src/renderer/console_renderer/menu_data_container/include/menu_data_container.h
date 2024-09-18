@@ -1,10 +1,10 @@
 #ifndef MENU_DATA_CONTAINER_H
 #define MENU_DATA_CONTAINER_H
 
-#include <string>
-#include <vector>
-#include <utility>
 #include <initializer_list>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/renderer/field_info.h"
@@ -23,25 +23,27 @@ class MenuDataContainer {
     ::std::vector<::std::vector<char>> field_;
 
     ActionType actionType_;
-	enum {n_ED_OPT = 6};
-	::std::pair<::std::string, ::std::string> editableOptions[n_ED_OPT];
+    enum { n_ED_OPT = 6 };
+    ::std::pair<::std::string, ::std::string> editableOptions[n_ED_OPT];
     int arrowPos_;
 
     void regenerateField();
     void regenerateFunction();
 
     ::std::string actionTypeToStr(ActionType a) const;
-	void initEditableOptions();
-	void regenerateEditableOption(int idx);
-	void regenerateEditableOptions();
-	void renderEditableOptions() const;
+    void initEditableOptions();
+    void regenerateEditableOption(int idx);
+    void regenerateEditableOptions();
+    void renderEditableOptions() const;
 
-	void processPressedKeyInSelectMode(char pressedKey);
-	bool processPressedKeyInEditMode(char pressedKey);
-	int returnValueIfOneOfTheKeyPressed(int value, char pressedKey, const std::initializer_list<char>& keys);
+    void processPressedKeyInSelectMode(char pressedKey);
+    bool processPressedKeyInEditMode(char pressedKey);
+    int returnValueIfOneOfTheKeyPressed(
+        int value, char pressedKey, const std::initializer_list<char>& keys);
 
-	bool isArrowPointsToFunctionOptionInSelectMode() const;
-	void updateFunction();
+    bool isArrowPointsToFunctionOptionInSelectMode() const;
+    void updateFunction();
+
    public:
     MenuDataContainer();
     ~MenuDataContainer();

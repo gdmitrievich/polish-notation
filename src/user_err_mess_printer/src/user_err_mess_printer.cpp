@@ -10,6 +10,8 @@ void printErrMess(const ::std::exception& e) {
     } else if (dynamic_cast<const ::pn_e::InvalidFieldInfoException*>(&e)) {
         printInvalidFieldInfoErrMess(
             dynamic_cast<const ::pn_e::InvalidFieldInfoException&>(e));
+    } else if (dynamic_cast<const ::std::invalid_argument*>(&e)) {
+        std::cout << "Invalid data: "
     }
 }
 

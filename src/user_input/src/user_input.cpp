@@ -1,5 +1,7 @@
 #include "user_input.h"
 
+#include <exception>
+
 namespace polish_notation::user_input {
 using polish_notation::renderer::FieldInfo;
 using std::cout, std::endl, std::cin;
@@ -33,6 +35,9 @@ void setFieldInfo(FieldInfo& fInfo) {
 template <typename T>
 void printActionAndSetAnswer(const char* action, T& data) {
     cout << action;
-    (cin >> data).get();
+    if (!cin >> data)
+        throw ::std::invalid_argument(
+            "invalid_argument: Can't read data from stdin.");
+    cin.get();
 }
 } // namespace polish_notation::user_input

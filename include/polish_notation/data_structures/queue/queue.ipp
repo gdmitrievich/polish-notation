@@ -39,18 +39,18 @@ Queue<T>::Queue() noexcept : frontPtr_(), backPtr_(), size_() {}
 
 template <typename T>
 Queue<T>::Queue(const Queue& q) : frontPtr_(), backPtr_(), size_() {
-	copyNodesFrom(q);
+    copyNodesFrom(q);
 }
 
 template <typename T>
 Queue<T> Queue<T>::operator=(const Queue& q) {
-	if (this == &q)
-		return *this;
+    if (this == &q)
+        return *this;
 
-	destroy();
-	copyNodesFrom(q);
+    destroy();
+    copyNodesFrom(q);
 
-	return *this;
+    return *this;
 }
 
 template <typename T>
