@@ -7,6 +7,7 @@
 #include "polish_notation/data_structures/queue/queue.h"
 #include "polish_notation/exceptions/invalid_function/invalid_function.h"
 #include "polish_notation/parser/parser.h"
+#include "polish_notation/polish_calculation/polish_calculation.h"
 #include "polish_notation/renderer/console_renderer/console_renderer.h"
 #include "polish_notation/renderer/field_generator.h"
 #include "polish_notation/shunting_yard_alg/shunting_yard_alg.h"
@@ -23,7 +24,7 @@ MenuDataContainer::MenuDataContainer() :
     actionType_(ActionType::Select),
     editableOptions(),
     arrowPos_() {
-	system("clear");
+    system("clear");
     pn_ui::setFunctionStr(funcStr_);
     regenerateFunction();
 
@@ -52,6 +53,13 @@ void MenuDataContainer::regenerateFunction() {
 
     funcPostfixTokenQueue_ =
         pn::shunting_yard_alg::convertInfixTokenQueueToPostfix(qTokens);
+
+    try {
+        pn::polish_calculation::calculatePostfixTokenQueue(
+            funcPostfixTokenQueue_, 0);
+    } catch (const ::std::domain_error& e) {
+        return;
+    }
 }
 
 void MenuDataContainer::regenerateField() {
